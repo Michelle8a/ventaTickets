@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a9aab2d4bcd4976a6e32fb5b83b3eac" Name="Diagram1" ZoomLevel="29">
+        <EntityTypeShape EntityType="gestion_ticketsModel.agenda_usuario" Width="1.5" PointX="18" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.artistas" Width="1.5" PointX="10.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.categorias" Width="1.5" PointX="8.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.ciudades" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.compras" Width="1.5" PointX="15" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.conversion_moneda" Width="1.5" PointX="4.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.descuentos" Width="1.5" PointX="12.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.eventos" Width="1.5" PointX="10.5" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.fotos_venue" Width="1.5" PointX="7.5" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.likes" Width="1.5" PointX="12.75" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.metodos_pago_cash" Width="1.5" PointX="16" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.metodos_pago_tarjeta" Width="1.5" PointX="16" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.metodos_pago_transferencia" Width="1.5" PointX="16" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.notificaciones" Width="1.5" PointX="15.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.pagos" Width="1.5" PointX="18.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.paises" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.presentaciones" Width="1.5" PointX="12.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.reembolsos" Width="1.5" PointX="20.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.roles" Width="1.5" PointX="3" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.secciones_venue" Width="1.5" PointX="7.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.tipos_ticket" Width="1.5" PointX="15.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.usuarios" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.usuarios_rol" Width="1.5" PointX="5.25" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_ticketsModel.venues" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_agenda_presentaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_agenda_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_presentaciones_artistas" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_eventos_categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_ciudades_pais" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_venues_ciudades" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_compras_descuentos" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_compras_tipos_ticket" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_compras_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_pagos_compras" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_reembolsos_compras" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_descuentos_eventos" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_eventos_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_eventos_venues" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_likes_eventos" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_notificaciones_eventos" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_presentaciones_eventos" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_tipos_ticket_eventos" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_fotos_venue" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_likes_presentaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_likes_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_pagos_cash" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_pagos_tarjeta" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_pagos_transferencia" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_notificaciones_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_pagos_usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_reembolsos_pagos" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_usuarios_pais" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_usuariosrol_rol" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_secciones_venues" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_tipos_ticket_secciones" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_usuariosrol_usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

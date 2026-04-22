@@ -1,0 +1,2070 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="gestion_ticketsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="agenda_usuario">
+          <Key>
+            <PropertyRef Name="id_agenda" />
+          </Key>
+          <Property Name="id_agenda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_presentacion" Type="int" Nullable="false" />
+          <Property Name="recordatorio" Type="bit" />
+          <Property Name="fecha_agregado" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="artistas">
+          <Key>
+            <PropertyRef Name="id_artista" />
+          </Key>
+          <Property Name="id_artista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="genero" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="imagen_url" Type="varchar" MaxLength="255" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="icono_url" Type="varchar" MaxLength="255" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="ciudades">
+          <Key>
+            <PropertyRef Name="id_ciudad" />
+          </Key>
+          <Property Name="id_ciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pais" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="compras">
+          <Key>
+            <PropertyRef Name="id_compra" />
+          </Key>
+          <Property Name="id_compra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_tipo_ticket" Type="int" Nullable="false" />
+          <Property Name="id_descuento" Type="int" />
+          <Property Name="codigo_orden" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="precio_unitario" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="total" Type="decimal" Precision="21" Scale="2" StoreGeneratedPattern="Computed" />
+          <Property Name="estado" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_compra" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="conversion_moneda">
+          <Key>
+            <PropertyRef Name="id_conversion" />
+          </Key>
+          <Property Name="id_conversion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="moneda_origen" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="moneda_destino" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="tasa" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="fecha_actualizacion" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="descuentos">
+          <Key>
+            <PropertyRef Name="id_descuento" />
+          </Key>
+          <Property Name="id_descuento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="20" />
+          <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="20" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="eventos">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_venue" Type="int" Nullable="false" />
+          <Property Name="id_categoria" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="imagen_url" Type="varchar" MaxLength="255" />
+          <Property Name="fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="fecha_fin" Type="date" />
+          <Property Name="fecha_creacion" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="fotos_venue">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_venue" Type="int" Nullable="false" />
+          <Property Name="url" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="orden" Type="int" />
+          <Property Name="fecha_subida" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="likes">
+          <Key>
+            <PropertyRef Name="id_like" />
+          </Key>
+          <Property Name="id_like" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_evento" Type="int" />
+          <Property Name="id_presentacion" Type="int" />
+          <Property Name="fecha_like" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="metodos_pago_cash">
+          <Key>
+            <PropertyRef Name="id_metodo_cash" />
+          </Key>
+          <Property Name="id_metodo_cash" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="punto_pago" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="codigo_referencia" Type="varchar" MaxLength="100" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="metodos_pago_tarjeta">
+          <Key>
+            <PropertyRef Name="id_metodo_tarjeta" />
+          </Key>
+          <Property Name="id_metodo_tarjeta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titular" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="numero_enmascarado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tipo_tarjeta" Type="varchar" MaxLength="30" />
+          <Property Name="fecha_expiracion" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="metodos_pago_transferencia">
+          <Key>
+            <PropertyRef Name="id_metodo_transferencia" />
+          </Key>
+          <Property Name="id_metodo_transferencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="banco" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="numero_cuenta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="titular_cuenta" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="referencia" Type="varchar" MaxLength="100" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="notificaciones">
+          <Key>
+            <PropertyRef Name="id_notificacion" />
+          </Key>
+          <Property Name="id_notificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_evento" Type="int" />
+          <Property Name="titulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="mensaje" Type="varchar(max)" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="30" />
+          <Property Name="fecha_envio" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="pagos">
+          <Key>
+            <PropertyRef Name="id_pago" />
+          </Key>
+          <Property Name="id_pago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_compra" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="metodo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="id_metodo_tarjeta" Type="int" />
+          <Property Name="id_metodo_transferencia" Type="int" />
+          <Property Name="id_metodo_cash" Type="int" />
+          <Property Name="monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="moneda" Type="varchar" MaxLength="10" />
+          <Property Name="estado" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_pago" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="paises">
+          <Key>
+            <PropertyRef Name="id_pais" />
+          </Key>
+          <Property Name="id_pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="moneda" Type="varchar" MaxLength="5" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="presentaciones">
+          <Key>
+            <PropertyRef Name="id_presentacion" />
+          </Key>
+          <Property Name="id_presentacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="id_artista" Type="int" Nullable="false" />
+          <Property Name="escenario" Type="varchar" MaxLength="100" />
+          <Property Name="fecha_hora_inicio" Type="datetime" Nullable="false" />
+          <Property Name="fecha_hora_fin" Type="datetime" />
+          <Property Name="orden" Type="int" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="reembolsos">
+          <Key>
+            <PropertyRef Name="id_reembolso" />
+          </Key>
+          <Property Name="id_reembolso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_compra" Type="int" Nullable="false" />
+          <Property Name="id_pago" Type="int" Nullable="false" />
+          <Property Name="monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="motivo" Type="varchar(max)" />
+          <Property Name="estado" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_solicitud" Type="datetime" />
+          <Property Name="fecha_proceso" Type="datetime" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="fecha_creacion" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="secciones_venue">
+          <Key>
+            <PropertyRef Name="id_seccion" />
+          </Key>
+          <Property Name="id_seccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_venue" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="capacidad" Type="int" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="tipos_ticket">
+          <Key>
+            <PropertyRef Name="id_tipo_ticket" />
+          </Key>
+          <Property Name="id_tipo_ticket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="id_seccion" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="moneda" Type="varchar" MaxLength="10" />
+          <Property Name="cantidad_ticket" Type="int" Nullable="false" />
+          <Property Name="venta_inicio" Type="datetime" />
+          <Property Name="venta_fin" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pais" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="password_hash" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" />
+          <Property Name="fecha_registro" Type="datetime" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="usuarios_rol">
+          <Key>
+            <PropertyRef Name="id_usuarios_rol" />
+          </Key>
+          <Property Name="id_usuarios_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="id_rol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="venues">
+          <Key>
+            <PropertyRef Name="id_venue" />
+          </Key>
+          <Property Name="id_venue" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ciudad" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" />
+          <Property Name="direccion" Type="varchar" MaxLength="255" />
+          <Property Name="capacidad" Type="int" />
+          <Property Name="latitud" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="longitud" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="imagen_url" Type="varchar" MaxLength="255" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <Association Name="fk_agenda_presentaciones">
+          <End Role="presentaciones" Type="Self.presentaciones" Multiplicity="1" />
+          <End Role="agenda_usuario" Type="Self.agenda_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="presentaciones">
+              <PropertyRef Name="id_presentacion" />
+            </Principal>
+            <Dependent Role="agenda_usuario">
+              <PropertyRef Name="id_presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_agenda_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="agenda_usuario" Type="Self.agenda_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="agenda_usuario">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ciudades_pais">
+          <End Role="paises" Type="Self.paises" Multiplicity="1" />
+          <End Role="ciudades" Type="Self.ciudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paises">
+              <PropertyRef Name="id_pais" />
+            </Principal>
+            <Dependent Role="ciudades">
+              <PropertyRef Name="id_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compras_descuentos">
+          <End Role="descuentos" Type="Self.descuentos" Multiplicity="0..1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descuentos">
+              <PropertyRef Name="id_descuento" />
+            </Principal>
+            <Dependent Role="compras">
+              <PropertyRef Name="id_descuento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compras_tipos_ticket">
+          <End Role="tipos_ticket" Type="Self.tipos_ticket" Multiplicity="1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos_ticket">
+              <PropertyRef Name="id_tipo_ticket" />
+            </Principal>
+            <Dependent Role="compras">
+              <PropertyRef Name="id_tipo_ticket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compras_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="compras">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_descuentos_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="1" />
+          <End Role="descuentos" Type="Self.descuentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="descuentos">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_eventos_categorias">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="1" />
+          <End Role="eventos" Type="Self.eventos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="eventos">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_eventos_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="eventos" Type="Self.eventos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="eventos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_eventos_venues">
+          <End Role="venues" Type="Self.venues" Multiplicity="1" />
+          <End Role="eventos" Type="Self.eventos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venues">
+              <PropertyRef Name="id_venue" />
+            </Principal>
+            <Dependent Role="eventos">
+              <PropertyRef Name="id_venue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fotos_venue">
+          <End Role="venues" Type="Self.venues" Multiplicity="1" />
+          <End Role="fotos_venue" Type="Self.fotos_venue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venues">
+              <PropertyRef Name="id_venue" />
+            </Principal>
+            <Dependent Role="fotos_venue">
+              <PropertyRef Name="id_venue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_likes_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="0..1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_likes_presentaciones">
+          <End Role="presentaciones" Type="Self.presentaciones" Multiplicity="0..1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="presentaciones">
+              <PropertyRef Name="id_presentacion" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="id_presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_likes_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_notificaciones_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="0..1" />
+          <End Role="notificaciones" Type="Self.notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="notificaciones">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_notificaciones_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="notificaciones" Type="Self.notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="notificaciones">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_cash">
+          <End Role="metodos_pago_cash" Type="Self.metodos_pago_cash" Multiplicity="0..1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="metodos_pago_cash">
+              <PropertyRef Name="id_metodo_cash" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_metodo_cash" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_compras">
+          <End Role="compras" Type="Self.compras" Multiplicity="1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compras">
+              <PropertyRef Name="id_compra" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_tarjeta">
+          <End Role="metodos_pago_tarjeta" Type="Self.metodos_pago_tarjeta" Multiplicity="0..1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="metodos_pago_tarjeta">
+              <PropertyRef Name="id_metodo_tarjeta" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_metodo_tarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_transferencia">
+          <End Role="metodos_pago_transferencia" Type="Self.metodos_pago_transferencia" Multiplicity="0..1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="metodos_pago_transferencia">
+              <PropertyRef Name="id_metodo_transferencia" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_metodo_transferencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_presentaciones_artistas">
+          <End Role="artistas" Type="Self.artistas" Multiplicity="1" />
+          <End Role="presentaciones" Type="Self.presentaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artistas">
+              <PropertyRef Name="id_artista" />
+            </Principal>
+            <Dependent Role="presentaciones">
+              <PropertyRef Name="id_artista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_presentaciones_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="1" />
+          <End Role="presentaciones" Type="Self.presentaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="presentaciones">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reembolsos_compras">
+          <End Role="compras" Type="Self.compras" Multiplicity="1" />
+          <End Role="reembolsos" Type="Self.reembolsos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compras">
+              <PropertyRef Name="id_compra" />
+            </Principal>
+            <Dependent Role="reembolsos">
+              <PropertyRef Name="id_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reembolsos_pagos">
+          <End Role="pagos" Type="Self.pagos" Multiplicity="1" />
+          <End Role="reembolsos" Type="Self.reembolsos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pagos">
+              <PropertyRef Name="id_pago" />
+            </Principal>
+            <Dependent Role="reembolsos">
+              <PropertyRef Name="id_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_secciones_venues">
+          <End Role="venues" Type="Self.venues" Multiplicity="1" />
+          <End Role="secciones_venue" Type="Self.secciones_venue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venues">
+              <PropertyRef Name="id_venue" />
+            </Principal>
+            <Dependent Role="secciones_venue">
+              <PropertyRef Name="id_venue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tipos_ticket_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="1" />
+          <End Role="tipos_ticket" Type="Self.tipos_ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="tipos_ticket">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tipos_ticket_secciones">
+          <End Role="secciones_venue" Type="Self.secciones_venue" Multiplicity="0..1" />
+          <End Role="tipos_ticket" Type="Self.tipos_ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="secciones_venue">
+              <PropertyRef Name="id_seccion" />
+            </Principal>
+            <Dependent Role="tipos_ticket">
+              <PropertyRef Name="id_seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarios_pais">
+          <End Role="paises" Type="Self.paises" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paises">
+              <PropertyRef Name="id_pais" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuariosrol_rol">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="usuarios_rol" Type="Self.usuarios_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="usuarios_rol">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuariosrol_usuario">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="usuarios_rol" Type="Self.usuarios_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="usuarios_rol">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_venues_ciudades">
+          <End Role="ciudades" Type="Self.ciudades" Multiplicity="1" />
+          <End Role="venues" Type="Self.venues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ciudades">
+              <PropertyRef Name="id_ciudad" />
+            </Principal>
+            <Dependent Role="venues">
+              <PropertyRef Name="id_ciudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gestion_ticketsModelStoreContainer">
+          <EntitySet Name="agenda_usuario" EntityType="Self.agenda_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="artistas" EntityType="Self.artistas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categorias" EntityType="Self.categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ciudades" EntityType="Self.ciudades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="compras" EntityType="Self.compras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="conversion_moneda" EntityType="Self.conversion_moneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="descuentos" EntityType="Self.descuentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="eventos" EntityType="Self.eventos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fotos_venue" EntityType="Self.fotos_venue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="likes" EntityType="Self.likes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="metodos_pago_cash" EntityType="Self.metodos_pago_cash" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="metodos_pago_tarjeta" EntityType="Self.metodos_pago_tarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="metodos_pago_transferencia" EntityType="Self.metodos_pago_transferencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notificaciones" EntityType="Self.notificaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pagos" EntityType="Self.pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paises" EntityType="Self.paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="presentaciones" EntityType="Self.presentaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reembolsos" EntityType="Self.reembolsos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="secciones_venue" EntityType="Self.secciones_venue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipos_ticket" EntityType="Self.tipos_ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuarios_rol" EntityType="Self.usuarios_rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="venues" EntityType="Self.venues" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_agenda_presentaciones" Association="Self.fk_agenda_presentaciones">
+            <End Role="presentaciones" EntitySet="presentaciones" />
+            <End Role="agenda_usuario" EntitySet="agenda_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_agenda_usuarios" Association="Self.fk_agenda_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="agenda_usuario" EntitySet="agenda_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ciudades_pais" Association="Self.fk_ciudades_pais">
+            <End Role="paises" EntitySet="paises" />
+            <End Role="ciudades" EntitySet="ciudades" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compras_descuentos" Association="Self.fk_compras_descuentos">
+            <End Role="descuentos" EntitySet="descuentos" />
+            <End Role="compras" EntitySet="compras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compras_tipos_ticket" Association="Self.fk_compras_tipos_ticket">
+            <End Role="tipos_ticket" EntitySet="tipos_ticket" />
+            <End Role="compras" EntitySet="compras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compras_usuarios" Association="Self.fk_compras_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="compras" EntitySet="compras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_descuentos_eventos" Association="Self.fk_descuentos_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="descuentos" EntitySet="descuentos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_eventos_categorias" Association="Self.fk_eventos_categorias">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="eventos" EntitySet="eventos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_eventos_usuarios" Association="Self.fk_eventos_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="eventos" EntitySet="eventos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_eventos_venues" Association="Self.fk_eventos_venues">
+            <End Role="venues" EntitySet="venues" />
+            <End Role="eventos" EntitySet="eventos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fotos_venue" Association="Self.fk_fotos_venue">
+            <End Role="venues" EntitySet="venues" />
+            <End Role="fotos_venue" EntitySet="fotos_venue" />
+          </AssociationSet>
+          <AssociationSet Name="fk_likes_eventos" Association="Self.fk_likes_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_likes_presentaciones" Association="Self.fk_likes_presentaciones">
+            <End Role="presentaciones" EntitySet="presentaciones" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_likes_usuarios" Association="Self.fk_likes_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_notificaciones_eventos" Association="Self.fk_notificaciones_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="notificaciones" EntitySet="notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_notificaciones_usuarios" Association="Self.fk_notificaciones_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="notificaciones" EntitySet="notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_cash" Association="Self.fk_pagos_cash">
+            <End Role="metodos_pago_cash" EntitySet="metodos_pago_cash" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_compras" Association="Self.fk_pagos_compras">
+            <End Role="compras" EntitySet="compras" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_tarjeta" Association="Self.fk_pagos_tarjeta">
+            <End Role="metodos_pago_tarjeta" EntitySet="metodos_pago_tarjeta" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_transferencia" Association="Self.fk_pagos_transferencia">
+            <End Role="metodos_pago_transferencia" EntitySet="metodos_pago_transferencia" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_usuarios" Association="Self.fk_pagos_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_presentaciones_artistas" Association="Self.fk_presentaciones_artistas">
+            <End Role="artistas" EntitySet="artistas" />
+            <End Role="presentaciones" EntitySet="presentaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_presentaciones_eventos" Association="Self.fk_presentaciones_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="presentaciones" EntitySet="presentaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reembolsos_compras" Association="Self.fk_reembolsos_compras">
+            <End Role="compras" EntitySet="compras" />
+            <End Role="reembolsos" EntitySet="reembolsos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reembolsos_pagos" Association="Self.fk_reembolsos_pagos">
+            <End Role="pagos" EntitySet="pagos" />
+            <End Role="reembolsos" EntitySet="reembolsos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_secciones_venues" Association="Self.fk_secciones_venues">
+            <End Role="venues" EntitySet="venues" />
+            <End Role="secciones_venue" EntitySet="secciones_venue" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipos_ticket_eventos" Association="Self.fk_tipos_ticket_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="tipos_ticket" EntitySet="tipos_ticket" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipos_ticket_secciones" Association="Self.fk_tipos_ticket_secciones">
+            <End Role="secciones_venue" EntitySet="secciones_venue" />
+            <End Role="tipos_ticket" EntitySet="tipos_ticket" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarios_pais" Association="Self.fk_usuarios_pais">
+            <End Role="paises" EntitySet="paises" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuariosrol_rol" Association="Self.fk_usuariosrol_rol">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="usuarios_rol" EntitySet="usuarios_rol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuariosrol_usuario" Association="Self.fk_usuariosrol_usuario">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="usuarios_rol" EntitySet="usuarios_rol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_venues_ciudades" Association="Self.fk_venues_ciudades">
+            <End Role="ciudades" EntitySet="ciudades" />
+            <End Role="venues" EntitySet="venues" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gestion_ticketsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="agenda_usuario">
+          <Key>
+            <PropertyRef Name="id_agenda" />
+          </Key>
+          <Property Name="id_agenda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_presentacion" Type="Int32" Nullable="false" />
+          <Property Name="recordatorio" Type="Boolean" />
+          <Property Name="fecha_agregado" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="presentaciones" Relationship="Self.fk_agenda_presentaciones" FromRole="agenda_usuario" ToRole="presentaciones" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_agenda_usuarios" FromRole="agenda_usuario" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="artistas">
+          <Key>
+            <PropertyRef Name="id_artista" />
+          </Key>
+          <Property Name="id_artista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="imagen_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="presentaciones" Relationship="Self.fk_presentaciones_artistas" FromRole="artistas" ToRole="presentaciones" />
+        </EntityType>
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="id_categoria" />
+          </Key>
+          <Property Name="id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="icono_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="eventos" Relationship="Self.fk_eventos_categorias" FromRole="categorias" ToRole="eventos" />
+        </EntityType>
+        <EntityType Name="ciudades">
+          <Key>
+            <PropertyRef Name="id_ciudad" />
+          </Key>
+          <Property Name="id_ciudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pais" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="paises" Relationship="Self.fk_ciudades_pais" FromRole="ciudades" ToRole="paises" />
+          <NavigationProperty Name="venues" Relationship="Self.fk_venues_ciudades" FromRole="ciudades" ToRole="venues" />
+        </EntityType>
+        <EntityType Name="compras">
+          <Key>
+            <PropertyRef Name="id_compra" />
+          </Key>
+          <Property Name="id_compra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_ticket" Type="Int32" Nullable="false" />
+          <Property Name="id_descuento" Type="Int32" />
+          <Property Name="codigo_orden" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="precio_unitario" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="total" Type="Decimal" Precision="21" Scale="2" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_compra" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="descuentos" Relationship="Self.fk_compras_descuentos" FromRole="compras" ToRole="descuentos" />
+          <NavigationProperty Name="tipos_ticket" Relationship="Self.fk_compras_tipos_ticket" FromRole="compras" ToRole="tipos_ticket" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_compras_usuarios" FromRole="compras" ToRole="usuarios" />
+          <NavigationProperty Name="pagos" Relationship="Self.fk_pagos_compras" FromRole="compras" ToRole="pagos" />
+          <NavigationProperty Name="reembolsos" Relationship="Self.fk_reembolsos_compras" FromRole="compras" ToRole="reembolsos" />
+        </EntityType>
+        <EntityType Name="conversion_moneda">
+          <Key>
+            <PropertyRef Name="id_conversion" />
+          </Key>
+          <Property Name="id_conversion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="moneda_origen" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="moneda_destino" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tasa" Type="Decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="fecha_actualizacion" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="descuentos">
+          <Key>
+            <PropertyRef Name="id_descuento" />
+          </Key>
+          <Property Name="id_descuento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_evento" Type="Int32" Nullable="false" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="compras" Relationship="Self.fk_compras_descuentos" FromRole="descuentos" ToRole="compras" />
+          <NavigationProperty Name="eventos" Relationship="Self.fk_descuentos_eventos" FromRole="descuentos" ToRole="eventos" />
+        </EntityType>
+        <EntityType Name="eventos">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_venue" Type="Int32" Nullable="false" />
+          <Property Name="id_categoria" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="imagen_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="categorias" Relationship="Self.fk_eventos_categorias" FromRole="eventos" ToRole="categorias" />
+          <NavigationProperty Name="descuentos" Relationship="Self.fk_descuentos_eventos" FromRole="eventos" ToRole="descuentos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_eventos_usuarios" FromRole="eventos" ToRole="usuarios" />
+          <NavigationProperty Name="venues" Relationship="Self.fk_eventos_venues" FromRole="eventos" ToRole="venues" />
+          <NavigationProperty Name="likes" Relationship="Self.fk_likes_eventos" FromRole="eventos" ToRole="likes" />
+          <NavigationProperty Name="notificaciones" Relationship="Self.fk_notificaciones_eventos" FromRole="eventos" ToRole="notificaciones" />
+          <NavigationProperty Name="presentaciones" Relationship="Self.fk_presentaciones_eventos" FromRole="eventos" ToRole="presentaciones" />
+          <NavigationProperty Name="tipos_ticket" Relationship="Self.fk_tipos_ticket_eventos" FromRole="eventos" ToRole="tipos_ticket" />
+        </EntityType>
+        <EntityType Name="fotos_venue">
+          <Key>
+            <PropertyRef Name="id_foto" />
+          </Key>
+          <Property Name="id_foto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_venue" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="orden" Type="Int32" />
+          <Property Name="fecha_subida" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="venues" Relationship="Self.fk_fotos_venue" FromRole="fotos_venue" ToRole="venues" />
+        </EntityType>
+        <EntityType Name="likes">
+          <Key>
+            <PropertyRef Name="id_like" />
+          </Key>
+          <Property Name="id_like" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_evento" Type="Int32" />
+          <Property Name="id_presentacion" Type="Int32" />
+          <Property Name="fecha_like" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="eventos" Relationship="Self.fk_likes_eventos" FromRole="likes" ToRole="eventos" />
+          <NavigationProperty Name="presentaciones" Relationship="Self.fk_likes_presentaciones" FromRole="likes" ToRole="presentaciones" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_likes_usuarios" FromRole="likes" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="metodos_pago_cash">
+          <Key>
+            <PropertyRef Name="id_metodo_cash" />
+          </Key>
+          <Property Name="id_metodo_cash" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="punto_pago" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigo_referencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="pagos" Relationship="Self.fk_pagos_cash" FromRole="metodos_pago_cash" ToRole="pagos" />
+        </EntityType>
+        <EntityType Name="metodos_pago_tarjeta">
+          <Key>
+            <PropertyRef Name="id_metodo_tarjeta" />
+          </Key>
+          <Property Name="id_metodo_tarjeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titular" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numero_enmascarado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo_tarjeta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_expiracion" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="pagos" Relationship="Self.fk_pagos_tarjeta" FromRole="metodos_pago_tarjeta" ToRole="pagos" />
+        </EntityType>
+        <EntityType Name="metodos_pago_transferencia">
+          <Key>
+            <PropertyRef Name="id_metodo_transferencia" />
+          </Key>
+          <Property Name="id_metodo_transferencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="banco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numero_cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="titular_cuenta" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="referencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="pagos" Relationship="Self.fk_pagos_transferencia" FromRole="metodos_pago_transferencia" ToRole="pagos" />
+        </EntityType>
+        <EntityType Name="notificaciones">
+          <Key>
+            <PropertyRef Name="id_notificacion" />
+          </Key>
+          <Property Name="id_notificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_evento" Type="Int32" />
+          <Property Name="titulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_envio" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="eventos" Relationship="Self.fk_notificaciones_eventos" FromRole="notificaciones" ToRole="eventos" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_notificaciones_usuarios" FromRole="notificaciones" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="pagos">
+          <Key>
+            <PropertyRef Name="id_pago" />
+          </Key>
+          <Property Name="id_pago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_compra" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="metodo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_metodo_tarjeta" Type="Int32" />
+          <Property Name="id_metodo_transferencia" Type="Int32" />
+          <Property Name="id_metodo_cash" Type="Int32" />
+          <Property Name="monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="moneda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_pago" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="compras" Relationship="Self.fk_pagos_compras" FromRole="pagos" ToRole="compras" />
+          <NavigationProperty Name="metodos_pago_cash" Relationship="Self.fk_pagos_cash" FromRole="pagos" ToRole="metodos_pago_cash" />
+          <NavigationProperty Name="metodos_pago_tarjeta" Relationship="Self.fk_pagos_tarjeta" FromRole="pagos" ToRole="metodos_pago_tarjeta" />
+          <NavigationProperty Name="metodos_pago_transferencia" Relationship="Self.fk_pagos_transferencia" FromRole="pagos" ToRole="metodos_pago_transferencia" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_pagos_usuarios" FromRole="pagos" ToRole="usuarios" />
+          <NavigationProperty Name="reembolsos" Relationship="Self.fk_reembolsos_pagos" FromRole="pagos" ToRole="reembolsos" />
+        </EntityType>
+        <EntityType Name="paises">
+          <Key>
+            <PropertyRef Name="id_pais" />
+          </Key>
+          <Property Name="id_pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="moneda" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="ciudades" Relationship="Self.fk_ciudades_pais" FromRole="paises" ToRole="ciudades" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_usuarios_pais" FromRole="paises" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="presentaciones">
+          <Key>
+            <PropertyRef Name="id_presentacion" />
+          </Key>
+          <Property Name="id_presentacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_evento" Type="Int32" Nullable="false" />
+          <Property Name="id_artista" Type="Int32" Nullable="false" />
+          <Property Name="escenario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_hora_inicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_hora_fin" Type="DateTime" Precision="3" />
+          <Property Name="orden" Type="Int32" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="agenda_usuario" Relationship="Self.fk_agenda_presentaciones" FromRole="presentaciones" ToRole="agenda_usuario" />
+          <NavigationProperty Name="artistas" Relationship="Self.fk_presentaciones_artistas" FromRole="presentaciones" ToRole="artistas" />
+          <NavigationProperty Name="eventos" Relationship="Self.fk_presentaciones_eventos" FromRole="presentaciones" ToRole="eventos" />
+          <NavigationProperty Name="likes" Relationship="Self.fk_likes_presentaciones" FromRole="presentaciones" ToRole="likes" />
+        </EntityType>
+        <EntityType Name="reembolsos">
+          <Key>
+            <PropertyRef Name="id_reembolso" />
+          </Key>
+          <Property Name="id_reembolso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_compra" Type="Int32" Nullable="false" />
+          <Property Name="id_pago" Type="Int32" Nullable="false" />
+          <Property Name="monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="motivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_solicitud" Type="DateTime" Precision="3" />
+          <Property Name="fecha_proceso" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="compras" Relationship="Self.fk_reembolsos_compras" FromRole="reembolsos" ToRole="compras" />
+          <NavigationProperty Name="pagos" Relationship="Self.fk_reembolsos_pagos" FromRole="reembolsos" ToRole="pagos" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="usuarios_rol" Relationship="Self.fk_usuariosrol_rol" FromRole="roles" ToRole="usuarios_rol" />
+        </EntityType>
+        <EntityType Name="secciones_venue">
+          <Key>
+            <PropertyRef Name="id_seccion" />
+          </Key>
+          <Property Name="id_seccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_venue" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="capacidad" Type="Int32" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="venues" Relationship="Self.fk_secciones_venues" FromRole="secciones_venue" ToRole="venues" />
+          <NavigationProperty Name="tipos_ticket" Relationship="Self.fk_tipos_ticket_secciones" FromRole="secciones_venue" ToRole="tipos_ticket" />
+        </EntityType>
+        <EntityType Name="tipos_ticket">
+          <Key>
+            <PropertyRef Name="id_tipo_ticket" />
+          </Key>
+          <Property Name="id_tipo_ticket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_evento" Type="Int32" Nullable="false" />
+          <Property Name="id_seccion" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="moneda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad_ticket" Type="Int32" Nullable="false" />
+          <Property Name="venta_inicio" Type="DateTime" Precision="3" />
+          <Property Name="venta_fin" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="compras" Relationship="Self.fk_compras_tipos_ticket" FromRole="tipos_ticket" ToRole="compras" />
+          <NavigationProperty Name="eventos" Relationship="Self.fk_tipos_ticket_eventos" FromRole="tipos_ticket" ToRole="eventos" />
+          <NavigationProperty Name="secciones_venue" Relationship="Self.fk_tipos_ticket_secciones" FromRole="tipos_ticket" ToRole="secciones_venue" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pais" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="agenda_usuario" Relationship="Self.fk_agenda_usuarios" FromRole="usuarios" ToRole="agenda_usuario" />
+          <NavigationProperty Name="compras" Relationship="Self.fk_compras_usuarios" FromRole="usuarios" ToRole="compras" />
+          <NavigationProperty Name="eventos" Relationship="Self.fk_eventos_usuarios" FromRole="usuarios" ToRole="eventos" />
+          <NavigationProperty Name="likes" Relationship="Self.fk_likes_usuarios" FromRole="usuarios" ToRole="likes" />
+          <NavigationProperty Name="notificaciones" Relationship="Self.fk_notificaciones_usuarios" FromRole="usuarios" ToRole="notificaciones" />
+          <NavigationProperty Name="pagos" Relationship="Self.fk_pagos_usuarios" FromRole="usuarios" ToRole="pagos" />
+          <NavigationProperty Name="paises" Relationship="Self.fk_usuarios_pais" FromRole="usuarios" ToRole="paises" />
+          <NavigationProperty Name="usuarios_rol" Relationship="Self.fk_usuariosrol_usuario" FromRole="usuarios" ToRole="usuarios_rol" />
+        </EntityType>
+        <EntityType Name="usuarios_rol">
+          <Key>
+            <PropertyRef Name="id_usuarios_rol" />
+          </Key>
+          <Property Name="id_usuarios_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_rol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="roles" Relationship="Self.fk_usuariosrol_rol" FromRole="usuarios_rol" ToRole="roles" />
+          <NavigationProperty Name="usuarios" Relationship="Self.fk_usuariosrol_usuario" FromRole="usuarios_rol" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="venues">
+          <Key>
+            <PropertyRef Name="id_venue" />
+          </Key>
+          <Property Name="id_venue" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ciudad" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="capacidad" Type="Int32" />
+          <Property Name="latitud" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="longitud" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="imagen_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="ciudades" Relationship="Self.fk_venues_ciudades" FromRole="venues" ToRole="ciudades" />
+          <NavigationProperty Name="eventos" Relationship="Self.fk_eventos_venues" FromRole="venues" ToRole="eventos" />
+          <NavigationProperty Name="fotos_venue" Relationship="Self.fk_fotos_venue" FromRole="venues" ToRole="fotos_venue" />
+          <NavigationProperty Name="secciones_venue" Relationship="Self.fk_secciones_venues" FromRole="venues" ToRole="secciones_venue" />
+        </EntityType>
+        <Association Name="fk_agenda_presentaciones">
+          <End Role="presentaciones" Type="Self.presentaciones" Multiplicity="1" />
+          <End Role="agenda_usuario" Type="Self.agenda_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="presentaciones">
+              <PropertyRef Name="id_presentacion" />
+            </Principal>
+            <Dependent Role="agenda_usuario">
+              <PropertyRef Name="id_presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_agenda_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="agenda_usuario" Type="Self.agenda_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="agenda_usuario">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_presentaciones_artistas">
+          <End Role="artistas" Type="Self.artistas" Multiplicity="1" />
+          <End Role="presentaciones" Type="Self.presentaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artistas">
+              <PropertyRef Name="id_artista" />
+            </Principal>
+            <Dependent Role="presentaciones">
+              <PropertyRef Name="id_artista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_eventos_categorias">
+          <End Role="categorias" Type="Self.categorias" Multiplicity="1" />
+          <End Role="eventos" Type="Self.eventos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorias">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="eventos">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ciudades_pais">
+          <End Role="paises" Type="Self.paises" Multiplicity="1" />
+          <End Role="ciudades" Type="Self.ciudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paises">
+              <PropertyRef Name="id_pais" />
+            </Principal>
+            <Dependent Role="ciudades">
+              <PropertyRef Name="id_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_venues_ciudades">
+          <End Role="ciudades" Type="Self.ciudades" Multiplicity="1" />
+          <End Role="venues" Type="Self.venues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ciudades">
+              <PropertyRef Name="id_ciudad" />
+            </Principal>
+            <Dependent Role="venues">
+              <PropertyRef Name="id_ciudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compras_descuentos">
+          <End Role="descuentos" Type="Self.descuentos" Multiplicity="0..1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descuentos">
+              <PropertyRef Name="id_descuento" />
+            </Principal>
+            <Dependent Role="compras">
+              <PropertyRef Name="id_descuento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compras_tipos_ticket">
+          <End Role="tipos_ticket" Type="Self.tipos_ticket" Multiplicity="1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipos_ticket">
+              <PropertyRef Name="id_tipo_ticket" />
+            </Principal>
+            <Dependent Role="compras">
+              <PropertyRef Name="id_tipo_ticket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compras_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="compras" Type="Self.compras" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="compras">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_compras">
+          <End Role="compras" Type="Self.compras" Multiplicity="1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compras">
+              <PropertyRef Name="id_compra" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reembolsos_compras">
+          <End Role="compras" Type="Self.compras" Multiplicity="1" />
+          <End Role="reembolsos" Type="Self.reembolsos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compras">
+              <PropertyRef Name="id_compra" />
+            </Principal>
+            <Dependent Role="reembolsos">
+              <PropertyRef Name="id_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_descuentos_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="1" />
+          <End Role="descuentos" Type="Self.descuentos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="descuentos">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_eventos_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="eventos" Type="Self.eventos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="eventos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_eventos_venues">
+          <End Role="venues" Type="Self.venues" Multiplicity="1" />
+          <End Role="eventos" Type="Self.eventos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venues">
+              <PropertyRef Name="id_venue" />
+            </Principal>
+            <Dependent Role="eventos">
+              <PropertyRef Name="id_venue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_likes_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="0..1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_notificaciones_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="0..1" />
+          <End Role="notificaciones" Type="Self.notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="notificaciones">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_presentaciones_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="1" />
+          <End Role="presentaciones" Type="Self.presentaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="presentaciones">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tipos_ticket_eventos">
+          <End Role="eventos" Type="Self.eventos" Multiplicity="1" />
+          <End Role="tipos_ticket" Type="Self.tipos_ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="eventos">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="tipos_ticket">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fotos_venue">
+          <End Role="venues" Type="Self.venues" Multiplicity="1" />
+          <End Role="fotos_venue" Type="Self.fotos_venue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venues">
+              <PropertyRef Name="id_venue" />
+            </Principal>
+            <Dependent Role="fotos_venue">
+              <PropertyRef Name="id_venue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_likes_presentaciones">
+          <End Role="presentaciones" Type="Self.presentaciones" Multiplicity="0..1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="presentaciones">
+              <PropertyRef Name="id_presentacion" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="id_presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_likes_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_cash">
+          <End Role="metodos_pago_cash" Type="Self.metodos_pago_cash" Multiplicity="0..1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="metodos_pago_cash">
+              <PropertyRef Name="id_metodo_cash" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_metodo_cash" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_tarjeta">
+          <End Role="metodos_pago_tarjeta" Type="Self.metodos_pago_tarjeta" Multiplicity="0..1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="metodos_pago_tarjeta">
+              <PropertyRef Name="id_metodo_tarjeta" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_metodo_tarjeta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_transferencia">
+          <End Role="metodos_pago_transferencia" Type="Self.metodos_pago_transferencia" Multiplicity="0..1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="metodos_pago_transferencia">
+              <PropertyRef Name="id_metodo_transferencia" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_metodo_transferencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_notificaciones_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="notificaciones" Type="Self.notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="notificaciones">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_pagos_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="pagos" Type="Self.pagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="pagos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reembolsos_pagos">
+          <End Role="pagos" Type="Self.pagos" Multiplicity="1" />
+          <End Role="reembolsos" Type="Self.reembolsos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pagos">
+              <PropertyRef Name="id_pago" />
+            </Principal>
+            <Dependent Role="reembolsos">
+              <PropertyRef Name="id_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuarios_pais">
+          <End Role="paises" Type="Self.paises" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paises">
+              <PropertyRef Name="id_pais" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuariosrol_rol">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="usuarios_rol" Type="Self.usuarios_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="usuarios_rol">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_secciones_venues">
+          <End Role="venues" Type="Self.venues" Multiplicity="1" />
+          <End Role="secciones_venue" Type="Self.secciones_venue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="venues">
+              <PropertyRef Name="id_venue" />
+            </Principal>
+            <Dependent Role="secciones_venue">
+              <PropertyRef Name="id_venue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tipos_ticket_secciones">
+          <End Role="secciones_venue" Type="Self.secciones_venue" Multiplicity="0..1" />
+          <End Role="tipos_ticket" Type="Self.tipos_ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="secciones_venue">
+              <PropertyRef Name="id_seccion" />
+            </Principal>
+            <Dependent Role="tipos_ticket">
+              <PropertyRef Name="id_seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuariosrol_usuario">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="usuarios_rol" Type="Self.usuarios_rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="usuarios_rol">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gestion_ticketsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="agenda_usuario" EntityType="Self.agenda_usuario" />
+          <EntitySet Name="artistas" EntityType="Self.artistas" />
+          <EntitySet Name="categorias" EntityType="Self.categorias" />
+          <EntitySet Name="ciudades" EntityType="Self.ciudades" />
+          <EntitySet Name="compras" EntityType="Self.compras" />
+          <EntitySet Name="conversion_moneda" EntityType="Self.conversion_moneda" />
+          <EntitySet Name="descuentos" EntityType="Self.descuentos" />
+          <EntitySet Name="eventos" EntityType="Self.eventos" />
+          <EntitySet Name="fotos_venue" EntityType="Self.fotos_venue" />
+          <EntitySet Name="likes" EntityType="Self.likes" />
+          <EntitySet Name="metodos_pago_cash" EntityType="Self.metodos_pago_cash" />
+          <EntitySet Name="metodos_pago_tarjeta" EntityType="Self.metodos_pago_tarjeta" />
+          <EntitySet Name="metodos_pago_transferencia" EntityType="Self.metodos_pago_transferencia" />
+          <EntitySet Name="notificaciones" EntityType="Self.notificaciones" />
+          <EntitySet Name="pagos" EntityType="Self.pagos" />
+          <EntitySet Name="paises" EntityType="Self.paises" />
+          <EntitySet Name="presentaciones" EntityType="Self.presentaciones" />
+          <EntitySet Name="reembolsos" EntityType="Self.reembolsos" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="secciones_venue" EntityType="Self.secciones_venue" />
+          <EntitySet Name="tipos_ticket" EntityType="Self.tipos_ticket" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+          <EntitySet Name="usuarios_rol" EntityType="Self.usuarios_rol" />
+          <EntitySet Name="venues" EntityType="Self.venues" />
+          <AssociationSet Name="fk_agenda_presentaciones" Association="Self.fk_agenda_presentaciones">
+            <End Role="presentaciones" EntitySet="presentaciones" />
+            <End Role="agenda_usuario" EntitySet="agenda_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_agenda_usuarios" Association="Self.fk_agenda_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="agenda_usuario" EntitySet="agenda_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_presentaciones_artistas" Association="Self.fk_presentaciones_artistas">
+            <End Role="artistas" EntitySet="artistas" />
+            <End Role="presentaciones" EntitySet="presentaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_eventos_categorias" Association="Self.fk_eventos_categorias">
+            <End Role="categorias" EntitySet="categorias" />
+            <End Role="eventos" EntitySet="eventos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ciudades_pais" Association="Self.fk_ciudades_pais">
+            <End Role="paises" EntitySet="paises" />
+            <End Role="ciudades" EntitySet="ciudades" />
+          </AssociationSet>
+          <AssociationSet Name="fk_venues_ciudades" Association="Self.fk_venues_ciudades">
+            <End Role="ciudades" EntitySet="ciudades" />
+            <End Role="venues" EntitySet="venues" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compras_descuentos" Association="Self.fk_compras_descuentos">
+            <End Role="descuentos" EntitySet="descuentos" />
+            <End Role="compras" EntitySet="compras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compras_tipos_ticket" Association="Self.fk_compras_tipos_ticket">
+            <End Role="tipos_ticket" EntitySet="tipos_ticket" />
+            <End Role="compras" EntitySet="compras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compras_usuarios" Association="Self.fk_compras_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="compras" EntitySet="compras" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_compras" Association="Self.fk_pagos_compras">
+            <End Role="compras" EntitySet="compras" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reembolsos_compras" Association="Self.fk_reembolsos_compras">
+            <End Role="compras" EntitySet="compras" />
+            <End Role="reembolsos" EntitySet="reembolsos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_descuentos_eventos" Association="Self.fk_descuentos_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="descuentos" EntitySet="descuentos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_eventos_usuarios" Association="Self.fk_eventos_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="eventos" EntitySet="eventos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_eventos_venues" Association="Self.fk_eventos_venues">
+            <End Role="venues" EntitySet="venues" />
+            <End Role="eventos" EntitySet="eventos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_likes_eventos" Association="Self.fk_likes_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_notificaciones_eventos" Association="Self.fk_notificaciones_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="notificaciones" EntitySet="notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_presentaciones_eventos" Association="Self.fk_presentaciones_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="presentaciones" EntitySet="presentaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipos_ticket_eventos" Association="Self.fk_tipos_ticket_eventos">
+            <End Role="eventos" EntitySet="eventos" />
+            <End Role="tipos_ticket" EntitySet="tipos_ticket" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fotos_venue" Association="Self.fk_fotos_venue">
+            <End Role="venues" EntitySet="venues" />
+            <End Role="fotos_venue" EntitySet="fotos_venue" />
+          </AssociationSet>
+          <AssociationSet Name="fk_likes_presentaciones" Association="Self.fk_likes_presentaciones">
+            <End Role="presentaciones" EntitySet="presentaciones" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_likes_usuarios" Association="Self.fk_likes_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_cash" Association="Self.fk_pagos_cash">
+            <End Role="metodos_pago_cash" EntitySet="metodos_pago_cash" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_tarjeta" Association="Self.fk_pagos_tarjeta">
+            <End Role="metodos_pago_tarjeta" EntitySet="metodos_pago_tarjeta" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_transferencia" Association="Self.fk_pagos_transferencia">
+            <End Role="metodos_pago_transferencia" EntitySet="metodos_pago_transferencia" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_notificaciones_usuarios" Association="Self.fk_notificaciones_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="notificaciones" EntitySet="notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_pagos_usuarios" Association="Self.fk_pagos_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="pagos" EntitySet="pagos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reembolsos_pagos" Association="Self.fk_reembolsos_pagos">
+            <End Role="pagos" EntitySet="pagos" />
+            <End Role="reembolsos" EntitySet="reembolsos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuarios_pais" Association="Self.fk_usuarios_pais">
+            <End Role="paises" EntitySet="paises" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuariosrol_rol" Association="Self.fk_usuariosrol_rol">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="usuarios_rol" EntitySet="usuarios_rol" />
+          </AssociationSet>
+          <AssociationSet Name="fk_secciones_venues" Association="Self.fk_secciones_venues">
+            <End Role="venues" EntitySet="venues" />
+            <End Role="secciones_venue" EntitySet="secciones_venue" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tipos_ticket_secciones" Association="Self.fk_tipos_ticket_secciones">
+            <End Role="secciones_venue" EntitySet="secciones_venue" />
+            <End Role="tipos_ticket" EntitySet="tipos_ticket" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuariosrol_usuario" Association="Self.fk_usuariosrol_usuario">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="usuarios_rol" EntitySet="usuarios_rol" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gestion_ticketsModelStoreContainer" CdmEntityContainer="gestion_ticketsEntities">
+          <EntitySetMapping Name="agenda_usuario">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.agenda_usuario">
+              <MappingFragment StoreEntitySet="agenda_usuario">
+                <ScalarProperty Name="id_agenda" ColumnName="id_agenda" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_presentacion" ColumnName="id_presentacion" />
+                <ScalarProperty Name="recordatorio" ColumnName="recordatorio" />
+                <ScalarProperty Name="fecha_agregado" ColumnName="fecha_agregado" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="artistas">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.artistas">
+              <MappingFragment StoreEntitySet="artistas">
+                <ScalarProperty Name="id_artista" ColumnName="id_artista" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categorias">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.categorias">
+              <MappingFragment StoreEntitySet="categorias">
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="icono_url" ColumnName="icono_url" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ciudades">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.ciudades">
+              <MappingFragment StoreEntitySet="ciudades">
+                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="compras">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.compras">
+              <MappingFragment StoreEntitySet="compras">
+                <ScalarProperty Name="id_compra" ColumnName="id_compra" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_tipo_ticket" ColumnName="id_tipo_ticket" />
+                <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
+                <ScalarProperty Name="codigo_orden" ColumnName="codigo_orden" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio_unitario" ColumnName="precio_unitario" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_compra" ColumnName="fecha_compra" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="conversion_moneda">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.conversion_moneda">
+              <MappingFragment StoreEntitySet="conversion_moneda">
+                <ScalarProperty Name="id_conversion" ColumnName="id_conversion" />
+                <ScalarProperty Name="moneda_origen" ColumnName="moneda_origen" />
+                <ScalarProperty Name="moneda_destino" ColumnName="moneda_destino" />
+                <ScalarProperty Name="tasa" ColumnName="tasa" />
+                <ScalarProperty Name="fecha_actualizacion" ColumnName="fecha_actualizacion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="descuentos">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.descuentos">
+              <MappingFragment StoreEntitySet="descuentos">
+                <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="eventos">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.eventos">
+              <MappingFragment StoreEntitySet="eventos">
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="id_venue" ColumnName="id_venue" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fotos_venue">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.fotos_venue">
+              <MappingFragment StoreEntitySet="fotos_venue">
+                <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+                <ScalarProperty Name="id_venue" ColumnName="id_venue" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="fecha_subida" ColumnName="fecha_subida" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="likes">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.likes">
+              <MappingFragment StoreEntitySet="likes">
+                <ScalarProperty Name="id_like" ColumnName="id_like" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="id_presentacion" ColumnName="id_presentacion" />
+                <ScalarProperty Name="fecha_like" ColumnName="fecha_like" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="metodos_pago_cash">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.metodos_pago_cash">
+              <MappingFragment StoreEntitySet="metodos_pago_cash">
+                <ScalarProperty Name="id_metodo_cash" ColumnName="id_metodo_cash" />
+                <ScalarProperty Name="punto_pago" ColumnName="punto_pago" />
+                <ScalarProperty Name="codigo_referencia" ColumnName="codigo_referencia" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="metodos_pago_tarjeta">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.metodos_pago_tarjeta">
+              <MappingFragment StoreEntitySet="metodos_pago_tarjeta">
+                <ScalarProperty Name="id_metodo_tarjeta" ColumnName="id_metodo_tarjeta" />
+                <ScalarProperty Name="titular" ColumnName="titular" />
+                <ScalarProperty Name="numero_enmascarado" ColumnName="numero_enmascarado" />
+                <ScalarProperty Name="tipo_tarjeta" ColumnName="tipo_tarjeta" />
+                <ScalarProperty Name="fecha_expiracion" ColumnName="fecha_expiracion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="metodos_pago_transferencia">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.metodos_pago_transferencia">
+              <MappingFragment StoreEntitySet="metodos_pago_transferencia">
+                <ScalarProperty Name="id_metodo_transferencia" ColumnName="id_metodo_transferencia" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="numero_cuenta" ColumnName="numero_cuenta" />
+                <ScalarProperty Name="titular_cuenta" ColumnName="titular_cuenta" />
+                <ScalarProperty Name="referencia" ColumnName="referencia" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notificaciones">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.notificaciones">
+              <MappingFragment StoreEntitySet="notificaciones">
+                <ScalarProperty Name="id_notificacion" ColumnName="id_notificacion" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="fecha_envio" ColumnName="fecha_envio" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pagos">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.pagos">
+              <MappingFragment StoreEntitySet="pagos">
+                <ScalarProperty Name="id_pago" ColumnName="id_pago" />
+                <ScalarProperty Name="id_compra" ColumnName="id_compra" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="metodo" ColumnName="metodo" />
+                <ScalarProperty Name="id_metodo_tarjeta" ColumnName="id_metodo_tarjeta" />
+                <ScalarProperty Name="id_metodo_transferencia" ColumnName="id_metodo_transferencia" />
+                <ScalarProperty Name="id_metodo_cash" ColumnName="id_metodo_cash" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_pago" ColumnName="fecha_pago" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paises">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.paises">
+              <MappingFragment StoreEntitySet="paises">
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="presentaciones">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.presentaciones">
+              <MappingFragment StoreEntitySet="presentaciones">
+                <ScalarProperty Name="id_presentacion" ColumnName="id_presentacion" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="id_artista" ColumnName="id_artista" />
+                <ScalarProperty Name="escenario" ColumnName="escenario" />
+                <ScalarProperty Name="fecha_hora_inicio" ColumnName="fecha_hora_inicio" />
+                <ScalarProperty Name="fecha_hora_fin" ColumnName="fecha_hora_fin" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reembolsos">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.reembolsos">
+              <MappingFragment StoreEntitySet="reembolsos">
+                <ScalarProperty Name="id_reembolso" ColumnName="id_reembolso" />
+                <ScalarProperty Name="id_compra" ColumnName="id_compra" />
+                <ScalarProperty Name="id_pago" ColumnName="id_pago" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_proceso" ColumnName="fecha_proceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="secciones_venue">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.secciones_venue">
+              <MappingFragment StoreEntitySet="secciones_venue">
+                <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+                <ScalarProperty Name="id_venue" ColumnName="id_venue" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipos_ticket">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.tipos_ticket">
+              <MappingFragment StoreEntitySet="tipos_ticket">
+                <ScalarProperty Name="id_tipo_ticket" ColumnName="id_tipo_ticket" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="cantidad_ticket" ColumnName="cantidad_ticket" />
+                <ScalarProperty Name="venta_inicio" ColumnName="venta_inicio" />
+                <ScalarProperty Name="venta_fin" ColumnName="venta_fin" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password_hash" ColumnName="password_hash" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios_rol">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.usuarios_rol">
+              <MappingFragment StoreEntitySet="usuarios_rol">
+                <ScalarProperty Name="id_usuarios_rol" ColumnName="id_usuarios_rol" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="venues">
+            <EntityTypeMapping TypeName="gestion_ticketsModel.venues">
+              <MappingFragment StoreEntitySet="venues">
+                <ScalarProperty Name="id_venue" ColumnName="id_venue" />
+                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

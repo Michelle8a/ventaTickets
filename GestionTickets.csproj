@@ -56,6 +56,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -124,14 +126,101 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="agenda_usuario.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="artistas.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="categorias.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ciudades.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="compras.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="conversion_moneda.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="descuentos.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eventos.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fotos_venue.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GestionTicketsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GestionTicketsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GestionTicketsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GestionTicketsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GestionTicketsModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="likes.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="metodos_pago_cash.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="metodos_pago_tarjeta.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="metodos_pago_transferencia.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="notificaciones.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pagos.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="paises.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="presentaciones.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reembolsos.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="roles.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="secciones_venue.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipos_ticket.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usuarios.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usuarios_rol.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="venues.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -151,6 +240,16 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="GestionTicketsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GestionTicketsModel.edmx</DependentUpon>
+      <LastGenOutput>GestionTicketsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="GestionTicketsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GestionTicketsModel.edmx</DependentUpon>
+      <LastGenOutput>GestionTicketsModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -159,6 +258,13 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="GestionTicketsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GestionTicketsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="GestionTicketsModel.edmx.diagram">
+      <DependentUpon>GestionTicketsModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -215,6 +321,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

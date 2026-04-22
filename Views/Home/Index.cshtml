@@ -1,33 +1,80 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Inicio";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<div class="container mt-5">
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">GestionTickets</h1>
+        <p class="lead text-muted">Compra y gestiona tickets para eventos en toda Centroamérica</p>
+        <a href="/Eventos" class="btn btn-primary me-2">Ver Eventos</a>
+        <a href="/Account/Register" class="btn btn-outline-secondary">Crear Cuenta</a>
     </div>
-</main>
+
+    <hr />
+
+    <h4 class="mb-4">Módulos del sistema</h4>
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Eventos</h5>
+                    <p class="card-text text-muted">Explora y gestiona eventos por categoría y venue.</p>
+                    <a href="/Eventos" class="btn btn-sm btn-outline-primary">Ver</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Artistas</h5>
+                    <p class="card-text text-muted">Catálogo de artistas y sus presentaciones.</p>
+                    <a href="/Artistas" class="btn btn-sm btn-outline-primary">Ver</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Venues</h5>
+                    <p class="card-text text-muted">Estadios, teatros y auditorios disponibles.</p>
+                    <a href="/Venues" class="btn btn-sm btn-outline-primary">Ver</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Tickets</h5>
+                    <p class="card-text text-muted">Compra y administra tus entradas.</p>
+                    <a href="/Compras" class="btn btn-sm btn-outline-primary">Ver</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Mi Agenda</h5>
+                    <p class="card-text text-muted">Guarda las presentaciones que no te quieres perder.</p>
+                    <a href="/Agenda" class="btn btn-sm btn-outline-primary">Ver</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Notificaciones</h5>
+                    <p class="card-text text-muted">Recordatorios y confirmaciones de compra.</p>
+                    <a href="/Notificaciones" class="btn btn-sm btn-outline-primary">Ver</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
