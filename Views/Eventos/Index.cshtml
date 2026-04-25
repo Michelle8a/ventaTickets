@@ -1,0 +1,39 @@
+﻿@model IEnumerable<GestionTickets.sp_mostrar_eventos_Result>
+
+@{
+    ViewBag.Title = "Eventos";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4"> Eventos disponibles</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No hay eventos disponibles.</div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var evento in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <span class="badge bg-secondary mb-2">@evento.categoria</span>
+                            <h5 class="card-title">@evento.evento</h5>
+                            <p class="card-text text-muted">@evento.tipo</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> @evento.venue</li>
+                            <li class="list-group-item"> @evento.fecha_inicio.ToString("dd/MM/yyyy")</li>
+                            <li class="list-group-item"> @evento.organizador</li>
+                        </ul>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-sm btn-primary w-100">Ver tickets</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

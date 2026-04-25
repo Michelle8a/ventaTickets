@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="gestion_ticketsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="gestion_ticketsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="agenda_usuario">
           <Key>
             <PropertyRef Name="id_agenda" />
@@ -677,6 +677,381 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_activar_artista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_artista" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_categoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_categoria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_ciudad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ciudad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_conversion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_conversion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_descuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_descuento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_foto_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_foto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_metodo_cash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_cash" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_metodo_tarjeta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_tarjeta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_metodo_transferencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_transferencia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_presentacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_presentacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_seccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_seccion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_tipo_ticket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tipo_ticket" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_activar_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_artista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_artista" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="genero" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="imagen_url" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_categoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_categoria" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="icono_url" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_ciudad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ciudad" Type="int" Mode="In" />
+          <Parameter Name="id_pais" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_conversion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_conversion" Type="int" Mode="In" />
+          <Parameter Name="tasa" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_descuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_descuento" Type="int" Mode="In" />
+          <Parameter Name="codigo" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="valor" Type="decimal" Mode="In" />
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_estado_pago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_pago" Type="int" Mode="In" />
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_estado_reembolso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_reembolso" Type="int" Mode="In" />
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+          <Parameter Name="id_categoria" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="imagen_url" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_inicio" Type="date" Mode="In" />
+          <Parameter Name="fecha_fin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_foto_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_foto" Type="int" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="orden" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_metodo_cash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_cash" Type="int" Mode="In" />
+          <Parameter Name="punto_pago" Type="varchar" Mode="In" />
+          <Parameter Name="codigo_referencia" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_metodo_tarjeta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_tarjeta" Type="int" Mode="In" />
+          <Parameter Name="titular" Type="varchar" Mode="In" />
+          <Parameter Name="tipo_tarjeta" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_expiracion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_metodo_transferencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_transferencia" Type="int" Mode="In" />
+          <Parameter Name="banco" Type="varchar" Mode="In" />
+          <Parameter Name="numero_cuenta" Type="varchar" Mode="In" />
+          <Parameter Name="titular_cuenta" Type="varchar" Mode="In" />
+          <Parameter Name="referencia" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_presentacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_presentacion" Type="int" Mode="In" />
+          <Parameter Name="id_artista" Type="int" Mode="In" />
+          <Parameter Name="escenario" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_hora_inicio" Type="datetime" Mode="In" />
+          <Parameter Name="fecha_hora_fin" Type="datetime" Mode="In" />
+          <Parameter Name="orden" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_seccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_seccion" Type="int" Mode="In" />
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="capacidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_tipo_ticket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tipo_ticket" Type="int" Mode="In" />
+          <Parameter Name="id_seccion" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="precio" Type="decimal" Mode="In" />
+          <Parameter Name="moneda" Type="varchar" Mode="In" />
+          <Parameter Name="cantidad_ticket" Type="int" Mode="In" />
+          <Parameter Name="venta_inicio" Type="datetime" Mode="In" />
+          <Parameter Name="venta_fin" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="id_pais" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_usuario_rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuarios_rol" Type="int" Mode="In" />
+          <Parameter Name="id_rol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+          <Parameter Name="id_ciudad" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="capacidad" Type="int" Mode="In" />
+          <Parameter Name="latitud" Type="decimal" Mode="In" />
+          <Parameter Name="longitud" Type="decimal" Mode="In" />
+          <Parameter Name="imagen_url" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_artista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="genero" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="imagen_url" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_categoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="icono_url" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_ciudades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_pais" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_conversion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="moneda_origen" Type="varchar" Mode="In" />
+          <Parameter Name="moneda_destino" Type="varchar" Mode="In" />
+          <Parameter Name="tasa" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_descuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+          <Parameter Name="codigo" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="valor" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+          <Parameter Name="id_categoria" Type="int" Mode="In" />
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar(max)" Mode="In" />
+          <Parameter Name="imagen_url" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_inicio" Type="date" Mode="In" />
+          <Parameter Name="fecha_fin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_foto_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+          <Parameter Name="url" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="orden" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_metodo_cash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="punto_pago" Type="varchar" Mode="In" />
+          <Parameter Name="codigo_referencia" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_metodo_tarjeta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="titular" Type="varchar" Mode="In" />
+          <Parameter Name="numero_enmascarado" Type="varchar" Mode="In" />
+          <Parameter Name="tipo_tarjeta" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_expiracion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_metodo_transferencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="banco" Type="varchar" Mode="In" />
+          <Parameter Name="numero_cuenta" Type="varchar" Mode="In" />
+          <Parameter Name="titular_cuenta" Type="varchar" Mode="In" />
+          <Parameter Name="referencia" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_pago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_compra" Type="int" Mode="In" />
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="metodo" Type="varchar" Mode="In" />
+          <Parameter Name="id_metodo_tarjeta" Type="int" Mode="In" />
+          <Parameter Name="id_metodo_transferencia" Type="int" Mode="In" />
+          <Parameter Name="id_metodo_cash" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_presentacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+          <Parameter Name="id_artista" Type="int" Mode="In" />
+          <Parameter Name="fecha_hora_inicio" Type="datetime" Mode="In" />
+          <Parameter Name="escenario" Type="varchar" Mode="In" />
+          <Parameter Name="fecha_hora_fin" Type="datetime" Mode="In" />
+          <Parameter Name="orden" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_reembolso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_compra" Type="int" Mode="In" />
+          <Parameter Name="id_pago" Type="int" Mode="In" />
+          <Parameter Name="motivo" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_seccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="capacidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_tipo_ticket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+          <Parameter Name="id_seccion" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="precio" Type="decimal" Mode="In" />
+          <Parameter Name="moneda" Type="varchar" Mode="In" />
+          <Parameter Name="cantidad_ticket" Type="int" Mode="In" />
+          <Parameter Name="venta_inicio" Type="datetime" Mode="In" />
+          <Parameter Name="venta_fin" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_pais" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="apellido" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="password_hash" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_usuario_rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="id_rol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ciudad" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="capacidad" Type="int" Mode="In" />
+          <Parameter Name="latitud" Type="decimal" Mode="In" />
+          <Parameter Name="longitud" Type="decimal" Mode="In" />
+          <Parameter Name="imagen_url" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_artista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_artista" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_categoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_categoria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_ciudad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ciudad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_conversion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_conversion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_descuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_descuento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_evento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_foto_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_foto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_metodo_cash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_cash" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_metodo_tarjeta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_tarjeta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_metodo_transferencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_metodo_transferencia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_presentacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_presentacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_seccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_seccion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_tipo_ticket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tipo_ticket" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_usuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_usuario_rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuarios_rol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_artistas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="genero" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_categorias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_mostrar_ciudades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_conversiones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="moneda_origen" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_descuentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_eventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_categoria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_fotos_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_metodos_cash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_mostrar_metodos_tarjeta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_mostrar_metodos_transferencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_mostrar_pagos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_presentaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_reembolsos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_compra" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_secciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_venue" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_tipos_ticket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_evento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_usuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_usuarios_rol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_venues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ciudad" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="gestion_ticketsModelStoreContainer">
           <EntitySet Name="agenda_usuario" EntityType="Self.agenda_usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="artistas" EntityType="Self.artistas" Schema="dbo" store:Type="Tables" />
@@ -831,8 +1206,7 @@
             <End Role="venues" EntitySet="venues" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="gestion_ticketsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1725,7 +2099,536 @@
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="usuarios_rol" EntitySet="usuarios_rol" />
           </AssociationSet>
+          <FunctionImport Name="sp_activar_artista">
+            <Parameter Name="id_artista" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_categoria">
+            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_ciudad">
+            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_conversion">
+            <Parameter Name="id_conversion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_descuento">
+            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_evento">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_foto_venue">
+            <Parameter Name="id_foto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_metodo_cash">
+            <Parameter Name="id_metodo_cash" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_metodo_tarjeta">
+            <Parameter Name="id_metodo_tarjeta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_metodo_transferencia">
+            <Parameter Name="id_metodo_transferencia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_presentacion">
+            <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_seccion">
+            <Parameter Name="id_seccion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_tipo_ticket">
+            <Parameter Name="id_tipo_ticket" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_usuario">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_activar_venue">
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_artista">
+            <Parameter Name="id_artista" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="genero" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="imagen_url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_categoria">
+            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="icono_url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_ciudad">
+            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+            <Parameter Name="id_pais" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_conversion">
+            <Parameter Name="id_conversion" Mode="In" Type="Int32" />
+            <Parameter Name="tasa" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_descuento">
+            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="valor" Mode="In" Type="Decimal" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_estado_pago">
+            <Parameter Name="id_pago" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_estado_reembolso">
+            <Parameter Name="id_reembolso" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_evento">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="imagen_url" Mode="In" Type="String" />
+            <Parameter Name="fecha_inicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_foto_venue">
+            <Parameter Name="id_foto" Mode="In" Type="Int32" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="orden" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_metodo_cash">
+            <Parameter Name="id_metodo_cash" Mode="In" Type="Int32" />
+            <Parameter Name="punto_pago" Mode="In" Type="String" />
+            <Parameter Name="codigo_referencia" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_metodo_tarjeta">
+            <Parameter Name="id_metodo_tarjeta" Mode="In" Type="Int32" />
+            <Parameter Name="titular" Mode="In" Type="String" />
+            <Parameter Name="tipo_tarjeta" Mode="In" Type="String" />
+            <Parameter Name="fecha_expiracion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_metodo_transferencia">
+            <Parameter Name="id_metodo_transferencia" Mode="In" Type="Int32" />
+            <Parameter Name="banco" Mode="In" Type="String" />
+            <Parameter Name="numero_cuenta" Mode="In" Type="String" />
+            <Parameter Name="titular_cuenta" Mode="In" Type="String" />
+            <Parameter Name="referencia" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_presentacion">
+            <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
+            <Parameter Name="id_artista" Mode="In" Type="Int32" />
+            <Parameter Name="escenario" Mode="In" Type="String" />
+            <Parameter Name="fecha_hora_inicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_hora_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="orden" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_seccion">
+            <Parameter Name="id_seccion" Mode="In" Type="Int32" />
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="capacidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_tipo_ticket">
+            <Parameter Name="id_tipo_ticket" Mode="In" Type="Int32" />
+            <Parameter Name="id_seccion" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="precio" Mode="In" Type="Decimal" />
+            <Parameter Name="moneda" Mode="In" Type="String" />
+            <Parameter Name="cantidad_ticket" Mode="In" Type="Int32" />
+            <Parameter Name="venta_inicio" Mode="In" Type="DateTime" />
+            <Parameter Name="venta_fin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_usuario">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="id_pais" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_usuario_rol">
+            <Parameter Name="id_usuarios_rol" Mode="In" Type="Int32" />
+            <Parameter Name="id_rol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_venue">
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="capacidad" Mode="In" Type="Int32" />
+            <Parameter Name="latitud" Mode="In" Type="Decimal" />
+            <Parameter Name="longitud" Mode="In" Type="Decimal" />
+            <Parameter Name="imagen_url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_artista">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="genero" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="imagen_url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_categoria">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="icono_url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_ciudades">
+            <Parameter Name="id_pais" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_conversion">
+            <Parameter Name="moneda_origen" Mode="In" Type="String" />
+            <Parameter Name="moneda_destino" Mode="In" Type="String" />
+            <Parameter Name="tasa" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_descuento">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="valor" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_evento">
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="imagen_url" Mode="In" Type="String" />
+            <Parameter Name="fecha_inicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_fin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_foto_venue">
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+            <Parameter Name="url" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="orden" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_metodo_cash">
+            <Parameter Name="punto_pago" Mode="In" Type="String" />
+            <Parameter Name="codigo_referencia" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_metodo_tarjeta">
+            <Parameter Name="titular" Mode="In" Type="String" />
+            <Parameter Name="numero_enmascarado" Mode="In" Type="String" />
+            <Parameter Name="tipo_tarjeta" Mode="In" Type="String" />
+            <Parameter Name="fecha_expiracion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_metodo_transferencia">
+            <Parameter Name="banco" Mode="In" Type="String" />
+            <Parameter Name="numero_cuenta" Mode="In" Type="String" />
+            <Parameter Name="titular_cuenta" Mode="In" Type="String" />
+            <Parameter Name="referencia" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_pago">
+            <Parameter Name="id_compra" Mode="In" Type="Int32" />
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="metodo" Mode="In" Type="String" />
+            <Parameter Name="id_metodo_tarjeta" Mode="In" Type="Int32" />
+            <Parameter Name="id_metodo_transferencia" Mode="In" Type="Int32" />
+            <Parameter Name="id_metodo_cash" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_presentacion">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+            <Parameter Name="id_artista" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_hora_inicio" Mode="In" Type="DateTime" />
+            <Parameter Name="escenario" Mode="In" Type="String" />
+            <Parameter Name="fecha_hora_fin" Mode="In" Type="DateTime" />
+            <Parameter Name="orden" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_reembolso">
+            <Parameter Name="id_compra" Mode="In" Type="Int32" />
+            <Parameter Name="id_pago" Mode="In" Type="Int32" />
+            <Parameter Name="motivo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_seccion">
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="capacidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_tipo_ticket">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+            <Parameter Name="id_seccion" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="precio" Mode="In" Type="Decimal" />
+            <Parameter Name="moneda" Mode="In" Type="String" />
+            <Parameter Name="cantidad_ticket" Mode="In" Type="Int32" />
+            <Parameter Name="venta_inicio" Mode="In" Type="DateTime" />
+            <Parameter Name="venta_fin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_usuario">
+            <Parameter Name="id_pais" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="apellido" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="password_hash" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_usuario_rol">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="id_rol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_venue">
+            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="capacidad" Mode="In" Type="Int32" />
+            <Parameter Name="latitud" Mode="In" Type="Decimal" />
+            <Parameter Name="longitud" Mode="In" Type="Decimal" />
+            <Parameter Name="imagen_url" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_artista">
+            <Parameter Name="id_artista" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_categoria">
+            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_ciudad">
+            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_conversion">
+            <Parameter Name="id_conversion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_descuento">
+            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_evento">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_foto_venue">
+            <Parameter Name="id_foto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_metodo_cash">
+            <Parameter Name="id_metodo_cash" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_metodo_tarjeta">
+            <Parameter Name="id_metodo_tarjeta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_metodo_transferencia">
+            <Parameter Name="id_metodo_transferencia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_presentacion">
+            <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_seccion">
+            <Parameter Name="id_seccion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_tipo_ticket">
+            <Parameter Name="id_tipo_ticket" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_usuario">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_usuario_rol">
+            <Parameter Name="id_usuarios_rol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_venue">
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_artistas" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_artistas_Result)">
+            <Parameter Name="genero" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_categorias" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_categorias_Result)" />
+          <FunctionImport Name="sp_mostrar_ciudades" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_ciudades_Result)">
+            <Parameter Name="id_pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_conversiones" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_conversiones_Result)">
+            <Parameter Name="moneda_origen" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_descuentos" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_descuentos_Result)">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_eventos" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_eventos_Result)">
+            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_fotos_venue" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_fotos_venue_Result)">
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_metodos_cash" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_metodos_cash_Result)" />
+          <FunctionImport Name="sp_mostrar_metodos_tarjeta" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_metodos_tarjeta_Result)" />
+          <FunctionImport Name="sp_mostrar_metodos_transferencia" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_metodos_transferencia_Result)" />
+          <FunctionImport Name="sp_mostrar_pagos" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_pagos_Result)">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_presentaciones" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_presentaciones_Result)">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_reembolsos" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_reembolsos_Result)">
+            <Parameter Name="id_compra" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_secciones" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_secciones_Result)">
+            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_tipos_ticket" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_tipos_ticket_Result)">
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_usuarios" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_usuarios_Result)">
+            <Parameter Name="id_pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_usuarios_rol" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_usuarios_rol_Result)">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_venues" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_venues_Result)">
+            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_mostrar_artistas_Result">
+          <Property Type="Int32" Name="id_artista" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="genero" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="descripcion" Nullable="true" />
+          <Property Type="String" Name="imagen_url" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_categorias_Result">
+          <Property Type="Int32" Name="id_categoria" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="descripcion" Nullable="true" />
+          <Property Type="String" Name="icono_url" Nullable="true" MaxLength="255" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_ciudades_Result">
+          <Property Type="Int32" Name="id_ciudad" Nullable="false" />
+          <Property Type="String" Name="ciudad" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="pais" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_conversiones_Result">
+          <Property Type="Int32" Name="id_conversion" Nullable="false" />
+          <Property Type="String" Name="moneda_origen" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="moneda_destino" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="tasa" Nullable="false" Precision="18" Scale="6" />
+          <Property Type="DateTime" Name="fecha_actualizacion" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_descuentos_Result">
+          <Property Type="Int32" Name="id_descuento" Nullable="false" />
+          <Property Type="String" Name="evento" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tipo" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="valor" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="String" Name="estado" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_eventos_Result">
+          <Property Type="Int32" Name="id_evento" Nullable="false" />
+          <Property Type="String" Name="evento" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="tipo" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="fecha_inicio" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_fin" Nullable="true" />
+          <Property Type="String" Name="categoria" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="venue" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="organizador" Nullable="false" MaxLength="201" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_fotos_venue_Result">
+          <Property Type="Int32" Name="id_foto" Nullable="false" />
+          <Property Type="String" Name="venue" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="url" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="orden" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_subida" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_metodos_cash_Result">
+          <Property Type="Int32" Name="id_metodo_cash" Nullable="false" />
+          <Property Type="String" Name="punto_pago" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="codigo_referencia" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_metodos_tarjeta_Result">
+          <Property Type="Int32" Name="id_metodo_tarjeta" Nullable="false" />
+          <Property Type="String" Name="titular" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="numero_enmascarado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="tipo_tarjeta" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="fecha_expiracion" Nullable="false" MaxLength="7" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_metodos_transferencia_Result">
+          <Property Type="Int32" Name="id_metodo_transferencia" Nullable="false" />
+          <Property Type="String" Name="banco" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="numero_cuenta" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="titular_cuenta" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="referencia" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_pagos_Result">
+          <Property Type="Int32" Name="id_pago" Nullable="false" />
+          <Property Type="String" Name="codigo_orden" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="usuario" Nullable="false" MaxLength="201" />
+          <Property Type="String" Name="metodo" Nullable="false" MaxLength="30" />
+          <Property Type="Decimal" Name="monto" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="String" Name="moneda" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="estado" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="fecha_pago" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_presentaciones_Result">
+          <Property Type="Int32" Name="id_presentacion" Nullable="false" />
+          <Property Type="String" Name="evento" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="artista" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="escenario" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="fecha_hora_inicio" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="fecha_hora_fin" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="orden" Nullable="true" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_reembolsos_Result">
+          <Property Type="Int32" Name="id_reembolso" Nullable="false" />
+          <Property Type="String" Name="codigo_orden" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="usuario" Nullable="false" MaxLength="201" />
+          <Property Type="Decimal" Name="monto" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="String" Name="motivo" Nullable="true" />
+          <Property Type="String" Name="estado" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_proceso" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_secciones_Result">
+          <Property Type="Int32" Name="id_seccion" Nullable="false" />
+          <Property Type="String" Name="seccion" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="capacidad" Nullable="true" />
+          <Property Type="String" Name="venue" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_tipos_ticket_Result">
+          <Property Type="Int32" Name="id_tipo_ticket" Nullable="false" />
+          <Property Type="String" Name="evento" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="seccion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="tipo_ticket" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="precio" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="String" Name="moneda" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="cantidad_ticket" Nullable="false" />
+          <Property Type="DateTime" Name="venta_inicio" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="venta_fin" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_usuarios_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="apellido" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="pais" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="fecha_registro" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_usuarios_rol_Result">
+          <Property Type="Int32" Name="id_usuarios_rol" Nullable="false" />
+          <Property Type="String" Name="usuario" Nullable="false" MaxLength="201" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="rol" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_venues_Result">
+          <Property Type="Int32" Name="id_venue" Nullable="false" />
+          <Property Type="String" Name="venue" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="tipo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="direccion" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="capacidad" Nullable="true" />
+          <Property Type="String" Name="ciudad" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="pais" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2044,6 +2947,299 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_activar_artista" FunctionName="gestion_ticketsModel.Store.sp_activar_artista" />
+          <FunctionImportMapping FunctionImportName="sp_activar_categoria" FunctionName="gestion_ticketsModel.Store.sp_activar_categoria" />
+          <FunctionImportMapping FunctionImportName="sp_activar_ciudad" FunctionName="gestion_ticketsModel.Store.sp_activar_ciudad" />
+          <FunctionImportMapping FunctionImportName="sp_activar_conversion" FunctionName="gestion_ticketsModel.Store.sp_activar_conversion" />
+          <FunctionImportMapping FunctionImportName="sp_activar_descuento" FunctionName="gestion_ticketsModel.Store.sp_activar_descuento" />
+          <FunctionImportMapping FunctionImportName="sp_activar_evento" FunctionName="gestion_ticketsModel.Store.sp_activar_evento" />
+          <FunctionImportMapping FunctionImportName="sp_activar_foto_venue" FunctionName="gestion_ticketsModel.Store.sp_activar_foto_venue" />
+          <FunctionImportMapping FunctionImportName="sp_activar_metodo_cash" FunctionName="gestion_ticketsModel.Store.sp_activar_metodo_cash" />
+          <FunctionImportMapping FunctionImportName="sp_activar_metodo_tarjeta" FunctionName="gestion_ticketsModel.Store.sp_activar_metodo_tarjeta" />
+          <FunctionImportMapping FunctionImportName="sp_activar_metodo_transferencia" FunctionName="gestion_ticketsModel.Store.sp_activar_metodo_transferencia" />
+          <FunctionImportMapping FunctionImportName="sp_activar_presentacion" FunctionName="gestion_ticketsModel.Store.sp_activar_presentacion" />
+          <FunctionImportMapping FunctionImportName="sp_activar_seccion" FunctionName="gestion_ticketsModel.Store.sp_activar_seccion" />
+          <FunctionImportMapping FunctionImportName="sp_activar_tipo_ticket" FunctionName="gestion_ticketsModel.Store.sp_activar_tipo_ticket" />
+          <FunctionImportMapping FunctionImportName="sp_activar_usuario" FunctionName="gestion_ticketsModel.Store.sp_activar_usuario" />
+          <FunctionImportMapping FunctionImportName="sp_activar_venue" FunctionName="gestion_ticketsModel.Store.sp_activar_venue" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_artista" FunctionName="gestion_ticketsModel.Store.sp_actualizar_artista" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_categoria" FunctionName="gestion_ticketsModel.Store.sp_actualizar_categoria" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_ciudad" FunctionName="gestion_ticketsModel.Store.sp_actualizar_ciudad" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_conversion" FunctionName="gestion_ticketsModel.Store.sp_actualizar_conversion" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_descuento" FunctionName="gestion_ticketsModel.Store.sp_actualizar_descuento" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_estado_pago" FunctionName="gestion_ticketsModel.Store.sp_actualizar_estado_pago" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_estado_reembolso" FunctionName="gestion_ticketsModel.Store.sp_actualizar_estado_reembolso" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_evento" FunctionName="gestion_ticketsModel.Store.sp_actualizar_evento" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_foto_venue" FunctionName="gestion_ticketsModel.Store.sp_actualizar_foto_venue" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_metodo_cash" FunctionName="gestion_ticketsModel.Store.sp_actualizar_metodo_cash" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_metodo_tarjeta" FunctionName="gestion_ticketsModel.Store.sp_actualizar_metodo_tarjeta" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_metodo_transferencia" FunctionName="gestion_ticketsModel.Store.sp_actualizar_metodo_transferencia" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_presentacion" FunctionName="gestion_ticketsModel.Store.sp_actualizar_presentacion" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_seccion" FunctionName="gestion_ticketsModel.Store.sp_actualizar_seccion" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_tipo_ticket" FunctionName="gestion_ticketsModel.Store.sp_actualizar_tipo_ticket" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_usuario" FunctionName="gestion_ticketsModel.Store.sp_actualizar_usuario" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_usuario_rol" FunctionName="gestion_ticketsModel.Store.sp_actualizar_usuario_rol" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_venue" FunctionName="gestion_ticketsModel.Store.sp_actualizar_venue" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_artista" FunctionName="gestion_ticketsModel.Store.sp_agregar_artista" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_categoria" FunctionName="gestion_ticketsModel.Store.sp_agregar_categoria" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_ciudades" FunctionName="gestion_ticketsModel.Store.sp_agregar_ciudades" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_conversion" FunctionName="gestion_ticketsModel.Store.sp_agregar_conversion" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_descuento" FunctionName="gestion_ticketsModel.Store.sp_agregar_descuento" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_evento" FunctionName="gestion_ticketsModel.Store.sp_agregar_evento" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_foto_venue" FunctionName="gestion_ticketsModel.Store.sp_agregar_foto_venue" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_metodo_cash" FunctionName="gestion_ticketsModel.Store.sp_agregar_metodo_cash" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_metodo_tarjeta" FunctionName="gestion_ticketsModel.Store.sp_agregar_metodo_tarjeta" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_metodo_transferencia" FunctionName="gestion_ticketsModel.Store.sp_agregar_metodo_transferencia" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_pago" FunctionName="gestion_ticketsModel.Store.sp_agregar_pago" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_presentacion" FunctionName="gestion_ticketsModel.Store.sp_agregar_presentacion" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_reembolso" FunctionName="gestion_ticketsModel.Store.sp_agregar_reembolso" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_seccion" FunctionName="gestion_ticketsModel.Store.sp_agregar_seccion" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_tipo_ticket" FunctionName="gestion_ticketsModel.Store.sp_agregar_tipo_ticket" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_usuario" FunctionName="gestion_ticketsModel.Store.sp_agregar_usuario" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_usuario_rol" FunctionName="gestion_ticketsModel.Store.sp_agregar_usuario_rol" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_venue" FunctionName="gestion_ticketsModel.Store.sp_agregar_venue" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_artista" FunctionName="gestion_ticketsModel.Store.sp_eliminar_artista" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_categoria" FunctionName="gestion_ticketsModel.Store.sp_eliminar_categoria" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_ciudad" FunctionName="gestion_ticketsModel.Store.sp_eliminar_ciudad" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_conversion" FunctionName="gestion_ticketsModel.Store.sp_eliminar_conversion" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_descuento" FunctionName="gestion_ticketsModel.Store.sp_eliminar_descuento" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_evento" FunctionName="gestion_ticketsModel.Store.sp_eliminar_evento" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_foto_venue" FunctionName="gestion_ticketsModel.Store.sp_eliminar_foto_venue" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_metodo_cash" FunctionName="gestion_ticketsModel.Store.sp_eliminar_metodo_cash" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_metodo_tarjeta" FunctionName="gestion_ticketsModel.Store.sp_eliminar_metodo_tarjeta" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_metodo_transferencia" FunctionName="gestion_ticketsModel.Store.sp_eliminar_metodo_transferencia" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_presentacion" FunctionName="gestion_ticketsModel.Store.sp_eliminar_presentacion" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_seccion" FunctionName="gestion_ticketsModel.Store.sp_eliminar_seccion" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_tipo_ticket" FunctionName="gestion_ticketsModel.Store.sp_eliminar_tipo_ticket" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_usuario" FunctionName="gestion_ticketsModel.Store.sp_eliminar_usuario" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_usuario_rol" FunctionName="gestion_ticketsModel.Store.sp_eliminar_usuario_rol" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_venue" FunctionName="gestion_ticketsModel.Store.sp_eliminar_venue" />
+          <FunctionImportMapping FunctionImportName="sp_mostrar_artistas" FunctionName="gestion_ticketsModel.Store.sp_mostrar_artistas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_artistas_Result">
+                <ScalarProperty Name="id_artista" ColumnName="id_artista" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_categorias" FunctionName="gestion_ticketsModel.Store.sp_mostrar_categorias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_categorias_Result">
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="icono_url" ColumnName="icono_url" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_ciudades" FunctionName="gestion_ticketsModel.Store.sp_mostrar_ciudades">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_ciudades_Result">
+                <ScalarProperty Name="id_ciudad" ColumnName="id_ciudad" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_conversiones" FunctionName="gestion_ticketsModel.Store.sp_mostrar_conversiones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_conversiones_Result">
+                <ScalarProperty Name="id_conversion" ColumnName="id_conversion" />
+                <ScalarProperty Name="moneda_origen" ColumnName="moneda_origen" />
+                <ScalarProperty Name="moneda_destino" ColumnName="moneda_destino" />
+                <ScalarProperty Name="tasa" ColumnName="tasa" />
+                <ScalarProperty Name="fecha_actualizacion" ColumnName="fecha_actualizacion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_descuentos" FunctionName="gestion_ticketsModel.Store.sp_mostrar_descuentos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_descuentos_Result">
+                <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_eventos" FunctionName="gestion_ticketsModel.Store.sp_mostrar_eventos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_eventos_Result">
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="organizador" ColumnName="organizador" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_fotos_venue" FunctionName="gestion_ticketsModel.Store.sp_mostrar_fotos_venue">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_fotos_venue_Result">
+                <ScalarProperty Name="id_foto" ColumnName="id_foto" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="fecha_subida" ColumnName="fecha_subida" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_metodos_cash" FunctionName="gestion_ticketsModel.Store.sp_mostrar_metodos_cash">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_metodos_cash_Result">
+                <ScalarProperty Name="id_metodo_cash" ColumnName="id_metodo_cash" />
+                <ScalarProperty Name="punto_pago" ColumnName="punto_pago" />
+                <ScalarProperty Name="codigo_referencia" ColumnName="codigo_referencia" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_metodos_tarjeta" FunctionName="gestion_ticketsModel.Store.sp_mostrar_metodos_tarjeta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_metodos_tarjeta_Result">
+                <ScalarProperty Name="id_metodo_tarjeta" ColumnName="id_metodo_tarjeta" />
+                <ScalarProperty Name="titular" ColumnName="titular" />
+                <ScalarProperty Name="numero_enmascarado" ColumnName="numero_enmascarado" />
+                <ScalarProperty Name="tipo_tarjeta" ColumnName="tipo_tarjeta" />
+                <ScalarProperty Name="fecha_expiracion" ColumnName="fecha_expiracion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_metodos_transferencia" FunctionName="gestion_ticketsModel.Store.sp_mostrar_metodos_transferencia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_metodos_transferencia_Result">
+                <ScalarProperty Name="id_metodo_transferencia" ColumnName="id_metodo_transferencia" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="numero_cuenta" ColumnName="numero_cuenta" />
+                <ScalarProperty Name="titular_cuenta" ColumnName="titular_cuenta" />
+                <ScalarProperty Name="referencia" ColumnName="referencia" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_pagos" FunctionName="gestion_ticketsModel.Store.sp_mostrar_pagos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_pagos_Result">
+                <ScalarProperty Name="id_pago" ColumnName="id_pago" />
+                <ScalarProperty Name="codigo_orden" ColumnName="codigo_orden" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="metodo" ColumnName="metodo" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_pago" ColumnName="fecha_pago" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_presentaciones" FunctionName="gestion_ticketsModel.Store.sp_mostrar_presentaciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_presentaciones_Result">
+                <ScalarProperty Name="id_presentacion" ColumnName="id_presentacion" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+                <ScalarProperty Name="artista" ColumnName="artista" />
+                <ScalarProperty Name="escenario" ColumnName="escenario" />
+                <ScalarProperty Name="fecha_hora_inicio" ColumnName="fecha_hora_inicio" />
+                <ScalarProperty Name="fecha_hora_fin" ColumnName="fecha_hora_fin" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_reembolsos" FunctionName="gestion_ticketsModel.Store.sp_mostrar_reembolsos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_reembolsos_Result">
+                <ScalarProperty Name="id_reembolso" ColumnName="id_reembolso" />
+                <ScalarProperty Name="codigo_orden" ColumnName="codigo_orden" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_proceso" ColumnName="fecha_proceso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_secciones" FunctionName="gestion_ticketsModel.Store.sp_mostrar_secciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_secciones_Result">
+                <ScalarProperty Name="id_seccion" ColumnName="id_seccion" />
+                <ScalarProperty Name="seccion" ColumnName="seccion" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_tipos_ticket" FunctionName="gestion_ticketsModel.Store.sp_mostrar_tipos_ticket">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_tipos_ticket_Result">
+                <ScalarProperty Name="id_tipo_ticket" ColumnName="id_tipo_ticket" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+                <ScalarProperty Name="seccion" ColumnName="seccion" />
+                <ScalarProperty Name="tipo_ticket" ColumnName="tipo_ticket" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
+                <ScalarProperty Name="cantidad_ticket" ColumnName="cantidad_ticket" />
+                <ScalarProperty Name="venta_inicio" ColumnName="venta_inicio" />
+                <ScalarProperty Name="venta_fin" ColumnName="venta_fin" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_usuarios" FunctionName="gestion_ticketsModel.Store.sp_mostrar_usuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_usuarios_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_usuarios_rol" FunctionName="gestion_ticketsModel.Store.sp_mostrar_usuarios_rol">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_usuarios_rol_Result">
+                <ScalarProperty Name="id_usuarios_rol" ColumnName="id_usuarios_rol" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_venues" FunctionName="gestion_ticketsModel.Store.sp_mostrar_venues">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_venues_Result">
+                <ScalarProperty Name="id_venue" ColumnName="id_venue" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -12,6 +12,8 @@ namespace GestionTickets
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class gestion_ticketsEntities : DbContext
     {
@@ -49,5 +51,1266 @@ namespace GestionTickets
         public virtual DbSet<usuarios> usuarios { get; set; }
         public virtual DbSet<usuarios_rol> usuarios_rol { get; set; }
         public virtual DbSet<venues> venues { get; set; }
+    
+        public virtual int sp_activar_artista(Nullable<int> id_artista)
+        {
+            var id_artistaParameter = id_artista.HasValue ?
+                new ObjectParameter("id_artista", id_artista) :
+                new ObjectParameter("id_artista", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_artista", id_artistaParameter);
+        }
+    
+        public virtual int sp_activar_categoria(Nullable<int> id_categoria)
+        {
+            var id_categoriaParameter = id_categoria.HasValue ?
+                new ObjectParameter("id_categoria", id_categoria) :
+                new ObjectParameter("id_categoria", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_categoria", id_categoriaParameter);
+        }
+    
+        public virtual int sp_activar_ciudad(Nullable<int> id_ciudad)
+        {
+            var id_ciudadParameter = id_ciudad.HasValue ?
+                new ObjectParameter("id_ciudad", id_ciudad) :
+                new ObjectParameter("id_ciudad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_ciudad", id_ciudadParameter);
+        }
+    
+        public virtual int sp_activar_conversion(Nullable<int> id_conversion)
+        {
+            var id_conversionParameter = id_conversion.HasValue ?
+                new ObjectParameter("id_conversion", id_conversion) :
+                new ObjectParameter("id_conversion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_conversion", id_conversionParameter);
+        }
+    
+        public virtual int sp_activar_descuento(Nullable<int> id_descuento)
+        {
+            var id_descuentoParameter = id_descuento.HasValue ?
+                new ObjectParameter("id_descuento", id_descuento) :
+                new ObjectParameter("id_descuento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_descuento", id_descuentoParameter);
+        }
+    
+        public virtual int sp_activar_evento(Nullable<int> id_evento)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_evento", id_eventoParameter);
+        }
+    
+        public virtual int sp_activar_foto_venue(Nullable<int> id_foto)
+        {
+            var id_fotoParameter = id_foto.HasValue ?
+                new ObjectParameter("id_foto", id_foto) :
+                new ObjectParameter("id_foto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_foto_venue", id_fotoParameter);
+        }
+    
+        public virtual int sp_activar_metodo_cash(Nullable<int> id_metodo_cash)
+        {
+            var id_metodo_cashParameter = id_metodo_cash.HasValue ?
+                new ObjectParameter("id_metodo_cash", id_metodo_cash) :
+                new ObjectParameter("id_metodo_cash", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_metodo_cash", id_metodo_cashParameter);
+        }
+    
+        public virtual int sp_activar_metodo_tarjeta(Nullable<int> id_metodo_tarjeta)
+        {
+            var id_metodo_tarjetaParameter = id_metodo_tarjeta.HasValue ?
+                new ObjectParameter("id_metodo_tarjeta", id_metodo_tarjeta) :
+                new ObjectParameter("id_metodo_tarjeta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_metodo_tarjeta", id_metodo_tarjetaParameter);
+        }
+    
+        public virtual int sp_activar_metodo_transferencia(Nullable<int> id_metodo_transferencia)
+        {
+            var id_metodo_transferenciaParameter = id_metodo_transferencia.HasValue ?
+                new ObjectParameter("id_metodo_transferencia", id_metodo_transferencia) :
+                new ObjectParameter("id_metodo_transferencia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_metodo_transferencia", id_metodo_transferenciaParameter);
+        }
+    
+        public virtual int sp_activar_presentacion(Nullable<int> id_presentacion)
+        {
+            var id_presentacionParameter = id_presentacion.HasValue ?
+                new ObjectParameter("id_presentacion", id_presentacion) :
+                new ObjectParameter("id_presentacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_presentacion", id_presentacionParameter);
+        }
+    
+        public virtual int sp_activar_seccion(Nullable<int> id_seccion)
+        {
+            var id_seccionParameter = id_seccion.HasValue ?
+                new ObjectParameter("id_seccion", id_seccion) :
+                new ObjectParameter("id_seccion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_seccion", id_seccionParameter);
+        }
+    
+        public virtual int sp_activar_tipo_ticket(Nullable<int> id_tipo_ticket)
+        {
+            var id_tipo_ticketParameter = id_tipo_ticket.HasValue ?
+                new ObjectParameter("id_tipo_ticket", id_tipo_ticket) :
+                new ObjectParameter("id_tipo_ticket", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_tipo_ticket", id_tipo_ticketParameter);
+        }
+    
+        public virtual int sp_activar_usuario(Nullable<int> id_usuario)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_usuario", id_usuarioParameter);
+        }
+    
+        public virtual int sp_activar_venue(Nullable<int> id_venue)
+        {
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_venue", id_venueParameter);
+        }
+    
+        public virtual int sp_actualizar_artista(Nullable<int> id_artista, string nombre, string genero, string descripcion, string imagen_url)
+        {
+            var id_artistaParameter = id_artista.HasValue ?
+                new ObjectParameter("id_artista", id_artista) :
+                new ObjectParameter("id_artista", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var generoParameter = genero != null ?
+                new ObjectParameter("genero", genero) :
+                new ObjectParameter("genero", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var imagen_urlParameter = imagen_url != null ?
+                new ObjectParameter("imagen_url", imagen_url) :
+                new ObjectParameter("imagen_url", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_artista", id_artistaParameter, nombreParameter, generoParameter, descripcionParameter, imagen_urlParameter);
+        }
+    
+        public virtual int sp_actualizar_categoria(Nullable<int> id_categoria, string nombre, string descripcion, string icono_url)
+        {
+            var id_categoriaParameter = id_categoria.HasValue ?
+                new ObjectParameter("id_categoria", id_categoria) :
+                new ObjectParameter("id_categoria", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var icono_urlParameter = icono_url != null ?
+                new ObjectParameter("icono_url", icono_url) :
+                new ObjectParameter("icono_url", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_categoria", id_categoriaParameter, nombreParameter, descripcionParameter, icono_urlParameter);
+        }
+    
+        public virtual int sp_actualizar_ciudad(Nullable<int> id_ciudad, Nullable<int> id_pais, string nombre)
+        {
+            var id_ciudadParameter = id_ciudad.HasValue ?
+                new ObjectParameter("id_ciudad", id_ciudad) :
+                new ObjectParameter("id_ciudad", typeof(int));
+    
+            var id_paisParameter = id_pais.HasValue ?
+                new ObjectParameter("id_pais", id_pais) :
+                new ObjectParameter("id_pais", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_ciudad", id_ciudadParameter, id_paisParameter, nombreParameter);
+        }
+    
+        public virtual int sp_actualizar_conversion(Nullable<int> id_conversion, Nullable<decimal> tasa)
+        {
+            var id_conversionParameter = id_conversion.HasValue ?
+                new ObjectParameter("id_conversion", id_conversion) :
+                new ObjectParameter("id_conversion", typeof(int));
+    
+            var tasaParameter = tasa.HasValue ?
+                new ObjectParameter("tasa", tasa) :
+                new ObjectParameter("tasa", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_conversion", id_conversionParameter, tasaParameter);
+        }
+    
+        public virtual int sp_actualizar_descuento(Nullable<int> id_descuento, string codigo, string tipo, Nullable<decimal> valor, string estado)
+        {
+            var id_descuentoParameter = id_descuento.HasValue ?
+                new ObjectParameter("id_descuento", id_descuento) :
+                new ObjectParameter("id_descuento", typeof(int));
+    
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("valor", valor) :
+                new ObjectParameter("valor", typeof(decimal));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_descuento", id_descuentoParameter, codigoParameter, tipoParameter, valorParameter, estadoParameter);
+        }
+    
+        public virtual int sp_actualizar_estado_pago(Nullable<int> id_pago, string estado)
+        {
+            var id_pagoParameter = id_pago.HasValue ?
+                new ObjectParameter("id_pago", id_pago) :
+                new ObjectParameter("id_pago", typeof(int));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_estado_pago", id_pagoParameter, estadoParameter);
+        }
+    
+        public virtual int sp_actualizar_estado_reembolso(Nullable<int> id_reembolso, string estado)
+        {
+            var id_reembolsoParameter = id_reembolso.HasValue ?
+                new ObjectParameter("id_reembolso", id_reembolso) :
+                new ObjectParameter("id_reembolso", typeof(int));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_estado_reembolso", id_reembolsoParameter, estadoParameter);
+        }
+    
+        public virtual int sp_actualizar_evento(Nullable<int> id_evento, Nullable<int> id_venue, Nullable<int> id_categoria, string nombre, string tipo, string descripcion, string imagen_url, Nullable<System.DateTime> fecha_inicio, Nullable<System.DateTime> fecha_fin)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            var id_categoriaParameter = id_categoria.HasValue ?
+                new ObjectParameter("id_categoria", id_categoria) :
+                new ObjectParameter("id_categoria", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var imagen_urlParameter = imagen_url != null ?
+                new ObjectParameter("imagen_url", imagen_url) :
+                new ObjectParameter("imagen_url", typeof(string));
+    
+            var fecha_inicioParameter = fecha_inicio.HasValue ?
+                new ObjectParameter("fecha_inicio", fecha_inicio) :
+                new ObjectParameter("fecha_inicio", typeof(System.DateTime));
+    
+            var fecha_finParameter = fecha_fin.HasValue ?
+                new ObjectParameter("fecha_fin", fecha_fin) :
+                new ObjectParameter("fecha_fin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_evento", id_eventoParameter, id_venueParameter, id_categoriaParameter, nombreParameter, tipoParameter, descripcionParameter, imagen_urlParameter, fecha_inicioParameter, fecha_finParameter);
+        }
+    
+        public virtual int sp_actualizar_foto_venue(Nullable<int> id_foto, string url, string descripcion, Nullable<int> orden)
+        {
+            var id_fotoParameter = id_foto.HasValue ?
+                new ObjectParameter("id_foto", id_foto) :
+                new ObjectParameter("id_foto", typeof(int));
+    
+            var urlParameter = url != null ?
+                new ObjectParameter("url", url) :
+                new ObjectParameter("url", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("orden", orden) :
+                new ObjectParameter("orden", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_foto_venue", id_fotoParameter, urlParameter, descripcionParameter, ordenParameter);
+        }
+    
+        public virtual int sp_actualizar_metodo_cash(Nullable<int> id_metodo_cash, string punto_pago, string codigo_referencia)
+        {
+            var id_metodo_cashParameter = id_metodo_cash.HasValue ?
+                new ObjectParameter("id_metodo_cash", id_metodo_cash) :
+                new ObjectParameter("id_metodo_cash", typeof(int));
+    
+            var punto_pagoParameter = punto_pago != null ?
+                new ObjectParameter("punto_pago", punto_pago) :
+                new ObjectParameter("punto_pago", typeof(string));
+    
+            var codigo_referenciaParameter = codigo_referencia != null ?
+                new ObjectParameter("codigo_referencia", codigo_referencia) :
+                new ObjectParameter("codigo_referencia", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_metodo_cash", id_metodo_cashParameter, punto_pagoParameter, codigo_referenciaParameter);
+        }
+    
+        public virtual int sp_actualizar_metodo_tarjeta(Nullable<int> id_metodo_tarjeta, string titular, string tipo_tarjeta, string fecha_expiracion)
+        {
+            var id_metodo_tarjetaParameter = id_metodo_tarjeta.HasValue ?
+                new ObjectParameter("id_metodo_tarjeta", id_metodo_tarjeta) :
+                new ObjectParameter("id_metodo_tarjeta", typeof(int));
+    
+            var titularParameter = titular != null ?
+                new ObjectParameter("titular", titular) :
+                new ObjectParameter("titular", typeof(string));
+    
+            var tipo_tarjetaParameter = tipo_tarjeta != null ?
+                new ObjectParameter("tipo_tarjeta", tipo_tarjeta) :
+                new ObjectParameter("tipo_tarjeta", typeof(string));
+    
+            var fecha_expiracionParameter = fecha_expiracion != null ?
+                new ObjectParameter("fecha_expiracion", fecha_expiracion) :
+                new ObjectParameter("fecha_expiracion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_metodo_tarjeta", id_metodo_tarjetaParameter, titularParameter, tipo_tarjetaParameter, fecha_expiracionParameter);
+        }
+    
+        public virtual int sp_actualizar_metodo_transferencia(Nullable<int> id_metodo_transferencia, string banco, string numero_cuenta, string titular_cuenta, string referencia)
+        {
+            var id_metodo_transferenciaParameter = id_metodo_transferencia.HasValue ?
+                new ObjectParameter("id_metodo_transferencia", id_metodo_transferencia) :
+                new ObjectParameter("id_metodo_transferencia", typeof(int));
+    
+            var bancoParameter = banco != null ?
+                new ObjectParameter("banco", banco) :
+                new ObjectParameter("banco", typeof(string));
+    
+            var numero_cuentaParameter = numero_cuenta != null ?
+                new ObjectParameter("numero_cuenta", numero_cuenta) :
+                new ObjectParameter("numero_cuenta", typeof(string));
+    
+            var titular_cuentaParameter = titular_cuenta != null ?
+                new ObjectParameter("titular_cuenta", titular_cuenta) :
+                new ObjectParameter("titular_cuenta", typeof(string));
+    
+            var referenciaParameter = referencia != null ?
+                new ObjectParameter("referencia", referencia) :
+                new ObjectParameter("referencia", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_metodo_transferencia", id_metodo_transferenciaParameter, bancoParameter, numero_cuentaParameter, titular_cuentaParameter, referenciaParameter);
+        }
+    
+        public virtual int sp_actualizar_presentacion(Nullable<int> id_presentacion, Nullable<int> id_artista, string escenario, Nullable<System.DateTime> fecha_hora_inicio, Nullable<System.DateTime> fecha_hora_fin, Nullable<int> orden)
+        {
+            var id_presentacionParameter = id_presentacion.HasValue ?
+                new ObjectParameter("id_presentacion", id_presentacion) :
+                new ObjectParameter("id_presentacion", typeof(int));
+    
+            var id_artistaParameter = id_artista.HasValue ?
+                new ObjectParameter("id_artista", id_artista) :
+                new ObjectParameter("id_artista", typeof(int));
+    
+            var escenarioParameter = escenario != null ?
+                new ObjectParameter("escenario", escenario) :
+                new ObjectParameter("escenario", typeof(string));
+    
+            var fecha_hora_inicioParameter = fecha_hora_inicio.HasValue ?
+                new ObjectParameter("fecha_hora_inicio", fecha_hora_inicio) :
+                new ObjectParameter("fecha_hora_inicio", typeof(System.DateTime));
+    
+            var fecha_hora_finParameter = fecha_hora_fin.HasValue ?
+                new ObjectParameter("fecha_hora_fin", fecha_hora_fin) :
+                new ObjectParameter("fecha_hora_fin", typeof(System.DateTime));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("orden", orden) :
+                new ObjectParameter("orden", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_presentacion", id_presentacionParameter, id_artistaParameter, escenarioParameter, fecha_hora_inicioParameter, fecha_hora_finParameter, ordenParameter);
+        }
+    
+        public virtual int sp_actualizar_seccion(Nullable<int> id_seccion, Nullable<int> id_venue, string nombre, Nullable<int> capacidad)
+        {
+            var id_seccionParameter = id_seccion.HasValue ?
+                new ObjectParameter("id_seccion", id_seccion) :
+                new ObjectParameter("id_seccion", typeof(int));
+    
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var capacidadParameter = capacidad.HasValue ?
+                new ObjectParameter("capacidad", capacidad) :
+                new ObjectParameter("capacidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_seccion", id_seccionParameter, id_venueParameter, nombreParameter, capacidadParameter);
+        }
+    
+        public virtual int sp_actualizar_tipo_ticket(Nullable<int> id_tipo_ticket, Nullable<int> id_seccion, string nombre, Nullable<decimal> precio, string moneda, Nullable<int> cantidad_ticket, Nullable<System.DateTime> venta_inicio, Nullable<System.DateTime> venta_fin)
+        {
+            var id_tipo_ticketParameter = id_tipo_ticket.HasValue ?
+                new ObjectParameter("id_tipo_ticket", id_tipo_ticket) :
+                new ObjectParameter("id_tipo_ticket", typeof(int));
+    
+            var id_seccionParameter = id_seccion.HasValue ?
+                new ObjectParameter("id_seccion", id_seccion) :
+                new ObjectParameter("id_seccion", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(decimal));
+    
+            var monedaParameter = moneda != null ?
+                new ObjectParameter("moneda", moneda) :
+                new ObjectParameter("moneda", typeof(string));
+    
+            var cantidad_ticketParameter = cantidad_ticket.HasValue ?
+                new ObjectParameter("cantidad_ticket", cantidad_ticket) :
+                new ObjectParameter("cantidad_ticket", typeof(int));
+    
+            var venta_inicioParameter = venta_inicio.HasValue ?
+                new ObjectParameter("venta_inicio", venta_inicio) :
+                new ObjectParameter("venta_inicio", typeof(System.DateTime));
+    
+            var venta_finParameter = venta_fin.HasValue ?
+                new ObjectParameter("venta_fin", venta_fin) :
+                new ObjectParameter("venta_fin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_tipo_ticket", id_tipo_ticketParameter, id_seccionParameter, nombreParameter, precioParameter, monedaParameter, cantidad_ticketParameter, venta_inicioParameter, venta_finParameter);
+        }
+    
+        public virtual int sp_actualizar_usuario(Nullable<int> id_usuario, Nullable<int> id_pais, string nombre, string apellido, string email, string telefono)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var id_paisParameter = id_pais.HasValue ?
+                new ObjectParameter("id_pais", id_pais) :
+                new ObjectParameter("id_pais", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("apellido", apellido) :
+                new ObjectParameter("apellido", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_usuario", id_usuarioParameter, id_paisParameter, nombreParameter, apellidoParameter, emailParameter, telefonoParameter);
+        }
+    
+        public virtual int sp_actualizar_usuario_rol(Nullable<int> id_usuarios_rol, Nullable<int> id_rol)
+        {
+            var id_usuarios_rolParameter = id_usuarios_rol.HasValue ?
+                new ObjectParameter("id_usuarios_rol", id_usuarios_rol) :
+                new ObjectParameter("id_usuarios_rol", typeof(int));
+    
+            var id_rolParameter = id_rol.HasValue ?
+                new ObjectParameter("id_rol", id_rol) :
+                new ObjectParameter("id_rol", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_usuario_rol", id_usuarios_rolParameter, id_rolParameter);
+        }
+    
+        public virtual int sp_actualizar_venue(Nullable<int> id_venue, Nullable<int> id_ciudad, string nombre, string tipo, string direccion, Nullable<int> capacidad, Nullable<decimal> latitud, Nullable<decimal> longitud, string imagen_url)
+        {
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            var id_ciudadParameter = id_ciudad.HasValue ?
+                new ObjectParameter("id_ciudad", id_ciudad) :
+                new ObjectParameter("id_ciudad", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("direccion", direccion) :
+                new ObjectParameter("direccion", typeof(string));
+    
+            var capacidadParameter = capacidad.HasValue ?
+                new ObjectParameter("capacidad", capacidad) :
+                new ObjectParameter("capacidad", typeof(int));
+    
+            var latitudParameter = latitud.HasValue ?
+                new ObjectParameter("latitud", latitud) :
+                new ObjectParameter("latitud", typeof(decimal));
+    
+            var longitudParameter = longitud.HasValue ?
+                new ObjectParameter("longitud", longitud) :
+                new ObjectParameter("longitud", typeof(decimal));
+    
+            var imagen_urlParameter = imagen_url != null ?
+                new ObjectParameter("imagen_url", imagen_url) :
+                new ObjectParameter("imagen_url", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_venue", id_venueParameter, id_ciudadParameter, nombreParameter, tipoParameter, direccionParameter, capacidadParameter, latitudParameter, longitudParameter, imagen_urlParameter);
+        }
+    
+        public virtual int sp_agregar_artista(string nombre, string genero, string descripcion, string imagen_url)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var generoParameter = genero != null ?
+                new ObjectParameter("genero", genero) :
+                new ObjectParameter("genero", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var imagen_urlParameter = imagen_url != null ?
+                new ObjectParameter("imagen_url", imagen_url) :
+                new ObjectParameter("imagen_url", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_artista", nombreParameter, generoParameter, descripcionParameter, imagen_urlParameter);
+        }
+    
+        public virtual int sp_agregar_categoria(string nombre, string descripcion, string icono_url)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var icono_urlParameter = icono_url != null ?
+                new ObjectParameter("icono_url", icono_url) :
+                new ObjectParameter("icono_url", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_categoria", nombreParameter, descripcionParameter, icono_urlParameter);
+        }
+    
+        public virtual int sp_agregar_ciudades(Nullable<int> id_pais, string nombre)
+        {
+            var id_paisParameter = id_pais.HasValue ?
+                new ObjectParameter("id_pais", id_pais) :
+                new ObjectParameter("id_pais", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_ciudades", id_paisParameter, nombreParameter);
+        }
+    
+        public virtual int sp_agregar_conversion(string moneda_origen, string moneda_destino, Nullable<decimal> tasa)
+        {
+            var moneda_origenParameter = moneda_origen != null ?
+                new ObjectParameter("moneda_origen", moneda_origen) :
+                new ObjectParameter("moneda_origen", typeof(string));
+    
+            var moneda_destinoParameter = moneda_destino != null ?
+                new ObjectParameter("moneda_destino", moneda_destino) :
+                new ObjectParameter("moneda_destino", typeof(string));
+    
+            var tasaParameter = tasa.HasValue ?
+                new ObjectParameter("tasa", tasa) :
+                new ObjectParameter("tasa", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_conversion", moneda_origenParameter, moneda_destinoParameter, tasaParameter);
+        }
+    
+        public virtual int sp_agregar_descuento(Nullable<int> id_evento, string codigo, string tipo, Nullable<decimal> valor)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("valor", valor) :
+                new ObjectParameter("valor", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_descuento", id_eventoParameter, codigoParameter, tipoParameter, valorParameter);
+        }
+    
+        public virtual int sp_agregar_evento(Nullable<int> id_venue, Nullable<int> id_categoria, Nullable<int> id_usuario, string nombre, string tipo, string descripcion, string imagen_url, Nullable<System.DateTime> fecha_inicio, Nullable<System.DateTime> fecha_fin)
+        {
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            var id_categoriaParameter = id_categoria.HasValue ?
+                new ObjectParameter("id_categoria", id_categoria) :
+                new ObjectParameter("id_categoria", typeof(int));
+    
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var imagen_urlParameter = imagen_url != null ?
+                new ObjectParameter("imagen_url", imagen_url) :
+                new ObjectParameter("imagen_url", typeof(string));
+    
+            var fecha_inicioParameter = fecha_inicio.HasValue ?
+                new ObjectParameter("fecha_inicio", fecha_inicio) :
+                new ObjectParameter("fecha_inicio", typeof(System.DateTime));
+    
+            var fecha_finParameter = fecha_fin.HasValue ?
+                new ObjectParameter("fecha_fin", fecha_fin) :
+                new ObjectParameter("fecha_fin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_evento", id_venueParameter, id_categoriaParameter, id_usuarioParameter, nombreParameter, tipoParameter, descripcionParameter, imagen_urlParameter, fecha_inicioParameter, fecha_finParameter);
+        }
+    
+        public virtual int sp_agregar_foto_venue(Nullable<int> id_venue, string url, string descripcion, Nullable<int> orden)
+        {
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            var urlParameter = url != null ?
+                new ObjectParameter("url", url) :
+                new ObjectParameter("url", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("orden", orden) :
+                new ObjectParameter("orden", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_foto_venue", id_venueParameter, urlParameter, descripcionParameter, ordenParameter);
+        }
+    
+        public virtual int sp_agregar_metodo_cash(string punto_pago, string codigo_referencia)
+        {
+            var punto_pagoParameter = punto_pago != null ?
+                new ObjectParameter("punto_pago", punto_pago) :
+                new ObjectParameter("punto_pago", typeof(string));
+    
+            var codigo_referenciaParameter = codigo_referencia != null ?
+                new ObjectParameter("codigo_referencia", codigo_referencia) :
+                new ObjectParameter("codigo_referencia", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_metodo_cash", punto_pagoParameter, codigo_referenciaParameter);
+        }
+    
+        public virtual int sp_agregar_metodo_tarjeta(string titular, string numero_enmascarado, string tipo_tarjeta, string fecha_expiracion)
+        {
+            var titularParameter = titular != null ?
+                new ObjectParameter("titular", titular) :
+                new ObjectParameter("titular", typeof(string));
+    
+            var numero_enmascaradoParameter = numero_enmascarado != null ?
+                new ObjectParameter("numero_enmascarado", numero_enmascarado) :
+                new ObjectParameter("numero_enmascarado", typeof(string));
+    
+            var tipo_tarjetaParameter = tipo_tarjeta != null ?
+                new ObjectParameter("tipo_tarjeta", tipo_tarjeta) :
+                new ObjectParameter("tipo_tarjeta", typeof(string));
+    
+            var fecha_expiracionParameter = fecha_expiracion != null ?
+                new ObjectParameter("fecha_expiracion", fecha_expiracion) :
+                new ObjectParameter("fecha_expiracion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_metodo_tarjeta", titularParameter, numero_enmascaradoParameter, tipo_tarjetaParameter, fecha_expiracionParameter);
+        }
+    
+        public virtual int sp_agregar_metodo_transferencia(string banco, string numero_cuenta, string titular_cuenta, string referencia)
+        {
+            var bancoParameter = banco != null ?
+                new ObjectParameter("banco", banco) :
+                new ObjectParameter("banco", typeof(string));
+    
+            var numero_cuentaParameter = numero_cuenta != null ?
+                new ObjectParameter("numero_cuenta", numero_cuenta) :
+                new ObjectParameter("numero_cuenta", typeof(string));
+    
+            var titular_cuentaParameter = titular_cuenta != null ?
+                new ObjectParameter("titular_cuenta", titular_cuenta) :
+                new ObjectParameter("titular_cuenta", typeof(string));
+    
+            var referenciaParameter = referencia != null ?
+                new ObjectParameter("referencia", referencia) :
+                new ObjectParameter("referencia", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_metodo_transferencia", bancoParameter, numero_cuentaParameter, titular_cuentaParameter, referenciaParameter);
+        }
+    
+        public virtual int sp_agregar_pago(Nullable<int> id_compra, Nullable<int> id_usuario, string metodo, Nullable<int> id_metodo_tarjeta, Nullable<int> id_metodo_transferencia, Nullable<int> id_metodo_cash)
+        {
+            var id_compraParameter = id_compra.HasValue ?
+                new ObjectParameter("id_compra", id_compra) :
+                new ObjectParameter("id_compra", typeof(int));
+    
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var metodoParameter = metodo != null ?
+                new ObjectParameter("metodo", metodo) :
+                new ObjectParameter("metodo", typeof(string));
+    
+            var id_metodo_tarjetaParameter = id_metodo_tarjeta.HasValue ?
+                new ObjectParameter("id_metodo_tarjeta", id_metodo_tarjeta) :
+                new ObjectParameter("id_metodo_tarjeta", typeof(int));
+    
+            var id_metodo_transferenciaParameter = id_metodo_transferencia.HasValue ?
+                new ObjectParameter("id_metodo_transferencia", id_metodo_transferencia) :
+                new ObjectParameter("id_metodo_transferencia", typeof(int));
+    
+            var id_metodo_cashParameter = id_metodo_cash.HasValue ?
+                new ObjectParameter("id_metodo_cash", id_metodo_cash) :
+                new ObjectParameter("id_metodo_cash", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_pago", id_compraParameter, id_usuarioParameter, metodoParameter, id_metodo_tarjetaParameter, id_metodo_transferenciaParameter, id_metodo_cashParameter);
+        }
+    
+        public virtual int sp_agregar_presentacion(Nullable<int> id_evento, Nullable<int> id_artista, Nullable<System.DateTime> fecha_hora_inicio, string escenario, Nullable<System.DateTime> fecha_hora_fin, Nullable<int> orden)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            var id_artistaParameter = id_artista.HasValue ?
+                new ObjectParameter("id_artista", id_artista) :
+                new ObjectParameter("id_artista", typeof(int));
+    
+            var fecha_hora_inicioParameter = fecha_hora_inicio.HasValue ?
+                new ObjectParameter("fecha_hora_inicio", fecha_hora_inicio) :
+                new ObjectParameter("fecha_hora_inicio", typeof(System.DateTime));
+    
+            var escenarioParameter = escenario != null ?
+                new ObjectParameter("escenario", escenario) :
+                new ObjectParameter("escenario", typeof(string));
+    
+            var fecha_hora_finParameter = fecha_hora_fin.HasValue ?
+                new ObjectParameter("fecha_hora_fin", fecha_hora_fin) :
+                new ObjectParameter("fecha_hora_fin", typeof(System.DateTime));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("orden", orden) :
+                new ObjectParameter("orden", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_presentacion", id_eventoParameter, id_artistaParameter, fecha_hora_inicioParameter, escenarioParameter, fecha_hora_finParameter, ordenParameter);
+        }
+    
+        public virtual int sp_agregar_reembolso(Nullable<int> id_compra, Nullable<int> id_pago, string motivo)
+        {
+            var id_compraParameter = id_compra.HasValue ?
+                new ObjectParameter("id_compra", id_compra) :
+                new ObjectParameter("id_compra", typeof(int));
+    
+            var id_pagoParameter = id_pago.HasValue ?
+                new ObjectParameter("id_pago", id_pago) :
+                new ObjectParameter("id_pago", typeof(int));
+    
+            var motivoParameter = motivo != null ?
+                new ObjectParameter("motivo", motivo) :
+                new ObjectParameter("motivo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_reembolso", id_compraParameter, id_pagoParameter, motivoParameter);
+        }
+    
+        public virtual int sp_agregar_seccion(Nullable<int> id_venue, string nombre, Nullable<int> capacidad)
+        {
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var capacidadParameter = capacidad.HasValue ?
+                new ObjectParameter("capacidad", capacidad) :
+                new ObjectParameter("capacidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_seccion", id_venueParameter, nombreParameter, capacidadParameter);
+        }
+    
+        public virtual int sp_agregar_tipo_ticket(Nullable<int> id_evento, Nullable<int> id_seccion, string nombre, Nullable<decimal> precio, string moneda, Nullable<int> cantidad_ticket, Nullable<System.DateTime> venta_inicio, Nullable<System.DateTime> venta_fin)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            var id_seccionParameter = id_seccion.HasValue ?
+                new ObjectParameter("id_seccion", id_seccion) :
+                new ObjectParameter("id_seccion", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(decimal));
+    
+            var monedaParameter = moneda != null ?
+                new ObjectParameter("moneda", moneda) :
+                new ObjectParameter("moneda", typeof(string));
+    
+            var cantidad_ticketParameter = cantidad_ticket.HasValue ?
+                new ObjectParameter("cantidad_ticket", cantidad_ticket) :
+                new ObjectParameter("cantidad_ticket", typeof(int));
+    
+            var venta_inicioParameter = venta_inicio.HasValue ?
+                new ObjectParameter("venta_inicio", venta_inicio) :
+                new ObjectParameter("venta_inicio", typeof(System.DateTime));
+    
+            var venta_finParameter = venta_fin.HasValue ?
+                new ObjectParameter("venta_fin", venta_fin) :
+                new ObjectParameter("venta_fin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_tipo_ticket", id_eventoParameter, id_seccionParameter, nombreParameter, precioParameter, monedaParameter, cantidad_ticketParameter, venta_inicioParameter, venta_finParameter);
+        }
+    
+        public virtual int sp_agregar_usuario(Nullable<int> id_pais, string nombre, string apellido, string email, string password_hash, string telefono)
+        {
+            var id_paisParameter = id_pais.HasValue ?
+                new ObjectParameter("id_pais", id_pais) :
+                new ObjectParameter("id_pais", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var apellidoParameter = apellido != null ?
+                new ObjectParameter("apellido", apellido) :
+                new ObjectParameter("apellido", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var password_hashParameter = password_hash != null ?
+                new ObjectParameter("password_hash", password_hash) :
+                new ObjectParameter("password_hash", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_usuario", id_paisParameter, nombreParameter, apellidoParameter, emailParameter, password_hashParameter, telefonoParameter);
+        }
+    
+        public virtual int sp_agregar_usuario_rol(Nullable<int> id_usuario, Nullable<int> id_rol)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var id_rolParameter = id_rol.HasValue ?
+                new ObjectParameter("id_rol", id_rol) :
+                new ObjectParameter("id_rol", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_usuario_rol", id_usuarioParameter, id_rolParameter);
+        }
+    
+        public virtual int sp_agregar_venue(Nullable<int> id_ciudad, string nombre, string tipo, string direccion, Nullable<int> capacidad, Nullable<decimal> latitud, Nullable<decimal> longitud, string imagen_url)
+        {
+            var id_ciudadParameter = id_ciudad.HasValue ?
+                new ObjectParameter("id_ciudad", id_ciudad) :
+                new ObjectParameter("id_ciudad", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("direccion", direccion) :
+                new ObjectParameter("direccion", typeof(string));
+    
+            var capacidadParameter = capacidad.HasValue ?
+                new ObjectParameter("capacidad", capacidad) :
+                new ObjectParameter("capacidad", typeof(int));
+    
+            var latitudParameter = latitud.HasValue ?
+                new ObjectParameter("latitud", latitud) :
+                new ObjectParameter("latitud", typeof(decimal));
+    
+            var longitudParameter = longitud.HasValue ?
+                new ObjectParameter("longitud", longitud) :
+                new ObjectParameter("longitud", typeof(decimal));
+    
+            var imagen_urlParameter = imagen_url != null ?
+                new ObjectParameter("imagen_url", imagen_url) :
+                new ObjectParameter("imagen_url", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_venue", id_ciudadParameter, nombreParameter, tipoParameter, direccionParameter, capacidadParameter, latitudParameter, longitudParameter, imagen_urlParameter);
+        }
+    
+        public virtual int sp_eliminar_artista(Nullable<int> id_artista)
+        {
+            var id_artistaParameter = id_artista.HasValue ?
+                new ObjectParameter("id_artista", id_artista) :
+                new ObjectParameter("id_artista", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_artista", id_artistaParameter);
+        }
+    
+        public virtual int sp_eliminar_categoria(Nullable<int> id_categoria)
+        {
+            var id_categoriaParameter = id_categoria.HasValue ?
+                new ObjectParameter("id_categoria", id_categoria) :
+                new ObjectParameter("id_categoria", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_categoria", id_categoriaParameter);
+        }
+    
+        public virtual int sp_eliminar_ciudad(Nullable<int> id_ciudad)
+        {
+            var id_ciudadParameter = id_ciudad.HasValue ?
+                new ObjectParameter("id_ciudad", id_ciudad) :
+                new ObjectParameter("id_ciudad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_ciudad", id_ciudadParameter);
+        }
+    
+        public virtual int sp_eliminar_conversion(Nullable<int> id_conversion)
+        {
+            var id_conversionParameter = id_conversion.HasValue ?
+                new ObjectParameter("id_conversion", id_conversion) :
+                new ObjectParameter("id_conversion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_conversion", id_conversionParameter);
+        }
+    
+        public virtual int sp_eliminar_descuento(Nullable<int> id_descuento)
+        {
+            var id_descuentoParameter = id_descuento.HasValue ?
+                new ObjectParameter("id_descuento", id_descuento) :
+                new ObjectParameter("id_descuento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_descuento", id_descuentoParameter);
+        }
+    
+        public virtual int sp_eliminar_evento(Nullable<int> id_evento)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_evento", id_eventoParameter);
+        }
+    
+        public virtual int sp_eliminar_foto_venue(Nullable<int> id_foto)
+        {
+            var id_fotoParameter = id_foto.HasValue ?
+                new ObjectParameter("id_foto", id_foto) :
+                new ObjectParameter("id_foto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_foto_venue", id_fotoParameter);
+        }
+    
+        public virtual int sp_eliminar_metodo_cash(Nullable<int> id_metodo_cash)
+        {
+            var id_metodo_cashParameter = id_metodo_cash.HasValue ?
+                new ObjectParameter("id_metodo_cash", id_metodo_cash) :
+                new ObjectParameter("id_metodo_cash", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_metodo_cash", id_metodo_cashParameter);
+        }
+    
+        public virtual int sp_eliminar_metodo_tarjeta(Nullable<int> id_metodo_tarjeta)
+        {
+            var id_metodo_tarjetaParameter = id_metodo_tarjeta.HasValue ?
+                new ObjectParameter("id_metodo_tarjeta", id_metodo_tarjeta) :
+                new ObjectParameter("id_metodo_tarjeta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_metodo_tarjeta", id_metodo_tarjetaParameter);
+        }
+    
+        public virtual int sp_eliminar_metodo_transferencia(Nullable<int> id_metodo_transferencia)
+        {
+            var id_metodo_transferenciaParameter = id_metodo_transferencia.HasValue ?
+                new ObjectParameter("id_metodo_transferencia", id_metodo_transferencia) :
+                new ObjectParameter("id_metodo_transferencia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_metodo_transferencia", id_metodo_transferenciaParameter);
+        }
+    
+        public virtual int sp_eliminar_presentacion(Nullable<int> id_presentacion)
+        {
+            var id_presentacionParameter = id_presentacion.HasValue ?
+                new ObjectParameter("id_presentacion", id_presentacion) :
+                new ObjectParameter("id_presentacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_presentacion", id_presentacionParameter);
+        }
+    
+        public virtual int sp_eliminar_seccion(Nullable<int> id_seccion)
+        {
+            var id_seccionParameter = id_seccion.HasValue ?
+                new ObjectParameter("id_seccion", id_seccion) :
+                new ObjectParameter("id_seccion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_seccion", id_seccionParameter);
+        }
+    
+        public virtual int sp_eliminar_tipo_ticket(Nullable<int> id_tipo_ticket)
+        {
+            var id_tipo_ticketParameter = id_tipo_ticket.HasValue ?
+                new ObjectParameter("id_tipo_ticket", id_tipo_ticket) :
+                new ObjectParameter("id_tipo_ticket", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_tipo_ticket", id_tipo_ticketParameter);
+        }
+    
+        public virtual int sp_eliminar_usuario(Nullable<int> id_usuario)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_usuario", id_usuarioParameter);
+        }
+    
+        public virtual int sp_eliminar_usuario_rol(Nullable<int> id_usuarios_rol)
+        {
+            var id_usuarios_rolParameter = id_usuarios_rol.HasValue ?
+                new ObjectParameter("id_usuarios_rol", id_usuarios_rol) :
+                new ObjectParameter("id_usuarios_rol", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_usuario_rol", id_usuarios_rolParameter);
+        }
+    
+        public virtual int sp_eliminar_venue(Nullable<int> id_venue)
+        {
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_venue", id_venueParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_artistas_Result> sp_mostrar_artistas(string genero)
+        {
+            var generoParameter = genero != null ?
+                new ObjectParameter("genero", genero) :
+                new ObjectParameter("genero", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_artistas_Result>("sp_mostrar_artistas", generoParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_categorias_Result> sp_mostrar_categorias()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_categorias_Result>("sp_mostrar_categorias");
+        }
+    
+        public virtual ObjectResult<sp_mostrar_ciudades_Result> sp_mostrar_ciudades(Nullable<int> id_pais)
+        {
+            var id_paisParameter = id_pais.HasValue ?
+                new ObjectParameter("id_pais", id_pais) :
+                new ObjectParameter("id_pais", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_ciudades_Result>("sp_mostrar_ciudades", id_paisParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_conversiones_Result> sp_mostrar_conversiones(string moneda_origen)
+        {
+            var moneda_origenParameter = moneda_origen != null ?
+                new ObjectParameter("moneda_origen", moneda_origen) :
+                new ObjectParameter("moneda_origen", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_conversiones_Result>("sp_mostrar_conversiones", moneda_origenParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_descuentos_Result> sp_mostrar_descuentos(Nullable<int> id_evento)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_descuentos_Result>("sp_mostrar_descuentos", id_eventoParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_eventos_Result> sp_mostrar_eventos(Nullable<int> id_categoria)
+        {
+            var id_categoriaParameter = id_categoria.HasValue ?
+                new ObjectParameter("id_categoria", id_categoria) :
+                new ObjectParameter("id_categoria", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_eventos_Result>("sp_mostrar_eventos", id_categoriaParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_fotos_venue_Result> sp_mostrar_fotos_venue(Nullable<int> id_venue)
+        {
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_fotos_venue_Result>("sp_mostrar_fotos_venue", id_venueParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_metodos_cash_Result> sp_mostrar_metodos_cash()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_metodos_cash_Result>("sp_mostrar_metodos_cash");
+        }
+    
+        public virtual ObjectResult<sp_mostrar_metodos_tarjeta_Result> sp_mostrar_metodos_tarjeta()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_metodos_tarjeta_Result>("sp_mostrar_metodos_tarjeta");
+        }
+    
+        public virtual ObjectResult<sp_mostrar_metodos_transferencia_Result> sp_mostrar_metodos_transferencia()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_metodos_transferencia_Result>("sp_mostrar_metodos_transferencia");
+        }
+    
+        public virtual ObjectResult<sp_mostrar_pagos_Result> sp_mostrar_pagos(Nullable<int> id_usuario)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_pagos_Result>("sp_mostrar_pagos", id_usuarioParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_presentaciones_Result> sp_mostrar_presentaciones(Nullable<int> id_evento)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_presentaciones_Result>("sp_mostrar_presentaciones", id_eventoParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_reembolsos_Result> sp_mostrar_reembolsos(Nullable<int> id_compra)
+        {
+            var id_compraParameter = id_compra.HasValue ?
+                new ObjectParameter("id_compra", id_compra) :
+                new ObjectParameter("id_compra", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_reembolsos_Result>("sp_mostrar_reembolsos", id_compraParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_secciones_Result> sp_mostrar_secciones(Nullable<int> id_venue)
+        {
+            var id_venueParameter = id_venue.HasValue ?
+                new ObjectParameter("id_venue", id_venue) :
+                new ObjectParameter("id_venue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_secciones_Result>("sp_mostrar_secciones", id_venueParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_tipos_ticket_Result> sp_mostrar_tipos_ticket(Nullable<int> id_evento)
+        {
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_tipos_ticket_Result>("sp_mostrar_tipos_ticket", id_eventoParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_usuarios_Result> sp_mostrar_usuarios(Nullable<int> id_pais)
+        {
+            var id_paisParameter = id_pais.HasValue ?
+                new ObjectParameter("id_pais", id_pais) :
+                new ObjectParameter("id_pais", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_usuarios_Result>("sp_mostrar_usuarios", id_paisParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_usuarios_rol_Result> sp_mostrar_usuarios_rol(Nullable<int> id_usuario)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_usuarios_rol_Result>("sp_mostrar_usuarios_rol", id_usuarioParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_venues_Result> sp_mostrar_venues(Nullable<int> id_ciudad)
+        {
+            var id_ciudadParameter = id_ciudad.HasValue ?
+                new ObjectParameter("id_ciudad", id_ciudad) :
+                new ObjectParameter("id_ciudad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_venues_Result>("sp_mostrar_venues", id_ciudadParameter);
+        }
     }
 }

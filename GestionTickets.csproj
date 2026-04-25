@@ -145,6 +145,7 @@
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccesoController.cs" />
+    <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="conversion_moneda.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
@@ -209,6 +210,60 @@
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="secciones_venue.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_artistas_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_categorias_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_ciudades_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_conversiones_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_descuentos_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_eventos_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_fotos_venue_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_metodos_cash_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_metodos_tarjeta_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_metodos_transferencia_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_pagos_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_presentaciones_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_reembolsos_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_secciones_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_tipos_ticket_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_usuarios_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_usuarios_rol_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_venues_Result.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tipos_ticket.cs">
@@ -296,6 +351,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Acceso\Login.cshtml" />
     <Content Include="Views\Acceso\Registrar.cshtml" />
+    <Content Include="Views\Eventos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
