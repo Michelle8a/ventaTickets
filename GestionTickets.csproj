@@ -144,6 +144,7 @@
     <Compile Include="compras.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="conversion_moneda.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
@@ -196,6 +197,7 @@
     <Compile Include="paises.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Permisos\ValidarSesionAttribute.cs" />
     <Compile Include="presentaciones.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
@@ -239,6 +241,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\Auth.css" />
+    <Content Include="Content\images\logotickets.png" />
     <Content Include="favicon.ico" />
     <Content Include="GestionTicketsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -290,9 +294,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Acceso\Login.cshtml" />
+    <Content Include="Views\Acceso\Registrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

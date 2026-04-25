@@ -8,7 +8,7 @@
         <h1 class="display-4 fw-bold">GestionTickets</h1>
         <p class="lead text-muted">Compra y gestiona tickets para eventos en toda Centroamérica</p>
         <a href="/Eventos" class="btn btn-primary me-2">Ver Eventos</a>
-        <a href="/Account/Register" class="btn btn-outline-secondary">Crear Cuenta</a>
+        @Html.ActionLink("Crear Cuenta", "Registrar", "Acceso", null, new { @class = "btn btn-outline-secondary" })
     </div>
 
     <hr />

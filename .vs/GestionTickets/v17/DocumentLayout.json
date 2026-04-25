@@ -1,14 +1,57 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\",
+  "WorkspaceRootPath": "C:\\Users\\danie\\source\\repos\\ventaTickets\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\views\\acceso\\registrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\acceso\\registrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\content\\css\\auth.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:content\\css\\auth.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\views\\acceso\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\acceso\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\permisos\\validarsesionattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:permisos\\validarsesionattribute.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\gestionticketsmodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\danie\\source\\repos\\ventaTickets\\gestionticketsmodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:gestionticketsmodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\danie\\source\\repos\\ventatickets\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\danie\\AppData\\Local\\Temp\\readme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +61,175 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ValidarSesionAttribute.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Permisos\\ValidarSesionAttribute.cs",
+              "RelativeDocumentMoniker": "Permisos\\ValidarSesionAttribute.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Permisos\\ValidarSesionAttribute.cs",
+              "RelativeToolTip": "Permisos\\ValidarSesionAttribute.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-25T01:40:47.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAqwAoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T23:49:21.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-25T02:02:59.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Registrar.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Acceso\\Registrar.cshtml",
+              "RelativeDocumentMoniker": "Views\\Acceso\\Registrar.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Acceso\\Registrar.cshtml",
+              "RelativeToolTip": "Views\\Acceso\\Registrar.cshtml",
+              "ViewState": "AgIAADEAAAAAAAAAAAAqwEsAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-25T01:46:43.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Acceso\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Acceso\\Login.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Acceso\\Login.cshtml",
+              "RelativeToolTip": "Views\\Acceso\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-25T01:45:52.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Auth.css",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Content\\css\\Auth.css",
+              "RelativeDocumentMoniker": "Content\\css\\Auth.css",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Content\\css\\Auth.css",
+              "RelativeToolTip": "Content\\css\\Auth.css",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAAFgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-04-25T03:32:50.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccesoController.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Controllers\\AccesoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccesoController.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Controllers\\AccesoController.cs",
+              "RelativeToolTip": "Controllers\\AccesoController.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAqwEcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-25T01:20:32.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Home\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-04-22T05:11:42.457Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
               "Title": "GestionTicketsModel.edmx [Diagram1]",
-              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\GestionTicketsModel.edmx",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\GestionTicketsModel.edmx",
               "RelativeDocumentMoniker": "GestionTicketsModel.edmx",
-              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\GestionTicketsModel.edmx [Diagram1]",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\GestionTicketsModel.edmx [Diagram1]",
               "RelativeToolTip": "GestionTicketsModel.edmx [Diagram1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
               "WhenOpened": "2026-04-22T05:02:51.548Z",
               "EditorCaption": " [Diagram1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Web.config",
+              "RelativeDocumentMoniker": "Views\\Web.config",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Views\\Web.config",
+              "RelativeToolTip": "Views\\Web.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-04-25T03:12:05.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAADkAAAAAAAAAAAAkwEgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-04-25T01:20:29.513Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "packages.config",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\ventaTickets\\packages.config",
+              "RelativeDocumentMoniker": "packages.config",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\ventaTickets\\packages.config",
+              "RelativeToolTip": "packages.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-04-25T02:59:05.268Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "readme.txt",
+              "DocumentMoniker": "C:\\Users\\danie\\AppData\\Local\\Temp\\readme.txt",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\readme.txt",
+              "ToolTip": "C:\\Users\\danie\\AppData\\Local\\Temp\\readme.txt",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\readme.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-04-25T01:20:33.205Z",
+              "EditorCaption": ""
             }
           ]
         }

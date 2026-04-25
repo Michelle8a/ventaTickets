@@ -1,0 +1,136 @@
+﻿@model GestionTickets.usuarios
+
+@{
+    ViewBag.Title = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="auth-container">
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            <img src="~/Content/images/logotickets.png" alt="Logo" />
+        </div>
+
+        <h3 class="auth-title">Crear Cuenta</h3>
+
+        @using (Html.BeginForm("Registrar", "Acceso", FormMethod.Post, new { id = "formRegistrar" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger text-center" })
+
+            @Html.TextBox("nombre", null, new { @class = "form-control mb-3", placeholder = "Nombre" })
+
+            @Html.TextBox("apellido", null, new { @class = "form-control mb-3", placeholder = "Apellido" })
+            @Html.TextBox("telefono", null, new { @class = "form-control mb-3", placeholder = "Teléfono" })
+
+            @Html.TextBox("email", null, new { @class = "form-control mb-3", placeholder = "Correo" })
+
+            @Html.Password("password", null, new { @class = "form-control mb-3", placeholder = "Contraseña" })
+
+            <input type="password" id="confirmar" class="form-control mb-3" placeholder="Confirmar contraseña" />
+
+            @Html.DropDownList("id_pais",
+                new SelectList(ViewBag.Paises, "id_pais", "nombre"),
+                "Seleccione un país",
+                new { @class = "form-control mb-3" })
+
+            <div id="mensaje" class="alert alert-danger d-none"></div>
+
+            <button type="submit" class="btn btn-auth">Registrarse</button>
+        }
+
+        <div class="auth-link">
+            ¿Ya tienes cuenta?
+            @Html.ActionLink("Inicia sesión", "Login", "Acceso")
+        </div>
+
+    </div>
+</div>
+
+<script>
+  $("#formRegistrar").submit(function (e) {
+    e.preventDefault();
+
+    // =========================
+    // 1. OBTENER VALORES
+    // =========================
+    let nombre = $("input[name='nombre']").val().trim();
+    let apellido = $("input[name='apellido']").val().trim();
+    let email = $("input[name='email']").val().trim();
+    let password = $("input[name='password']").val();
+    let confirmar = $("#confirmar").val();
+    let telefono = $("input[name='telefono']").val().trim();
+    let pais = $("select[name='id_pais']").val();
+
+    // =========================
+    // 2. VALIDAR CAMPOS VACÍOS
+    // =========================
+    if (!nombre || !apellido || !email || !password || !confirmar || !telefono || !pais) {
+        toastr.error("Todos los campos son obligatorios");
+
+        $("input, select").each(function () {
+            if (!$(this).val()) {
+                $(this).css("border", "1px solid red");
+            } else {
+                $(this).css("border", "");
+            }
+        });
+        return;
+    }
+
+    // =========================
+    // 3. VALIDAR CONTRASEÑAS
+    // =========================
+    if (password !== confirmar) {
+        toastr.error("Las contraseñas no coinciden");
+        return;
+    }
+
+    // =========================
+    // 4. VALIDAR TELÉFONO
+    // =========================
+    if (!/^[0-9]+$/.test(telefono)) {
+        toastr.error("El teléfono solo debe contener números");
+        return;
+    }
+
+    // =========================
+    // 5. ENVIAR AJAX
+    // =========================
+    $.ajax({
+        url: '@Url.Action("Registrar","Acceso")',
+        type: 'POST',
+        data: $(this).serialize(),
+
+        success: function (response) {
+
+            if (response.success) {
+
+                toastr.success("Usuario registrado con éxito 🎉");
+
+                setTimeout(function () {
+                    window.location.href = '/Home/Index';
+                }, 1500);
+
+            } else {
+                toastr.error(response.mensaje);
+            }
+        },
+        error: function () {
+            toastr.error("Error en el servidor");
+        }
+    });
+});
+</script>
+
+<script>
+    toastr.options = {
+        "positionClass": "toast-top-right",
+        "timeOut": "1500",
+        "progressBar": true,
+        "closeButton": true,
+        "preventDuplicates": true
+    };
+</script>

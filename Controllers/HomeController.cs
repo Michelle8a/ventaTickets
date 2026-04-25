@@ -26,5 +26,11 @@ namespace GestionTickets.Controllers
 
             return View();
         }
+
+        public ActionResult CerrarSesion()
+        {
+            Session["usuario"] = null;
+            return RedirectToAction("Login", "Acceso");
+        }
     }
 }

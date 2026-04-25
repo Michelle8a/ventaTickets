@@ -1,0 +1,71 @@
+﻿<div class="auth-container">
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            <img src="~/Content/images/logotickets.png" alt="Logo" />
+        </div>
+
+        <h3 class="auth-title">Iniciar Sesión</h3>
+
+        @using (Html.BeginForm("Login", "Acceso", FormMethod.Post, new { id = "formLogin" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger text-center" })
+
+            @Html.TextBox("email", null, new
+            {
+                @class = "form-control mb-3",
+                placeholder = "Correo"
+            })
+
+            @Html.Password("password", null, new
+            {
+                @class = "form-control mb-3",
+                placeholder = "Contraseña"
+            })
+
+            <div id="mensaje" class="alert alert-danger d-none"></div>
+
+            <button type="submit" class="btn btn-auth">
+                Iniciar Sesión
+            </button>
+        }
+
+        <div class="auth-link">
+            ¿No tienes cuenta?
+            @Html.ActionLink("Regístrate", "Registrar", "Acceso")
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $("#formLogin").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: '@Url.Action("Login","Acceso")',
+            type: 'POST',
+            data: $(this).serialize(),
+
+            success: function (response) {
+
+                if (response.success) {
+
+                    toastr.success("Inicio de sesión exitoso");
+
+                    setTimeout(function () {
+                        window.location.href = '/Home/Index';
+                    }, 1200);
+
+                } else {
+                    toastr.error(response.mensaje || "Credenciales incorrectas");
+                }
+            },
+            error: function () {
+                toastr.error("Error en el servidor");
+            }
+        });
+    });
+</script>
