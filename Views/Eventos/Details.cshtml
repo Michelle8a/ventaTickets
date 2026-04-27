@@ -1,0 +1,76 @@
+﻿@model GestionTickets.eventos
+
+@{
+    ViewBag.Title = "Detalles del Evento";
+}
+
+<h2>Detalles del Evento</h2>
+
+<div>
+    <hr />
+
+    <dl class="dl-horizontal">
+
+        <dt>Nombre</dt>
+        <dd>@Model.nombre</dd>
+
+        <dt>Tipo</dt>
+        <dd>@Model.tipo</dd>
+
+        <dt>Descripción</dt>
+        <dd>@Model.descripcion</dd>
+
+        <dt>Imagen</dt>
+        <dd>
+            @if (!string.IsNullOrWhiteSpace(Model.imagen_url))
+            {
+                <img src="@Model.imagen_url" alt="@Model.nombre" style="max-width: 250px;" />
+            }
+            else
+            {
+                @:Sin imagen
+            }
+        </dd>
+
+        <dt>Venue</dt>
+        <dd>@(Model.venues != null ? Model.venues.nombre : "Sin venue")</dd>
+
+        <dt>Categoría</dt>
+        <dd>@(Model.categorias != null ? Model.categorias.nombre : "Sin categoría")</dd>
+
+        <dt>Usuario creador</dt>
+        <dd>
+            @if (Model.usuarios != null)
+            {
+                @($"{Model.usuarios.nombre} {Model.usuarios.apellido}")
+            }
+            else
+            {
+                @:Sin usuario
+            }
+        </dd>
+
+        <dt>Fecha inicio</dt>
+        <dd>@Model.fecha_inicio.ToString("dd/MM/yyyy")</dd>
+
+        <dt>Fecha fin</dt>
+        <dd>
+            @(Model.fecha_fin.HasValue ? Model.fecha_fin.Value.ToString("dd/MM/yyyy") : "-")
+        </dd>
+
+        <dt>Fecha creación</dt>
+        <dd>
+            @(Model.fecha_creacion.HasValue ? Model.fecha_creacion.Value.ToString("dd/MM/yyyy HH:mm") : "-")
+        </dd>
+
+        <dt>Activo</dt>
+        <dd>@(Model.activo == true ? "Sí" : "No")</dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id_evento }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default" })
+</p>
+

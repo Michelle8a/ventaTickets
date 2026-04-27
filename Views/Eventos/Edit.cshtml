@@ -1,0 +1,100 @@
+﻿@model GestionTickets.eventos
+
+@{
+    ViewBag.Title = "Editar Evento";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow bg-white">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Editar Evento</h4>
+                </div>
+
+                <div class="card-body">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.id_evento)
+                        @Html.HiddenFor(model => model.fecha_creacion)
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.id_venue, "Venue", new { @class = "form-label" })
+                            @Html.DropDownList("id_venue", null, "Seleccione un venue", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_venue, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.id_categoria, "Categoría", new { @class = "form-label" })
+                            @Html.DropDownList("id_categoria", null, "Seleccione una categoría", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_categoria, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.id_usuario, "Usuario creador", new { @class = "form-label" })
+                            @Html.DropDownList("id_usuario", null, "Seleccione un usuario", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_usuario, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.nombre, "Nombre del evento", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.nombre, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.tipo, "Tipo", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.tipo, new { @class = "form-control", placeholder = "Concierto, Teatro, Festival, Conferencia..." })
+                            @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.descripcion, "Descripción", new { @class = "form-label" })
+                            @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", rows = 4 })
+                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.imagen_url, "URL de imagen", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.imagen_url, new { @class = "form-control", placeholder = "https://..." })
+                            @Html.ValidationMessageFor(model => model.imagen_url, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.fecha_inicio, "Fecha inicio", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.fecha_inicio, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                                @Html.ValidationMessageFor(model => model.fecha_inicio, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.fecha_fin, "Fecha fin", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.fecha_fin, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                                @Html.ValidationMessageFor(model => model.fecha_fin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            @Html.CheckBox("activo", Model.activo == true, new { @class = "form-check-input" })
+                            @Html.LabelFor(model => model.activo, "Activo", new { @class = "form-check-label" })
+                            @Html.ValidationMessageFor(model => model.activo, "", new { @class = "text-danger d-block" })
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-secondary" })
+                            <input type="submit" value="Guardar cambios" class="btn btn-primary" />
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

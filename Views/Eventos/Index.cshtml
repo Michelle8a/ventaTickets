@@ -5,7 +5,17 @@
 }
 
 <div class="container mt-4">
-    <h2 class="mb-4"> Eventos disponibles</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Eventos disponibles</h2>
+
+        @Html.ActionLink(
+            "Crear evento",
+            "Create",
+            "Eventos",
+            null,
+            new { @class = "btn btn-success" }
+        )
+    </div>
 
     @if (!Model.Any())
     {
@@ -17,19 +27,41 @@
             @foreach (var evento in Model)
             {
                 <div class="col-md-4">
-                    <div class="card h-100">
+                    <div class="card h-100 shadow-sm">
                         <div class="card-body">
                             <span class="badge bg-secondary mb-2">@evento.categoria</span>
                             <h5 class="card-title">@evento.evento</h5>
                             <p class="card-text text-muted">@evento.tipo</p>
                         </div>
+
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> @evento.venue</li>
-                            <li class="list-group-item"> @evento.fecha_inicio.ToString("dd/MM/yyyy")</li>
-                            <li class="list-group-item"> @evento.organizador</li>
+                            <li class="list-group-item">@evento.venue</li>
+                            <li class="list-group-item">@evento.fecha_inicio.ToString("dd/MM/yyyy")</li>
+                            <li class="list-group-item">@evento.organizador</li>
                         </ul>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-sm btn-primary w-100">Ver tickets</a>
+
+                        <div class="card-footer bg-white">
+                            <div class="d-grid gap-2">
+                                <a href="#" class="btn btn-sm btn-primary">
+                                    Ver tickets
+                                </a>
+
+                                @Html.ActionLink(
+                                    "Editar",
+                                    "Edit",
+                                    "Eventos",
+                                    new { id = evento.id_evento },
+                                    new { @class = "btn btn-sm btn-warning" }
+                                )
+
+                                @Html.ActionLink(
+                                    "Eliminar",
+                                    "Delete",
+                                    "Eventos",
+                                    new { id = evento.id_evento },
+                                    new { @class = "btn btn-sm btn-danger" }
+                                )
+                            </div>
                         </div>
                     </div>
                 </div>

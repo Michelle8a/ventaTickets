@@ -1,0 +1,82 @@
+﻿@model GestionTickets.eventos
+
+@{
+    ViewBag.Title = "Eliminar Evento";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow bg-white">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Eliminar Evento</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-warning">
+                        ¿Seguro que deseas eliminar este evento?
+                        <br />
+                        <strong>Nota:</strong> el evento será desactivado, no eliminado definitivamente.
+                    </div>
+
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4">Nombre</dt>
+                        <dd class="col-sm-8">@Model.nombre</dd>
+
+                        <dt class="col-sm-4">Tipo</dt>
+                        <dd class="col-sm-8">@Model.tipo</dd>
+
+                        <dt class="col-sm-4">Venue</dt>
+                        <dd class="col-sm-8">
+                            @(Model.venues != null ? Model.venues.nombre : "Sin venue")
+                        </dd>
+
+                        <dt class="col-sm-4">Categoría</dt>
+                        <dd class="col-sm-8">
+                            @(Model.categorias != null ? Model.categorias.nombre : "Sin categoría")
+                        </dd>
+
+                        <dt class="col-sm-4">Usuario creador</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.usuarios != null)
+                            {
+                                @($"{Model.usuarios.nombre} {Model.usuarios.apellido}")
+                            }
+                            else
+                            {
+                                @:Sin usuario
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4">Fecha inicio</dt>
+                        <dd class="col-sm-8">@Model.fecha_inicio.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-4">Fecha fin</dt>
+                        <dd class="col-sm-8">
+                            @(Model.fecha_fin.HasValue ? Model.fecha_fin.Value.ToString("dd/MM/yyyy") : "-")
+                        </dd>
+
+                        <dt class="col-sm-4">Activo</dt>
+                        <dd class="col-sm-8">
+                            @(Model.activo == true ? "Sí" : "No")
+                        </dd>
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="d-flex justify-content-between">
+                            @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+                            <input type="submit" value="Eliminar" class="btn btn-danger" />
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
