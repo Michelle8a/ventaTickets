@@ -4,45 +4,94 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
-    <link href="~/Content/css/Auth.css" rel="stylesheet" />
+    <title>@ViewBag.Title - GestionTickets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Salir", "CerrarSesion", "Home")</li>
-                </ul>
-            </div>
-        </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+    <div class="topbar">
+        <button class="hamburger" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="@Url.Action("Index", "Home")" class="app-title">GestionTickets</a>
     </div>
-    <div class="container body-content">
+
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li class="sidebar-section">General</li>
+            <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+
+            <li class="sidebar-section">Eventos</li>
+            <li>@Html.ActionLink("Eventos", "Index", "Eventos")</li>
+            <li>@Html.ActionLink("Presentaciones", "Index", "Presentaciones")</li>
+            <li>@Html.ActionLink("Artistas", "Index", "Artistas")</li>
+            <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
+
+            <li class="sidebar-section">Lugares</li>
+            <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
+            <li>@Html.ActionLink("Secciones", "Index", "Secciones")</li>
+            <li>@Html.ActionLink("Ciudades", "Index", "Ciudades")</li>
+            <li>@Html.ActionLink("Paises", "Index", "Paises")</li>
+
+            <li class="sidebar-section">Ventas</li>
+            <li>@Html.ActionLink("Tipos de Ticket", "Index", "TiposTicket")</li>
+            <li>@Html.ActionLink("Compras", "Index", "Compras")</li>
+            <li>@Html.ActionLink("Pagos", "Index", "Pagos")</li>
+            <li>@Html.ActionLink("Descuentos", "Index", "Descuentos")</li>
+            <li>@Html.ActionLink("Reembolsos", "Index", "Reembolsos")</li>
+
+            <li class="sidebar-section">Usuarios</li>
+            <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+            <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+
+            <li class="sidebar-section">Otros</li>
+            <li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>
+            <li>@Html.ActionLink("Agenda", "Index", "Agenda")</li>
+            <li>@Html.ActionLink("Likes", "Index", "Likes")</li>
+            <li>@Html.ActionLink("Conversiones", "Index", "Conversiones")</li>
+
+            <li class="sidebar-section">Cuenta</li>
+            <li>@Html.ActionLink("Cerrar Sesion", "CerrarSesion", "Home")</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
         @RenderBody()
-        <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - GestionTickets</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        toggle.addEventListener('click', function () {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', function () {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+    </script>
+
 </body>
 </html>

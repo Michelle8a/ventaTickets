@@ -1,0 +1,46 @@
+﻿@{ ViewBag.Title = "Nueva Presentación"; }
+
+<div class="container mt-4">
+    <h2>Nueva Presentación</h2>
+    @using (Html.BeginForm("Crear", "Presentaciones", FormMethod.Post))
+    {
+        <div class="mb-3">
+            <label>Evento</label>
+            <select name="id_evento" class="form-select" required>
+                <option value="">-- Selecciona un evento --</option>
+                @foreach (var e in ViewBag.Eventos)
+                {
+                    <option value="@e.id_evento">@e.evento</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Artista</label>
+            <select name="id_artista" class="form-select" required>
+                <option value="">-- Selecciona un artista --</option>
+                @foreach (var a in ViewBag.Artistas)
+                {
+                    <option value="@a.id_artista">@a.nombre</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Escenario</label>
+            <input type="text" name="escenario" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Fecha y hora inicio</label>
+            <input type="datetime-local" name="fecha_hora_inicio" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label>Fecha y hora fin</label>
+            <input type="datetime-local" name="fecha_hora_fin" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Orden</label>
+            <input type="number" name="orden" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+    }
+</div>

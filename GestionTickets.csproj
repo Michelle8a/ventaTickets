@@ -147,6 +147,7 @@
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PresentacionesController.cs" />
     <Compile Include="conversion_moneda.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
@@ -298,6 +299,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\Auth.css" />
     <Content Include="Content\images\logotickets.png" />
+    <Content Include="Content\Layout.css" />
     <Content Include="favicon.ico" />
     <Content Include="GestionTicketsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -352,6 +354,9 @@
     <Content Include="Views\Acceso\Login.cshtml" />
     <Content Include="Views\Acceso\Registrar.cshtml" />
     <Content Include="Views\Eventos\Index.cshtml" />
+    <Content Include="Views\Presentaciones\Index.cshtml" />
+    <Content Include="Views\Presentaciones\Create.cshtml" />
+    <Content Include="Views\Presentaciones\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

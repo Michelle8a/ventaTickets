@@ -3,19 +3,39 @@
   "WorkspaceRootPath": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\views\\eventos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\eventos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\controllers\\eventoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\eventoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\views\\presentaciones\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\presentaciones\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\views\\presentaciones\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\presentaciones\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\views\\presentaciones\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\presentaciones\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\controllers\\presentacionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\presentacionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\views\\eventos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\eventos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\gestionticketsmodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:gestionticketsmodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\kari8\\onedrive\\desktop\\gestiontickets\\gestiontickets\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
@@ -32,43 +52,107 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-28T05:35:36.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-28T04:50:37.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Presentaciones\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Presentaciones\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Presentaciones\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Presentaciones\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-28T04:49:24.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Presentaciones\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Presentaciones\\Create.cshtml",
+              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Presentaciones\\Create.cshtml",
+              "RelativeToolTip": "Views\\Presentaciones\\Create.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACIAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-28T04:48:47.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Presentaciones\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Presentaciones\\Index.cshtml",
+              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Presentaciones\\Index.cshtml",
+              "RelativeToolTip": "Views\\Presentaciones\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-28T04:47:48.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PresentacionesController.cs",
+              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Controllers\\PresentacionesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PresentacionesController.cs",
+              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Controllers\\PresentacionesController.cs",
+              "RelativeToolTip": "Controllers\\PresentacionesController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAIwDoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-28T04:46:02.211Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Eventos\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Eventos\\Index.cshtml",
               "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Views\\Eventos\\Index.cshtml",
               "RelativeToolTip": "Views\\Eventos\\Index.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-04-25T06:01:04.626Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EventosController.cs",
-              "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Controllers\\EventosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\EventosController.cs",
-              "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Controllers\\EventosController.cs",
-              "RelativeToolTip": "Controllers\\EventosController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-25T05:43:49.698Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "GestionTicketsModel.edmx [Diagram1]",
               "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\GestionTicketsModel.edmx",
               "RelativeDocumentMoniker": "GestionTicketsModel.edmx",
               "ToolTip": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\GestionTicketsModel.edmx [Diagram1]",
               "RelativeToolTip": "GestionTicketsModel.edmx [Diagram1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
-              "WhenOpened": "2026-04-22T05:02:51.548Z",
-              "EditorCaption": " [Diagram1]"
+              "WhenOpened": "2026-04-22T05:02:51.548Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "Web.config",
               "DocumentMoniker": "C:\\Users\\kari8\\OneDrive\\Desktop\\GestionTickets\\GestionTickets\\Web.config",
               "RelativeDocumentMoniker": "Web.config",

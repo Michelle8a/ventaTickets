@@ -1,0 +1,39 @@
+﻿@model GestionTickets.sp_mostrar_presentaciones_Result
+@{ ViewBag.Title = "Editar Presentación"; }
+
+<div class="container mt-4">
+    <h2>Editar Presentación</h2>
+    @using (Html.BeginForm("Editar", "Presentaciones", FormMethod.Post))
+    {
+        <input type="hidden" name="id_presentacion" value="@Model.id_presentacion" />
+        <div class="mb-3">
+            <label>Artista</label>
+            <select name="id_artista" class="form-select" required>
+                @foreach (var a in ViewBag.Artistas)
+                {
+                    <option value="@a.id_artista">@a.nombre</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Escenario</label>
+            <input type="text" name="escenario" class="form-control" value="@Model.escenario" />
+        </div>
+        <div class="mb-3">
+            <label>Fecha y hora inicio</label>
+            <input type="datetime-local" name="fecha_hora_inicio" class="form-control"
+                   value="@Model.fecha_hora_inicio.ToString("yyyy-MM-ddTHH:mm")" required />
+        </div>
+        <div class="mb-3">
+            <label>Fecha y hora fin</label>
+            <input type="datetime-local" name="fecha_hora_fin" class="form-control"
+                   value="@(Model.fecha_hora_fin.HasValue ? Model.fecha_hora_fin.Value.ToString("yyyy-MM-ddTHH:mm") : "")" />
+        </div>
+        <div class="mb-3">
+            <label>Orden</label>
+            <input type="number" name="orden" class="form-control" value="@Model.orden" />
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+    }
+</div>
