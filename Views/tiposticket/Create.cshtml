@@ -1,0 +1,119 @@
+﻿@model GestionTickets.tipos_ticket
+
+@{
+    ViewBag.Title = "Crear Tipo de Ticket";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow bg-white">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Crear Tipo de Ticket</h4>
+                </div>
+
+                <div class="card-body">
+
+                    @using (Html.BeginForm("Create", "TiposTicket", FormMethod.Post, new { id = "formCrearTipoTicket" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.id_evento, "Evento", new { @class = "form-label" })
+                            @Html.DropDownList("id_evento", null, "Seleccione un evento", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_evento, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.id_seccion, "Sección", new { @class = "form-label" })
+                            @Html.DropDownList("id_seccion", null, "Seleccione una sección", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_seccion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.nombre, "Nombre del ticket", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.nombre, new { @class = "form-control", placeholder = "General, VIP, Preferente..." })
+                            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.precio, "Precio", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.precio, new { @class = "form-control", type = "number", step = "0.01", min = "0.01" })
+                                @Html.ValidationMessageFor(model => model.precio, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.moneda, "Moneda", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.moneda, new { @class = "form-control", placeholder = "USD", Value = "USD" })
+                                @Html.ValidationMessageFor(model => model.moneda, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.cantidad_ticket, "Cantidad de tickets", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.cantidad_ticket, new { @class = "form-control", type = "number", min = "1" })
+                            @Html.ValidationMessageFor(model => model.cantidad_ticket, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.venta_inicio, "Inicio de venta", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.venta_inicio, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local" })
+                                @Html.ValidationMessageFor(model => model.venta_inicio, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.venta_fin, "Fin de venta", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.venta_fin, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local" })
+                                @Html.ValidationMessageFor(model => model.venta_fin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            @Html.CheckBox("activo", true, new { @class = "form-check-input" })
+                            @Html.LabelFor(model => model.activo, "Activo", new { @class = "form-check-label" })
+                            @Html.ValidationMessageFor(model => model.activo, "", new { @class = "text-danger d-block" })
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            @Html.ActionLink("Volver", "Index", "Eventos", null, new { @class = "btn btn-secondary" })
+
+                            <button type="button" id="btnCrearTipoTicket" class="btn btn-primary">
+                                Guardar
+                            </button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btnCrearTipoTicket").on("click", function () {
+                Swal.fire({
+                    title: "¿Crear tipo de ticket?",
+                    text: "Se guardará el nuevo tipo de ticket para el evento seleccionado.",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, guardar",
+                    cancelButtonText: "Cancelar",
+                    confirmButtonColor: "#0d6efd",
+                    cancelButtonColor: "#6c757d"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#formCrearTipoTicket").submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

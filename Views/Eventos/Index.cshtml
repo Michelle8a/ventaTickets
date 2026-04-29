@@ -42,8 +42,9 @@
 
                         <div class="card-footer bg-white">
                             <div class="d-grid gap-2">
-                                <a href="#" class="btn btn-sm btn-primary">
-                                    Ver tickets
+                                <a href="@Url.Action("PorEvento", "TiposTicket", new { id = evento.id_evento })"
+                                class="btn btn-sm btn-primary w-100">
+                                Ver tickets
                                 </a>
 
                                 @Html.ActionLink(

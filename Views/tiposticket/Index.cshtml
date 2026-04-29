@@ -1,0 +1,82 @@
+﻿@model IEnumerable<GestionTickets.tipos_ticket>
+
+@{
+    ViewBag.Title = "Tipos de Ticket";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Tipos de Ticket</h2>
+
+        @Html.ActionLink("Crear tipo de ticket", "Create", "TiposTicket", null, new { @class = "btn btn-success" })
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No hay tipos de ticket registrados.
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var ticket in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm bg-white">
+
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">@ticket.nombre</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <p class="mb-2">
+                                <strong>Evento:</strong>
+                                @(ticket.eventos != null ? ticket.eventos.nombre : "Sin evento")
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Sección:</strong>
+                                @(ticket.secciones_venue != null ? ticket.secciones_venue.nombre : "Sin sección")
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Precio:</strong>
+                                @ticket.moneda @ticket.precio.ToString("N2")
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Cantidad:</strong>
+                                @ticket.cantidad_ticket
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Venta inicio:</strong>
+                                @(ticket.venta_inicio.HasValue ? ticket.venta_inicio.Value.ToString("dd/MM/yyyy HH:mm") : "-")
+                            </p>
+
+                            <p class="mb-2">
+                                <strong>Venta fin:</strong>
+                                @(ticket.venta_fin.HasValue ? ticket.venta_fin.Value.ToString("dd/MM/yyyy HH:mm") : "-")
+                            </p>
+
+                            <p class="mb-0">
+                                <strong>Activo:</strong>
+                                @(ticket.activo == true ? "Sí" : "No")
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-white">
+                            <div class="d-grid gap-2">
+                                @Html.ActionLink("Detalles", "Details", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-info" })
+                                @Html.ActionLink("Editar", "Edit", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-warning" })
+                                @Html.ActionLink("Eliminar", "Delete", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-danger" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

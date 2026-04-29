@@ -1,0 +1,91 @@
+﻿@model GestionTickets.tipos_ticket
+
+@{
+    ViewBag.Title = "Eliminar Tipo de Ticket";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow bg-white">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Eliminar Tipo de Ticket</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-warning">
+                        ¿Seguro que deseas eliminar este tipo de ticket?
+                        <br />
+                        <strong>Nota:</strong> el ticket será desactivado, no eliminado definitivamente.
+                    </div>
+
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4">Evento</dt>
+                        <dd class="col-sm-8">
+                            @(Model.eventos != null ? Model.eventos.nombre : "Sin evento")
+                        </dd>
+
+                        <dt class="col-sm-4">Sección</dt>
+                        <dd class="col-sm-8">
+                            @(Model.secciones_venue != null ? Model.secciones_venue.nombre : "Sin sección")
+                        </dd>
+
+                        <dt class="col-sm-4">Ticket</dt>
+                        <dd class="col-sm-8">@Model.nombre</dd>
+
+                        <dt class="col-sm-4">Precio</dt>
+                        <dd class="col-sm-8">@Model.moneda @Model.precio.ToString("N2")</dd>
+
+                        <dt class="col-sm-4">Cantidad</dt>
+                        <dd class="col-sm-8">@Model.cantidad_ticket</dd>
+
+                        <dt class="col-sm-4">Activo</dt>
+                        <dd class="col-sm-8">
+                            @(Model.activo == true ? "Sí" : "No")
+                        </dd>
+                    </dl>
+
+                    @using (Html.BeginForm("Delete", "TiposTicket", FormMethod.Post, new { id = "formEliminarTipoTicket" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="d-flex justify-content-between">
+                            @Html.ActionLink("Cancelar", "PorEvento", "TiposTicket", new { id = Model.id_evento }, new { @class = "btn btn-secondary" })
+
+                            <button type="button" id="btnEliminarTipoTicket" class="btn btn-danger">
+                                Desactivar
+                            </button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btnEliminarTipoTicket").on("click", function () {
+                Swal.fire({
+                    title: "¿Desactivar tipo de ticket?",
+                    text: "El ticket dejará de estar disponible, pero seguirá guardado en la base de datos.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, desactivar",
+                    cancelButtonText: "Cancelar",
+                    confirmButtonColor: "#dc3545",
+                    cancelButtonColor: "#6c757d"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#formEliminarTipoTicket").submit();
+                    }
+                });
+            });
+        });
+    </script>
+}
