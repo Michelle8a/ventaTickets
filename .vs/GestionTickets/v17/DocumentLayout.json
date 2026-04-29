@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\controllers\\tiposticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\tiposticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,24 +26,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TiposTicketController.cs",
-              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Controllers\\TiposTicketController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TiposTicketController.cs",
-              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Controllers\\TiposTicketController.cs",
-              "RelativeToolTip": "Controllers\\TiposTicketController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T22:29:36.243Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "GestionTicketsModel.edmx [Diagram1]",
               "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\GestionTicketsModel.edmx",
               "RelativeDocumentMoniker": "GestionTicketsModel.edmx",
@@ -52,7 +43,33 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-29T22:33:36.921Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "TiposTicketController.cs",
+              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Controllers\\TiposTicketController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TiposTicketController.cs",
+              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Controllers\\TiposTicketController.cs",
+              "RelativeToolTip": "Controllers\\TiposTicketController.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAiwOAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T22:29:36.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Web.config",
               "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Web.config",
               "RelativeDocumentMoniker": "Web.config",

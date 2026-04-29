@@ -325,6 +325,7 @@
     <Content Include="GestionTicketsModel.edmx.diagram">
       <DependentUpon>GestionTicketsModel.edmx</DependentUpon>
     </Content>
+    <Content Include=".gitignore" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
