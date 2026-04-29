@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\controllers\\tiposticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\tiposticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\views\\eventos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\eventos\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\views\\eventos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\eventos\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\views\\eventos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\eventos\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\views\\eventos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\eventos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\controllers\\eventoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\eventoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\views\\eventos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\eventos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\dm280\\onedrive\\documentos\\github\\ventatickets\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\gestionticketsmodel.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
@@ -42,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
+              "Title": "TiposTicketController.cs",
+              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Controllers\\TiposTicketController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TiposTicketController.cs",
+              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Controllers\\TiposTicketController.cs",
+              "RelativeToolTip": "Controllers\\TiposTicketController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T22:29:36.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "GestionTicketsModel.edmx [Diagram1]",
               "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\GestionTicketsModel.edmx",
               "RelativeDocumentMoniker": "GestionTicketsModel.edmx",
@@ -59,93 +52,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-27T03:12:28.843Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Eventos\\Index.cshtml",
-              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Index.cshtml",
-              "RelativeToolTip": "Views\\Eventos\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-27T01:16:49.456Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Delete.cshtml",
-              "RelativeDocumentMoniker": "Views\\Eventos\\Delete.cshtml",
-              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Delete.cshtml",
-              "RelativeToolTip": "Views\\Eventos\\Delete.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-27T01:16:40.552Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Views\\Eventos\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Edit.cshtml",
-              "RelativeToolTip": "Views\\Eventos\\Edit.cshtml",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAuwGMAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-27T01:15:46.844Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Eventos\\Create.cshtml",
-              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Create.cshtml",
-              "RelativeToolTip": "Views\\Eventos\\Create.cshtml",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-27T01:15:22.659Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Details.cshtml",
-              "RelativeDocumentMoniker": "Views\\Eventos\\Details.cshtml",
-              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Views\\Eventos\\Details.cshtml",
-              "RelativeToolTip": "Views\\Eventos\\Details.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-27T01:11:11.952Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "EventosController.cs",
-              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Controllers\\EventosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\EventosController.cs",
-              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Controllers\\EventosController.cs",
-              "RelativeToolTip": "Controllers\\EventosController.cs",
-              "ViewState": "AgIAAF4AAAAAAAAAAAAmwHUAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-25T05:43:49.698Z",
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "C:\\Users\\dm280\\OneDrive\\Documentos\\GitHub\\ventaTickets\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAADYAAAAAAAAAAAAiwEgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2026-04-29T22:27:18.723Z",
               "EditorCaption": ""
             }
           ]
