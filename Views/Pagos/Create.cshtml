@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Crear Pago";
+}
+
+<div class="container mt-4">
+    <h2>Registrar Pago</h2>
+
+    <form method="post" action="/Pagos/Create">
+        <div class="mb-3">
+            <label>Método de Pago</label>
+            <select name="MetodoPago" class="form-control">
+                <option>Tarjeta</option>
+                <option>Efectivo</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Número de Tarjeta</label>
+            <input type="text" name="NumeroTarjeta" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="/Pagos" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewBag.Title = "Pagos";
+}
+
+<div class="container mt-4">
+    <h2>Lista de Pagos</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Método</th>
+                <th>Tarjeta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pago in Model)
+            {
+                <tr>
+                    <td>@pago.IdPago</td>
+                    <td>@pago.MetodoPago</td>
+                    <td>@pago.NumeroTarjeta</td>
+                    <td>
+                        <a href="/Pagos/Details/@pago.IdPago" class="btn btn-info btn-sm">Ver</a>
+                        <a href="/Pagos/Edit/@pago.IdPago" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="/Pagos/Delete/@pago.IdPago" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a href="/Pagos/Create" class="btn btn-primary">Nuevo Pago</a>
+</div>

@@ -1,0 +1,26 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Editar Pago";
+}
+
+<div class="container mt-4">
+    <h2>Editar Pago</h2>
+
+    <form method="post" action="/Pagos/Edit">
+        <input type="hidden" name="IdPago" value="@Model.IdPago" />
+
+        <div class="mb-3">
+            <label>Método de Pago</label>
+            <input type="text" name="MetodoPago" value="@Model.MetodoPago" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Número de Tarjeta</label>
+            <input type="text" name="NumeroTarjeta" value="@Model.NumeroTarjeta" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="/Pagos" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

@@ -147,6 +147,7 @@
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Controllers\TiposTicketController.cs" />
     <Compile Include="conversion_moneda.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
@@ -364,6 +365,11 @@
     <Content Include="Views\tiposticket\Edit.cshtml" />
     <Content Include="Views\tiposticket\Index.cshtml" />
     <Content Include="Views\tiposticket\porEvento.cshtml" />
+    <Content Include="Views\Pagos\Index.cshtml" />
+    <Content Include="Views\Pagos\Create.cshtml" />
+    <Content Include="Views\Pagos\Edit.cshtml" />
+    <Content Include="Views\Pagos\Details.cshtml" />
+    <Content Include="Views\Pagos\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

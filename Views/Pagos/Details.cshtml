@@ -1,0 +1,15 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Detalle del Pago";
+}
+
+<div class="container mt-4">
+    <h2>Detalle del Pago</h2>
+
+    <p><strong>ID:</strong> @Model.IdPago</p>
+    <p><strong>Método:</strong> @Model.MetodoPago</p>
+    <p><strong>Tarjeta:</strong> @Model.NumeroTarjeta</p>
+
+    <a href="/Pagos" class="btn btn-primary">Volver</a>
+</div>

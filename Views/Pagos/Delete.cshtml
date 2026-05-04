@@ -1,0 +1,20 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Eliminar Pago";
+}
+
+<div class="container mt-4">
+    <h2>Eliminar Pago</h2>
+
+    <p>¿Seguro que deseas eliminar este pago?</p>
+
+    <p><strong>ID:</strong> @Model.IdPago</p>
+
+    <form method="post" action="/Pagos/Delete">
+        <input type="hidden" name="IdPago" value="@Model.IdPago" />
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="/Pagos" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
