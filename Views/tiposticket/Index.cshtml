@@ -68,6 +68,11 @@
 
                         <div class="card-footer bg-white">
                             <div class="d-grid gap-2">
+                                <a href="@Url.Action("Create", "Compras", new { idTipoTicket = ticket.id_tipo_ticket })"
+                                   class="btn btn-sm btn-success">
+                                    Comprar
+                                </a>
+
                                 @Html.ActionLink("Detalles", "Details", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-info" })
                                 @Html.ActionLink("Editar", "Edit", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-warning" })
                                 @Html.ActionLink("Eliminar", "Delete", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-danger" })
