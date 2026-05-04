@@ -1,0 +1,95 @@
+﻿@model GestionTickets.artistas
+
+@{
+    ViewBag.Title = "Eliminar Artista";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow bg-white">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Eliminar Artista</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-warning">
+                        ¿Seguro que deseas eliminar este artista?
+                        <br />
+                        <strong>Nota:</strong> el artista será desactivado, no eliminado definitivamente.
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.imagen_url))
+                    {
+                        <div class="mb-3 text-center">
+                            <img src="@Model.imagen_url"
+                                 alt="@Model.nombre"
+                                 class="img-thumbnail"
+                                 style="max-width: 220px; max-height: 220px; object-fit: cover;" />
+                        </div>
+                    }
+
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4">Nombre</dt>
+                        <dd class="col-sm-8">@Model.nombre</dd>
+
+                        <dt class="col-sm-4">Género</dt>
+                        <dd class="col-sm-8">
+                            @(string.IsNullOrWhiteSpace(Model.genero) ? "No especificado" : Model.genero)
+                        </dd>
+
+                        <dt class="col-sm-4">Descripción</dt>
+                        <dd class="col-sm-8">
+                            @(string.IsNullOrWhiteSpace(Model.descripcion) ? "Sin descripción" : Model.descripcion)
+                        </dd>
+
+                        <dt class="col-sm-4">Activo</dt>
+                        <dd class="col-sm-8">
+                            @(Model.activo == true ? "Sí" : "No")
+                        </dd>
+                    </dl>
+
+                    @using (Html.BeginForm("Delete", "Artistas", FormMethod.Post, new { id = "formEliminarArtista" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="d-flex justify-content-between">
+                            @Html.ActionLink("Cancelar", "Index", "Artistas", null, new { @class = "btn btn-secondary" })
+
+                            <button type="button" id="btnEliminarArtista" class="btn btn-danger">
+                                Desactivar
+                            </button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btnEliminarArtista").on("click", function () {
+                Swal.fire({
+                    title: "¿Desactivar artista?",
+                    text: "El artista dejará de aparecer en el catálogo activo.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, desactivar",
+                    cancelButtonText: "Cancelar",
+                    confirmButtonColor: "#dc3545",
+                    cancelButtonColor: "#6c757d"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#formEliminarArtista").submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

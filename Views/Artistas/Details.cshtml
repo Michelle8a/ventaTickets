@@ -1,0 +1,61 @@
+﻿@model GestionTickets.artistas
+
+@{
+    ViewBag.Title = "Detalle Artista";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow bg-white">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Detalle Artista</h4>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.imagen_url))
+                {
+                    <img src="@Model.imagen_url"
+                         class="card-img-top"
+                         alt="@Model.nombre"
+                         style="height: 260px; object-fit: cover;" />
+                }
+
+                <div class="card-body">
+
+                    <dl class="row mb-4">
+                        <dt class="col-sm-4">Nombre</dt>
+                        <dd class="col-sm-8">@Model.nombre</dd>
+
+                        <dt class="col-sm-4">Género</dt>
+                        <dd class="col-sm-8">
+                            @(string.IsNullOrWhiteSpace(Model.genero) ? "No especificado" : Model.genero)
+                        </dd>
+
+                        <dt class="col-sm-4">Descripción</dt>
+                        <dd class="col-sm-8">
+                            @(string.IsNullOrWhiteSpace(Model.descripcion) ? "Sin descripción" : Model.descripcion)
+                        </dd>
+
+                        <dt class="col-sm-4">URL imagen</dt>
+                        <dd class="col-sm-8">
+                            @(string.IsNullOrWhiteSpace(Model.imagen_url) ? "Sin imagen" : Model.imagen_url)
+                        </dd>
+
+                        <dt class="col-sm-4">Activo</dt>
+                        <dd class="col-sm-8">
+                            @(Model.activo == true ? "Sí" : "No")
+                        </dd>
+                    </dl>
+
+                    <div class="d-flex justify-content-between">
+                        @Html.ActionLink("Volver", "Index", "Artistas", null, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("Editar", "Edit", "Artistas", new { id = Model.id_artista }, new { @class = "btn btn-warning" })
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

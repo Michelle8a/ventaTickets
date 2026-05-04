@@ -1,0 +1,106 @@
+﻿@model GestionTickets.artistas
+
+@{
+    ViewBag.Title = "Editar Artista";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow bg-white">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Editar Artista</h4>
+                </div>
+
+                <div class="card-body">
+
+                    @using (Html.BeginForm("Edit", "Artistas", FormMethod.Post, new { id = "formEditarArtista" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.id_artista)
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.nombre, "Nombre del artista", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.nombre, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.genero, "Género", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.genero, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.genero, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.descripcion, "Descripción", new { @class = "form-label" })
+                            @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control", rows = 4 })
+                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.imagen_url, "URL de imagen", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.imagen_url, new { @class = "form-control", placeholder = "https://..." })
+                            @Html.ValidationMessageFor(model => model.imagen_url, "", new { @class = "text-danger" })
+                        </div>
+
+                        if (!string.IsNullOrWhiteSpace(Model.imagen_url))
+                        {
+                            <div class="mb-3">
+                                <label class="form-label">Vista previa</label>
+                                <div>
+                                    <img src="@Model.imagen_url"
+                                         alt="@Model.nombre"
+                                         class="img-thumbnail"
+                                         style="max-width: 220px; max-height: 220px; object-fit: cover;" />
+                                </div>
+                            </div>
+                        }
+
+                        <div class="form-check mb-4">
+                            @Html.CheckBox("activo", Model.activo == true, new { @class = "form-check-input" })
+                            @Html.LabelFor(model => model.activo, "Activo", new { @class = "form-check-label" })
+                            @Html.ValidationMessageFor(model => model.activo, "", new { @class = "text-danger d-block" })
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            @Html.ActionLink("Volver", "Index", "Artistas", null, new { @class = "btn btn-secondary" })
+
+                            <button type="button" id="btnEditarArtista" class="btn btn-primary">
+                                Guardar cambios
+                            </button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btnEditarArtista").on("click", function () {
+                Swal.fire({
+                    title: "¿Guardar cambios?",
+                    text: "Se actualizará la información del artista.",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, guardar",
+                    cancelButtonText: "Cancelar",
+                    confirmButtonColor: "#0d6efd",
+                    cancelButtonColor: "#6c757d"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#formEditarArtista").submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

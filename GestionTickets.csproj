@@ -145,9 +145,11 @@
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccesoController.cs" />
+    <Compile Include="Controllers\ArtistaController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
+    <Compile Include="Controllers\PresentacionesController.cs" />
     <Compile Include="Controllers\TiposTicketController.cs" />
     <Compile Include="conversion_moneda.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
@@ -370,6 +372,14 @@
     <Content Include="Views\Pagos\Edit.cshtml" />
     <Content Include="Views\Pagos\Details.cshtml" />
     <Content Include="Views\Pagos\Delete.cshtml" />
+    <Content Include="Views\Artistas\Index.cshtml" />
+    <Content Include="Views\Artistas\Details.cshtml" />
+    <Content Include="Views\Artistas\Create.cshtml" />
+    <Content Include="Views\Artistas\Edit.cshtml" />
+    <Content Include="Views\Artistas\Delete.cshtml" />
+    <Content Include="Views\Presentaciones\Crear.cshtml" />
+    <Content Include="Views\Presentaciones\Editar.cshtml" />
+    <Content Include="Views\Presentaciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

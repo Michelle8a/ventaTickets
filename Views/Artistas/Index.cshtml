@@ -1,0 +1,150 @@
+﻿@model IEnumerable<GestionTickets.artistas>
+
+@{
+    ViewBag.Title = "Artistas";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Artistas</h2>
+
+        @Html.ActionLink("Crear artista", "Create", "Artistas", null, new { @class = "btn btn-success" })
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No hay artistas registrados.
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var artista in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm bg-white">
+
+                        @if (!string.IsNullOrWhiteSpace(artista.imagen_url))
+                        {
+                            <img src="@artista.imagen_url"
+                                 class="card-img-top"
+                                 alt="@artista.nombre"
+                                 style="height: 220px; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 220px;">
+                                <span class="text-muted">Sin imagen</span>
+                            </div>
+                        }
+
+                        <div class="card-body">
+                            <h5 class="card-title">@artista.nombre</h5>
+
+                            <p class="card-text mb-2">
+                                <strong>Género:</strong>
+                                @(string.IsNullOrWhiteSpace(artista.genero) ? "No especificado" : artista.genero)
+                            </p>
+
+                            <p class="card-text text-muted">
+                                @{
+                                    var descripcion = artista.descripcion;
+
+                                    if (!string.IsNullOrWhiteSpace(descripcion) && descripcion.Length > 100)
+                                    {
+                                        descripcion = descripcion.Substring(0, 100) + "...";
+                                    }
+                                }
+
+                                @(string.IsNullOrWhiteSpace(descripcion) ? "Sin descripción." : descripcion)
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-white">
+                            <div class="d-grid gap-2">
+                                @Html.ActionLink("Detalles", "Details", "Artistas", new { id = artista.id_artista }, new { @class = "btn btn-sm btn-info" })
+
+                                <a href="@Url.Action("Edit", "Artistas", new { id = artista.id_artista })"
+                                   class="btn btn-sm btn-warning btn-editar-artista">
+                                    Editar
+                                </a>
+
+                                <a href="@Url.Action("Delete", "Artistas", new { id = artista.id_artista })"
+                                   class="btn btn-sm btn-danger btn-eliminar-artista">
+                                    Eliminar
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>
+                    Swal.fire({
+                        title: "Operación realizada",
+                        text: "@TempData["SuccessMessage"]",
+                        icon: "success",
+                        confirmButtonText: "Aceptar",
+                        confirmButtonColor: "#0d6efd"
+                    });
+                </text>
+            }
+
+            $(".btn-editar-artista").on("click", function (e) {
+                e.preventDefault();
+
+                var url = $(this).attr("href");
+
+                Swal.fire({
+                    title: "¿Editar artista?",
+                    text: "Serás redirigido al formulario de edición.",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "Sí, editar",
+                    cancelButtonText: "Cancelar",
+                    confirmButtonColor: "#ffc107",
+                    cancelButtonColor: "#6c757d"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                    }
+                });
+            });
+
+            $(".btn-eliminar-artista").on("click", function (e) {
+                e.preventDefault();
+
+                var url = $(this).attr("href");
+
+                Swal.fire({
+                    title: "¿Eliminar artista?",
+                    text: "Primero revisarás los datos del artista antes de confirmar.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Continuar",
+                    cancelButtonText: "Cancelar",
+                    confirmButtonColor: "#dc3545",
+                    cancelButtonColor: "#6c757d"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                    }
+                });
+            });
+
+        });
+    </script>
+}
