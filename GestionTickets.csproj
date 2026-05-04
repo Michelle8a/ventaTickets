@@ -148,6 +148,7 @@
     <Compile Include="Controllers\ArtistaController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrganizadoresController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Controllers\PresentacionesController.cs" />
     <Compile Include="Controllers\TiposTicketController.cs" />
@@ -380,6 +381,7 @@
     <Content Include="Views\Presentaciones\Crear.cshtml" />
     <Content Include="Views\Presentaciones\Editar.cshtml" />
     <Content Include="Views\Presentaciones\Index.cshtml" />
+    <Content Include="Views\Organizadores\Crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

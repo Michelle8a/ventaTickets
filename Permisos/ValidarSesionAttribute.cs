@@ -26,7 +26,7 @@ namespace GestionTickets.Permisos
                 }
             }
 
-            base.OnActionExecuting(filterContext);
+            return;
         }
     }
 }

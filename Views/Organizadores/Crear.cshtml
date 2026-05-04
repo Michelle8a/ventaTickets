@@ -1,8 +1,16 @@
 ﻿@model GestionTickets.usuarios
 
 @{
-    ViewBag.Title = "Registrar";
+    var rol = Session["rol"] as string;
+
+    if (rol != "Admin")
+    {
+        Response.Redirect("~/Home/Index");
+    }
+
+    ViewBag.Title = "Crear";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <div class="auth-container">
@@ -12,9 +20,9 @@
             <img src="~/Content/images/logotickets.png" alt="Logo" />
         </div>
 
-        <h3 class="auth-title">Crear Cuenta</h3>
+        <h3 class="auth-title">Crear Organizador</h3>
 
-        @using (Html.BeginForm("Registrar", "Acceso", FormMethod.Post, new { id = "formRegistrar" }))
+        @using (Html.BeginForm("Registrar", "Organizadores", FormMethod.Post, new { id = "formRegistrar" }))
         {
             @Html.AntiForgeryToken()
 
@@ -30,7 +38,7 @@
             @Html.Password("password", null, new { @class = "form-control mb-3", placeholder = "Contraseña" })
 
             <input type="password" id="confirmar" class="form-control mb-3" placeholder="Confirmar contraseña" />
-            <input type="hidden" name="tipo" value="Usuario" />
+            <input type="hidden" name="tipo" value="Organizador" />
 
             @Html.DropDownList("id_pais",
                 new SelectList(ViewBag.Paises, "id_pais", "nombre"),
@@ -41,11 +49,6 @@
 
             <button type="submit" class="btn btn-auth">Registrarse</button>
         }
-
-        <div class="auth-link">
-            ¿Ya tienes cuenta?
-            @Html.ActionLink("Inicia sesión", "Login", "Acceso")
-        </div>
 
     </div>
 </div>
@@ -101,7 +104,7 @@
     // 5. ENVIAR AJAX
     // =========================
     $.ajax({
-        url: '@Url.Action("Registrar","Acceso")',
+        url: '@Url.Action("Registrar","Organizadores")',
         type: 'POST',
         data: $(this).serialize(),
 
@@ -109,7 +112,7 @@
 
             if (response.success) {
 
-                toastr.success("Usuario registrado con éxito");
+                toastr.success("Organizador creado correctamente");
 
                 setTimeout(function () {
                     window.location.href = '/Home/Index';

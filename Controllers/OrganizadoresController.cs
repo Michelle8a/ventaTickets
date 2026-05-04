@@ -1,26 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 
 namespace GestionTickets.Controllers
 {
-    public class AccesoController : Controller
+    public class OrganizadoresController : Controller
     {
-        private gestion_ticketsEntities db = new gestion_ticketsEntities();
-
-        // ============================
-        // VISTAS
-        // ============================
-        public ActionResult Login()
+        gestion_ticketsEntities db = new gestion_ticketsEntities();
+        // GET: Organizadores
+        public ActionResult Crear()
         {
-            return View();
-        }
+            if (Session["rol"]?.ToString() != "Admin")
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
-        public ActionResult Registrar()
-        {
-            ViewBag.Paises = db.paises.ToList(); // para dropdown
+            ViewBag.Paises = db.paises.ToList();
+
             return View();
         }
 
@@ -74,8 +74,6 @@ namespace GestionTickets.Controllers
                     db.usuarios_rol.Add(ur);
                     db.SaveChanges();
 
-                    Session["usuario"] = nuevo;
-                    Session["rol"] = rolUsuario.nombre;
                 }
 
                 return Json(new { success = true, mensaje = "Usuario registrado correctamente" });
@@ -84,43 +82,6 @@ namespace GestionTickets.Controllers
             {
                 return Json(new { success = false, mensaje = ex.Message });
             }
-        }
-
-        // ============================
-        // LOGIN (AJAX)
-        // ============================
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JsonResult Login(string email, string password)
-        {
-            string hash = ConvertirSha256(password);
-
-            var usuario = db.usuarios
-                .FirstOrDefault(u => u.email == email && u.password_hash == hash && u.activo == true);
-
-            if (usuario != null)
-            {
-                var rol = db.usuarios_rol
-                    .Where(ur => ur.id_usuario == usuario.id_usuario)
-                    .Select(ur => ur.roles.nombre)
-                    .FirstOrDefault();
-
-                Session["usuario"] = usuario;
-                Session["rol"] = rol;
-
-                return Json(new { success = true });
-            }
-
-            return Json(new { success = false, mensaje = "Credenciales incorrectas" });
-        }
-
-        // ============================
-        // LOGOUT
-        // ============================
-        public ActionResult Logout()
-        {
-            Session.Clear();
-            return RedirectToAction("Login");
         }
 
         // ============================
@@ -142,8 +103,5 @@ namespace GestionTickets.Controllers
 
             return sb.ToString();
         }
-
-
-        
     }
 }

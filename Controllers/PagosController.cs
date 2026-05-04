@@ -1,11 +1,14 @@
-﻿using System;
+﻿using GestionTickets.Permisos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace GestionTickets.Controllers
+
 {
+    [ValidarSesion]
     public class PagosController : Controller
     {
         // Simulación de base de datos (temporal)

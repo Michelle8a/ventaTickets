@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var usuario = Session["usuario"] as GestionTickets.usuarios;
+    var rol = Session["rol"] as string;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -6,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - GestionTickets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="~/Content/css/Auth.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -16,13 +21,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
-    <div class="topbar">
-        <button class="hamburger" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <a href="@Url.Action("Index", "Home")" class="app-title">GestionTickets</a>
+    <div class="topbar" style="display:flex; justify-content:space-between; align-items:center; padding:10px 20px;">
+
+        <div style="display:flex; align-items:center;">
+            <button class="hamburger" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <a href="@Url.Action("Index", "Home")" class="app-title" style="margin-left:10px;">GestionTickets</a>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+
+            @if (usuario != null)
+            {
+                <div style="display:flex; align-items:center; background:#1e293b; padding:6px 12px; border-radius:20px; color:white;">
+                    <span style="margin-right:6px;">👤</span>
+                    <span style="font-weight:500;">@usuario.nombre</span>
+                </div>
+
+                <a href="#" onclick="confirmarLogout()"
+                   style="background:#ef4444; color:white; padding:6px 10px; border-radius:8px; text-decoration:none;">
+                    Cerrar
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login","Acceso")"
+                   style="background:#3b82f6; color:white; padding:6px 10px; border-radius:8px; text-decoration:none;">
+                    Login
+                </a>
+            }
+
+        </div>
     </div>
 
 
@@ -34,36 +66,73 @@
             <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
 
             <li class="sidebar-section">Eventos</li>
+
             <li>@Html.ActionLink("Eventos", "Index", "Eventos")</li>
-            <li>@Html.ActionLink("Presentaciones", "Index", "Presentaciones")</li>
-            <li>@Html.ActionLink("Artistas", "Index", "Artistas")</li>
-            <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
+
+            @if (rol == "Organizador" || rol == "Admin")
+            {
+                <li>@Html.ActionLink("Presentaciones", "Index", "Presentaciones")</li>
+                <li>@Html.ActionLink("Artistas", "Index", "Artistas")</li>
+                <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
+            }
 
             <li class="sidebar-section">Lugares</li>
-            <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
-            <li>@Html.ActionLink("Secciones", "Index", "Secciones")</li>
-            <li>@Html.ActionLink("Ciudades", "Index", "Ciudades")</li>
-            <li>@Html.ActionLink("Paises", "Index", "Paises")</li>
+
+            @if (rol == "Organizador" || rol == "Admin")
+            {
+                <li>@Html.ActionLink("Venues", "Index", "Venues")</li>
+                <li>@Html.ActionLink("Secciones", "Index", "Secciones")</li>
+                <li>@Html.ActionLink("Ciudades", "Index", "Ciudades")</li>
+                <li>@Html.ActionLink("Paises", "Index", "Paises")</li>
+            }
 
             <li class="sidebar-section">Ventas</li>
-            <li>@Html.ActionLink("Tipos de Ticket", "Index", "TiposTicket")</li>
-            <li>@Html.ActionLink("Compras", "Index", "Compras")</li>
-            <li>@Html.ActionLink("Pagos", "Index", "Pagos")</li>
-            <li>@Html.ActionLink("Descuentos", "Index", "Descuentos")</li>
-            <li>@Html.ActionLink("Reembolsos", "Index", "Reembolsos")</li>
+
+            @if (usuario != null)
+            {
+                <li>@Html.ActionLink("Tipos de Ticket", "Index", "TiposTicket")</li>
+                <li>@Html.ActionLink("Compras", "Index", "Compras")</li>
+                <li>@Html.ActionLink("Pagos", "Index", "Pagos")</li>
+                <li>@Html.ActionLink("Descuentos", "Index", "Descuentos")</li>
+                <li>@Html.ActionLink("Reembolsos", "Index", "Reembolsos")</li>
+            }
 
             <li class="sidebar-section">Usuarios</li>
-            <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
-            <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+
+            @if (rol == "Admin")
+            {
+                <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+
+                <li>@Html.ActionLink("Crear Organizador", "Crear", "Organizadores")</li>
+            }
 
             <li class="sidebar-section">Otros</li>
-            <li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>
-            <li>@Html.ActionLink("Agenda", "Index", "Agenda")</li>
-            <li>@Html.ActionLink("Likes", "Index", "Likes")</li>
-            <li>@Html.ActionLink("Conversiones", "Index", "Conversiones")</li>
+
+            @if (usuario != null)
+            {
+                <li>@Html.ActionLink("Notificaciones", "Index", "Notificaciones")</li>
+                <li>@Html.ActionLink("Agenda", "Index", "Agenda")</li>
+                <li>@Html.ActionLink("Likes", "Index", "Likes")</li>
+                <li>@Html.ActionLink("Conversiones", "Index", "Conversiones")</li>
+            }
 
             <li class="sidebar-section">Cuenta</li>
-            <li>@Html.ActionLink("Cerrar Sesion", "CerrarSesion", "Home")</li>
+
+            @if (usuario != null)
+            {
+                <a href="#" onclick="event.preventDefault(); confirmarLogout();"
+                   style="background:#ef4444; color:white; padding:6px 10px; border-radius:8px; text-decoration:none; display:inline-block; text-align: center; width:80%; margin:10px auto; text-align:center;">
+                    Cerrar Sesión
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login","Acceso")"
+                   style="background: #3b82f6; color: white; padding: 6px 10px; border-radius: 8px; text-decoration: none; text-align: center; width:80%; margin:10px auto; text-align:center;">
+                    Iniciar Sesión
+                </a>
+            }
         </ul>
     </div>
 
@@ -92,6 +161,25 @@
             sidebar.classList.remove('open');
             overlay.classList.remove('active');
         });
+    </script>
+
+    <script>
+        function confirmarLogout() {
+            Swal.fire({
+                title: '¿Cerrar sesión?',
+                text: "¿Seguro que quieres salir?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, cerrar sesión',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/Acceso/Logout';
+                }
+            });
+        }
     </script>
 
 </body>

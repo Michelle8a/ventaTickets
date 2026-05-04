@@ -1,4 +1,5 @@
 ﻿@{
+    var usuario = Session["usuario"] as GestionTickets.usuarios;
     ViewBag.Title = "Inicio";
 }
 
@@ -8,7 +9,19 @@
         <h1 class="display-4 fw-bold">GestionTickets</h1>
         <p class="lead text-muted">Compra y gestiona tickets para eventos en toda Centroamérica</p>
         <a href="/Eventos" class="btn btn-primary me-2">Ver Eventos</a>
-        @Html.ActionLink("Crear Cuenta", "Registrar", "Acceso", null, new { @class = "btn btn-outline-secondary" })
+        @if (usuario == null)
+        {
+            @Html.ActionLink("Iniciar Sesión", "Login", "Acceso", null, new { @class = "btn btn-outline-secondary" })
+        }
+        else
+        {
+            <div style="color:white; font-weight:500;">
+                Hola, <span style="font-weight:bold;">@usuario.nombre</span><br />
+                <small style="font-size:12px; opacity:0.8;">
+                    ¡Bienvenido de vuelta! ¿Listo para tu próximo concierto?
+                </small>
+            </div>
+        }
     </div>
 
     <hr />
