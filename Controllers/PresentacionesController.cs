@@ -13,7 +13,28 @@ namespace GestionTickets.Controllers
         // GET: Presentaciones
         public ActionResult Index()
         {
+            var usuarioSesion = Session["usuario"] as usuarios;
+
             var presentaciones = db.sp_mostrar_presentaciones(null).ToList();
+
+            if (usuarioSesion != null)
+            {
+                ViewBag.id_usuario = usuarioSesion.id_usuario;
+
+                // Lista de id_presentacion que el usuario ya tiene en likes
+                var likes = db.likes
+                    .Where(l => l.id_usuario == usuarioSesion.id_usuario && l.activo == true)
+                    .Select(l => l.id_presentacion)
+                    .ToList();
+
+                ViewBag.Likes = likes;
+            }
+            else
+            {
+                ViewBag.id_usuario = 0;
+                ViewBag.Likes = new List<int?>();
+            }
+
             return View(presentaciones);
         }
 
@@ -40,7 +61,10 @@ namespace GestionTickets.Controllers
         {
             var presentacion = db.sp_mostrar_presentaciones(null)
                 .FirstOrDefault(p => p.id_presentacion == id);
-            if (presentacion == null) return HttpNotFound();
+
+            if (presentacion == null)
+                return HttpNotFound();
+
             ViewBag.Artistas = db.sp_mostrar_artistas(null).ToList();
             return View(presentacion);
         }

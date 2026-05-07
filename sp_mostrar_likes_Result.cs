@@ -10,21 +10,18 @@
 namespace GestionTickets
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class likes
+    public partial class sp_mostrar_likes_Result
     {
         public int id_like { get; set; }
-        public int id_usuario { get; set; }
-        public Nullable<int> id_evento { get; set; }
-        public Nullable<int> id_presentacion { get; set; }
+        public string usuario { get; set; }
+        public string tipo_like { get; set; }
+        public string evento { get; set; }
+        public string artista { get; set; }
+        public string escenario { get; set; }
+        public Nullable<System.DateTime> fecha_hora_inicio { get; set; }
+        public Nullable<System.DateTime> fecha_hora_fin { get; set; }
         public Nullable<System.DateTime> fecha_like { get; set; }
         public Nullable<bool> activo { get; set; }
-        public Nullable<int> id_artista { get; set; }
-    
-        public virtual eventos eventos { get; set; }
-        public virtual presentaciones presentaciones { get; set; }
-        public virtual usuarios usuarios { get; set; }
-        public virtual artistas artistas { get; set; }
     }
 }

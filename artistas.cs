@@ -18,6 +18,7 @@ namespace GestionTickets
         public artistas()
         {
             this.presentaciones = new HashSet<presentaciones>();
+            this.likes = new HashSet<likes>();
         }
     
         public int id_artista { get; set; }
@@ -29,5 +30,7 @@ namespace GestionTickets
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<presentaciones> presentaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<likes> likes { get; set; }
     }
 }

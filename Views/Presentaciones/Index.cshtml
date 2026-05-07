@@ -1,12 +1,10 @@
 ﻿@model IEnumerable<GestionTickets.sp_mostrar_presentaciones_Result>
 @{ ViewBag.Title = "Presentaciones"; }
-
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2> Presentaciones</h2>
-        <a href="@Url.Action("Crear")" class="btn btn-primary"> Nueva Presentación</a>
+        <h2>Presentaciones</h2>
+        <a href="@Url.Action("Crear")" class="btn btn-primary">Nueva Presentacion</a>
     </div>
-
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
             <tr>
@@ -41,17 +39,33 @@
                         }
                     </td>
                     <td>
-                        <a href="@Url.Action("Editar", new { id = p.id_presentacion })" class="btn btn-sm btn-warning">Editar</a>
-                        @using (Html.BeginForm("Eliminar", "Presentaciones", new { id = p.id_presentacion }, FormMethod.Post))
-                        {
-                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        @* Boton de like *@
+                        @{
+                            var likes = ViewBag.Likes as List<int?>;
+                            bool tieneLike = likes != null && likes.Contains(p.id_presentacion);
                         }
-                        @if (p.activo == false)
+                        @using (Html.BeginForm("Toggle", "Likes", FormMethod.Post))
                         {
-                            using (Html.BeginForm("Activar", "Presentaciones", new { id = p.id_presentacion }, FormMethod.Post))
-                            {
-                                <button type="submit" class="btn btn-sm btn-success">Activar</button>
-                            }
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id_usuario" value="@ViewBag.id_usuario" />
+                            <input type="hidden" name="id_presentacion" value="@p.id_presentacion" />
+                            <input type="hidden" name="returnUrl" value="@Request.Url.PathAndQuery" />
+                            <button type="submit" class="btn btn-sm btn-light" title="@(tieneLike ? "Quitar de agenda" : "Agregar a agenda")">
+                                @if (tieneLike)
+                                {
+                                    // Corazon lleno
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="#e14a4a" d="M12 20.25c-.37 0-.74-.14-1.02-.42l-7.96-7.96A5.2 5.2 0 0 1 1.5 8.25a5.75 5.75 0 0 1 9.9-3.96A5.75 5.75 0 0 1 22.5 8.25c0 1.45-.59 2.75-1.54 3.71l-7.94 7.87c-.28.28-.65.42-1.02.42z" />
+                                    </svg>
+                                }
+                                else
+                                {
+                                    // Corazon vacio
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="#e14a4a" d="M4.24 12.25a4.2 4.2 0 0 1-1.24-3A4.25 4.25 0 0 1 7.25 5c1.58 0 2.96.86 3.69 2.14h1.12A4.24 4.24 0 0 1 15.75 5A4.25 4.25 0 0 1 20 9.25c0 1.17-.5 2.25-1.24 3L11.5 19.5zm15.22.71C20.41 12 21 10.7 21 9.25A5.25 5.25 0 0 0 15.75 4c-1.75 0-3.3.85-4.25 2.17A5.22 5.22 0 0 0 7.25 4A5.25 5.25 0 0 0 2 9.25c0 1.45.59 2.75 1.54 3.71l7.96 7.96z" />
+                                    </svg>
+                                }
+                            </button>
                         }
                     </td>
                 </tr>

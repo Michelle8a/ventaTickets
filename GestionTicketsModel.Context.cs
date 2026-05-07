@@ -1312,5 +1312,136 @@ namespace GestionTickets
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_venues_Result>("sp_mostrar_venues", id_ciudadParameter);
         }
+    
+        public virtual int sp_activar_agenda(Nullable<int> id_agenda)
+        {
+            var id_agendaParameter = id_agenda.HasValue ?
+                new ObjectParameter("id_agenda", id_agenda) :
+                new ObjectParameter("id_agenda", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_activar_agenda", id_agendaParameter);
+        }
+    
+        public virtual int sp_actualizar_agenda(Nullable<int> id_agenda, Nullable<bool> recordatorio)
+        {
+            var id_agendaParameter = id_agenda.HasValue ?
+                new ObjectParameter("id_agenda", id_agenda) :
+                new ObjectParameter("id_agenda", typeof(int));
+    
+            var recordatorioParameter = recordatorio.HasValue ?
+                new ObjectParameter("recordatorio", recordatorio) :
+                new ObjectParameter("recordatorio", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_agenda", id_agendaParameter, recordatorioParameter);
+        }
+    
+        public virtual int sp_actualizar_estado_compra(Nullable<int> id_compra, string estado)
+        {
+            var id_compraParameter = id_compra.HasValue ?
+                new ObjectParameter("id_compra", id_compra) :
+                new ObjectParameter("id_compra", typeof(int));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizar_estado_compra", id_compraParameter, estadoParameter);
+        }
+    
+        public virtual int sp_agregar_compra(Nullable<int> id_usuario, Nullable<int> id_tipo_ticket, Nullable<int> id_descuento, Nullable<int> cantidad)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var id_tipo_ticketParameter = id_tipo_ticket.HasValue ?
+                new ObjectParameter("id_tipo_ticket", id_tipo_ticket) :
+                new ObjectParameter("id_tipo_ticket", typeof(int));
+    
+            var id_descuentoParameter = id_descuento.HasValue ?
+                new ObjectParameter("id_descuento", id_descuento) :
+                new ObjectParameter("id_descuento", typeof(int));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("cantidad", cantidad) :
+                new ObjectParameter("cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_compra", id_usuarioParameter, id_tipo_ticketParameter, id_descuentoParameter, cantidadParameter);
+        }
+    
+        public virtual int sp_agregar_like(Nullable<int> id_usuario, Nullable<int> id_presentacion)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var id_presentacionParameter = id_presentacion.HasValue ?
+                new ObjectParameter("id_presentacion", id_presentacion) :
+                new ObjectParameter("id_presentacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_agregar_like", id_usuarioParameter, id_presentacionParameter);
+        }
+    
+        public virtual int sp_cancelar_compra(Nullable<int> id_compra)
+        {
+            var id_compraParameter = id_compra.HasValue ?
+                new ObjectParameter("id_compra", id_compra) :
+                new ObjectParameter("id_compra", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_cancelar_compra", id_compraParameter);
+        }
+    
+        public virtual int sp_eliminar_agenda(Nullable<int> id_agenda)
+        {
+            var id_agendaParameter = id_agenda.HasValue ?
+                new ObjectParameter("id_agenda", id_agenda) :
+                new ObjectParameter("id_agenda", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_eliminar_agenda", id_agendaParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_agenda_Result> sp_mostrar_agenda(Nullable<int> id_usuario)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_agenda_Result>("sp_mostrar_agenda", id_usuarioParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_compras_Result> sp_mostrar_compras(Nullable<int> id_usuario)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_compras_Result>("sp_mostrar_compras", id_usuarioParameter);
+        }
+    
+        public virtual ObjectResult<sp_mostrar_likes_Result> sp_mostrar_likes(Nullable<int> id_usuario, Nullable<int> id_evento)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var id_eventoParameter = id_evento.HasValue ?
+                new ObjectParameter("id_evento", id_evento) :
+                new ObjectParameter("id_evento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_mostrar_likes_Result>("sp_mostrar_likes", id_usuarioParameter, id_eventoParameter);
+        }
+    
+        public virtual int sp_quitar_like(Nullable<int> id_usuario, Nullable<int> id_presentacion)
+        {
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var id_presentacionParameter = id_presentacion.HasValue ?
+                new ObjectParameter("id_presentacion", id_presentacion) :
+                new ObjectParameter("id_presentacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_quitar_like", id_usuarioParameter, id_presentacionParameter);
+        }
     }
 }

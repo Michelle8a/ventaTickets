@@ -1,0 +1,81 @@
+﻿@model IEnumerable<GestionTickets.sp_mostrar_agenda_Result>
+
+@{
+    ViewBag.Title = "Mi Agenda";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Mi Agenda</h2>
+    </div>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No tienes presentaciones en tu agenda todavia. Dale like a las presentaciones que te interesen.</div>
+    }
+    else
+    {
+        var grupos = Model.GroupBy(a => a.fecha_hora_inicio.Date).OrderBy(g => g.Key).ToList();
+
+        foreach (var dia in grupos)
+        {
+            <div class="mb-4">
+                <h5 class="text-uppercase text-muted border-bottom pb-2">
+                    @dia.Key.ToString("dddd, dd 'de' MMMM yyyy", new System.Globalization.CultureInfo("es-ES"))
+                </h5>
+
+                <div class="row g-3">
+                    @foreach (var item in dia.OrderBy(a => a.fecha_hora_inicio))
+                    {
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm @(item.recordatorio == true ? "border-primary" : "")">
+                                <div class="card-body">
+                                    <span class="badge bg-secondary mb-2">@item.escenario</span>
+                                    <h5 class="card-title">@item.artista</h5>
+                                    <p class="card-text text-muted mb-1">@item.evento</p>
+                                    <p class="card-text text-muted mb-1">@item.venue</p>
+                                    <p class="card-text">
+                                        @item.fecha_hora_inicio.ToString("HH:mm")
+                                        -
+                                        @(item.fecha_hora_fin.HasValue ? item.fecha_hora_fin.Value.ToString("HH:mm") : "?")
+                                    </p>
+                                </div>
+                                <div class="card-footer bg-white">
+                                    <div class="d-grid gap-2">
+
+                                        @using (Html.BeginForm("ActualizarRecordatorio", "Agenda", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id_agenda" value="@item.id_agenda" />
+                                            <input type="hidden" name="recordatorio" value="@(item.recordatorio == true ? "false" : "true")" />
+                                            <input type="hidden" name="returnUrl" value="@Request.Url.PathAndQuery" />
+                                            <button type="submit" class="btn btn-sm @(item.recordatorio == true ? "btn-primary" : "btn-outline-primary") w-100">
+                                                @(item.recordatorio == true ? "Recordatorio activo" : "Activar recordatorio")
+                                            </button>
+                                        }
+
+                                        @using (Html.BeginForm("Toggle", "Likes", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id_usuario" value="@ViewBag.id_usuario" />                                            <input type="hidden" name="id_presentacion" value="@item.id_presentacion" />
+                                            <input type="hidden" name="returnUrl" value="@Request.Url.PathAndQuery" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger w-100">
+                                                Quitar de agenda
+                                            </button>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>

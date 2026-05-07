@@ -68,10 +68,11 @@
             <li class="sidebar-section">Eventos</li>
 
             <li>@Html.ActionLink("Eventos", "Index", "Eventos")</li>
+            <li>@Html.ActionLink("Presentaciones", "Index", "Presentaciones")</li>
 
             @if (rol == "Organizador" || rol == "Admin")
             {
-                <li>@Html.ActionLink("Presentaciones", "Index", "Presentaciones")</li>
+
                 <li>@Html.ActionLink("Artistas", "Index", "Artistas")</li>
                 <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
             }

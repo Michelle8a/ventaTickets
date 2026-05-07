@@ -124,6 +124,7 @@
           <Property Name="id_presentacion" Type="int" />
           <Property Name="fecha_like" Type="datetime" />
           <Property Name="activo" Type="bit" />
+          <Property Name="id_artista" Type="int" />
         </EntityType>
         <EntityType Name="metodos_pago_cash">
           <Key>
@@ -425,6 +426,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_likes_artistas">
+          <End Role="artistas" Type="Self.artistas" Multiplicity="0..1" />
+          <End Role="likes" Type="Self.likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artistas">
+              <PropertyRef Name="id_artista" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="id_artista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_likes_eventos">
           <End Role="eventos" Type="Self.eventos" Multiplicity="0..1" />
           <End Role="likes" Type="Self.likes" Multiplicity="*" />
@@ -677,6 +690,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_activar_agenda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_agenda" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_activar_artista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_artista" Type="int" Mode="In" />
         </Function>
@@ -722,6 +738,10 @@
         <Function Name="sp_activar_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_venue" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_actualizar_agenda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_agenda" Type="int" Mode="In" />
+          <Parameter Name="recordatorio" Type="bit" Mode="In" />
+        </Function>
         <Function Name="sp_actualizar_artista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_artista" Type="int" Mode="In" />
           <Parameter Name="nombre" Type="varchar" Mode="In" />
@@ -749,6 +769,10 @@
           <Parameter Name="codigo" Type="varchar" Mode="In" />
           <Parameter Name="tipo" Type="varchar" Mode="In" />
           <Parameter Name="valor" Type="decimal" Mode="In" />
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_actualizar_estado_compra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_compra" Type="int" Mode="In" />
           <Parameter Name="estado" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_actualizar_estado_pago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -856,6 +880,12 @@
           <Parameter Name="id_pais" Type="int" Mode="In" />
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_agregar_compra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="id_tipo_ticket" Type="int" Mode="In" />
+          <Parameter Name="id_descuento" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_agregar_conversion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="moneda_origen" Type="varchar" Mode="In" />
           <Parameter Name="moneda_destino" Type="varchar" Mode="In" />
@@ -883,6 +913,10 @@
           <Parameter Name="url" Type="varchar" Mode="In" />
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
           <Parameter Name="orden" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_agregar_like" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="id_presentacion" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_agregar_metodo_cash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="punto_pago" Type="varchar" Mode="In" />
@@ -958,6 +992,12 @@
           <Parameter Name="longitud" Type="decimal" Mode="In" />
           <Parameter Name="imagen_url" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_cancelar_compra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_compra" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_eliminar_agenda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_agenda" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_eliminar_artista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_artista" Type="int" Mode="In" />
         </Function>
@@ -1006,12 +1046,18 @@
         <Function Name="sp_eliminar_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_venue" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_mostrar_agenda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_mostrar_artistas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="genero" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_mostrar_categorias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_mostrar_ciudades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_compras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_mostrar_conversiones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="moneda_origen" Type="varchar" Mode="In" />
@@ -1024,6 +1070,10 @@
         </Function>
         <Function Name="sp_mostrar_fotos_venue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_venue" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_mostrar_likes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="id_evento" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_mostrar_metodos_cash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_mostrar_metodos_tarjeta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1051,6 +1101,10 @@
         </Function>
         <Function Name="sp_mostrar_venues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_ciudad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_quitar_like" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_usuario" Type="int" Mode="In" />
+          <Parameter Name="id_presentacion" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="gestion_ticketsModelStoreContainer">
           <EntitySet Name="agenda_usuario" EntityType="Self.agenda_usuario" Schema="dbo" store:Type="Tables" />
@@ -1120,6 +1174,10 @@
           <AssociationSet Name="fk_fotos_venue" Association="Self.fk_fotos_venue">
             <End Role="venues" EntitySet="venues" />
             <End Role="fotos_venue" EntitySet="fotos_venue" />
+          </AssociationSet>
+          <AssociationSet Name="fk_likes_artistas" Association="Self.fk_likes_artistas">
+            <End Role="artistas" EntitySet="artistas" />
+            <End Role="likes" EntitySet="likes" />
           </AssociationSet>
           <AssociationSet Name="fk_likes_eventos" Association="Self.fk_likes_eventos">
             <End Role="eventos" EntitySet="eventos" />
@@ -1234,6 +1292,7 @@
           <Property Name="imagen_url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" />
           <NavigationProperty Name="presentaciones" Relationship="Self.fk_presentaciones_artistas" FromRole="artistas" ToRole="presentaciones" />
+          <NavigationProperty Name="likes" Relationship="gestion_ticketsModel.fk_likes_artistas" FromRole="artistas" ToRole="likes" />
         </EntityType>
         <EntityType Name="categorias">
           <Key>
@@ -1354,6 +1413,8 @@
           <NavigationProperty Name="eventos" Relationship="Self.fk_likes_eventos" FromRole="likes" ToRole="eventos" />
           <NavigationProperty Name="presentaciones" Relationship="Self.fk_likes_presentaciones" FromRole="likes" ToRole="presentaciones" />
           <NavigationProperty Name="usuarios" Relationship="Self.fk_likes_usuarios" FromRole="likes" ToRole="usuarios" />
+          <Property Name="id_artista" Type="Int32" />
+          <NavigationProperty Name="artistas" Relationship="gestion_ticketsModel.fk_likes_artistas" FromRole="likes" ToRole="artistas" />
         </EntityType>
         <EntityType Name="metodos_pago_cash">
           <Key>
@@ -2100,49 +2161,49 @@
             <End Role="usuarios_rol" EntitySet="usuarios_rol" />
           </AssociationSet>
           <FunctionImport Name="sp_activar_artista">
-            <Parameter Name="id_artista" Mode="In" Type="Int32" />
+          <Parameter Name="id_artista" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_categoria">
-            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+          <Parameter Name="id_categoria" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_ciudad">
-            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+          <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_conversion">
-            <Parameter Name="id_conversion" Mode="In" Type="Int32" />
+          <Parameter Name="id_conversion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_descuento">
-            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+          <Parameter Name="id_descuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_evento">
-            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          <Parameter Name="id_evento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_foto_venue">
-            <Parameter Name="id_foto" Mode="In" Type="Int32" />
+          <Parameter Name="id_foto" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_metodo_cash">
-            <Parameter Name="id_metodo_cash" Mode="In" Type="Int32" />
+          <Parameter Name="id_metodo_cash" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_metodo_tarjeta">
-            <Parameter Name="id_metodo_tarjeta" Mode="In" Type="Int32" />
+          <Parameter Name="id_metodo_tarjeta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_metodo_transferencia">
-            <Parameter Name="id_metodo_transferencia" Mode="In" Type="Int32" />
+          <Parameter Name="id_metodo_transferencia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_presentacion">
-            <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
+          <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_seccion">
-            <Parameter Name="id_seccion" Mode="In" Type="Int32" />
+          <Parameter Name="id_seccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_tipo_ticket">
-            <Parameter Name="id_tipo_ticket" Mode="In" Type="Int32" />
+          <Parameter Name="id_tipo_ticket" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_usuario">
-            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          <Parameter Name="id_usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_activar_venue">
-            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+          <Parameter Name="id_venue" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_actualizar_artista">
             <Parameter Name="id_artista" Mode="In" Type="Int32" />
@@ -2381,98 +2442,143 @@
             <Parameter Name="imagen_url" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_artista">
-            <Parameter Name="id_artista" Mode="In" Type="Int32" />
+          <Parameter Name="id_artista" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_categoria">
-            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+          <Parameter Name="id_categoria" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_ciudad">
-            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+          <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_conversion">
-            <Parameter Name="id_conversion" Mode="In" Type="Int32" />
+          <Parameter Name="id_conversion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_descuento">
-            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+          <Parameter Name="id_descuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_evento">
-            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          <Parameter Name="id_evento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_foto_venue">
-            <Parameter Name="id_foto" Mode="In" Type="Int32" />
+          <Parameter Name="id_foto" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_metodo_cash">
-            <Parameter Name="id_metodo_cash" Mode="In" Type="Int32" />
+          <Parameter Name="id_metodo_cash" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_metodo_tarjeta">
-            <Parameter Name="id_metodo_tarjeta" Mode="In" Type="Int32" />
+          <Parameter Name="id_metodo_tarjeta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_metodo_transferencia">
-            <Parameter Name="id_metodo_transferencia" Mode="In" Type="Int32" />
+          <Parameter Name="id_metodo_transferencia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_presentacion">
-            <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
+          <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_seccion">
-            <Parameter Name="id_seccion" Mode="In" Type="Int32" />
+          <Parameter Name="id_seccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_tipo_ticket">
-            <Parameter Name="id_tipo_ticket" Mode="In" Type="Int32" />
+          <Parameter Name="id_tipo_ticket" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_usuario">
-            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          <Parameter Name="id_usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_usuario_rol">
-            <Parameter Name="id_usuarios_rol" Mode="In" Type="Int32" />
+          <Parameter Name="id_usuarios_rol" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_eliminar_venue">
-            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+          <Parameter Name="id_venue" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_artistas" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_artistas_Result)">
-            <Parameter Name="genero" Mode="In" Type="String" />
+          <Parameter Name="genero" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_categorias" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_categorias_Result)" />
           <FunctionImport Name="sp_mostrar_ciudades" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_ciudades_Result)">
-            <Parameter Name="id_pais" Mode="In" Type="Int32" />
+          <Parameter Name="id_pais" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_conversiones" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_conversiones_Result)">
-            <Parameter Name="moneda_origen" Mode="In" Type="String" />
+          <Parameter Name="moneda_origen" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_descuentos" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_descuentos_Result)">
-            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          <Parameter Name="id_evento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_eventos" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_eventos_Result)">
-            <Parameter Name="id_categoria" Mode="In" Type="Int32" />
+          <Parameter Name="id_categoria" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_fotos_venue" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_fotos_venue_Result)">
-            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+          <Parameter Name="id_venue" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_metodos_cash" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_metodos_cash_Result)" />
           <FunctionImport Name="sp_mostrar_metodos_tarjeta" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_metodos_tarjeta_Result)" />
           <FunctionImport Name="sp_mostrar_metodos_transferencia" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_metodos_transferencia_Result)" />
           <FunctionImport Name="sp_mostrar_pagos" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_pagos_Result)">
-            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          <Parameter Name="id_usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_presentaciones" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_presentaciones_Result)">
-            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          <Parameter Name="id_evento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_reembolsos" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_reembolsos_Result)">
-            <Parameter Name="id_compra" Mode="In" Type="Int32" />
+          <Parameter Name="id_compra" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_secciones" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_secciones_Result)">
-            <Parameter Name="id_venue" Mode="In" Type="Int32" />
+          <Parameter Name="id_venue" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_tipos_ticket" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_tipos_ticket_Result)">
-            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          <Parameter Name="id_evento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_usuarios" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_usuarios_Result)">
-            <Parameter Name="id_pais" Mode="In" Type="Int32" />
+          <Parameter Name="id_pais" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_usuarios_rol" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_usuarios_rol_Result)">
-            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          <Parameter Name="id_usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_mostrar_venues" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_venues_Result)">
-            <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+          <Parameter Name="id_ciudad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="fk_likes_artistas" Association="gestion_ticketsModel.fk_likes_artistas">
+            <End Role="artistas" EntitySet="artistas" />
+            <End Role="likes" EntitySet="likes" />
+          </AssociationSet>
+          <FunctionImport Name="sp_activar_agenda">
+          <Parameter Name="id_agenda" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_agenda">
+            <Parameter Name="id_agenda" Mode="In" Type="Int32" />
+            <Parameter Name="recordatorio" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="sp_actualizar_estado_compra">
+            <Parameter Name="id_compra" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_compra">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="id_tipo_ticket" Mode="In" Type="Int32" />
+            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_agregar_like">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_cancelar_compra">
+          <Parameter Name="id_compra" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_eliminar_agenda">
+          <Parameter Name="id_agenda" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_agenda" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_agenda_Result)">
+          <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_compras" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_compras_Result)">
+          <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_mostrar_likes" ReturnType="Collection(gestion_ticketsModel.sp_mostrar_likes_Result)">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="id_evento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_quitar_like">
+            <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_mostrar_artistas_Result">
@@ -2629,6 +2735,55 @@
           <Property Type="String" Name="pais" Nullable="false" MaxLength="100" />
           <Property Type="Boolean" Name="activo" Nullable="true" />
         </ComplexType>
+        <Association Name="fk_likes_artistas">
+          <End Type="gestion_ticketsModel.artistas" Role="artistas" Multiplicity="0..1" />
+          <End Type="gestion_ticketsModel.likes" Role="likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artistas">
+              <PropertyRef Name="id_artista" />
+            </Principal>
+            <Dependent Role="likes">
+              <PropertyRef Name="id_artista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_mostrar_agenda_Result">
+          <Property Type="Int32" Name="id_agenda" Nullable="false" />
+          <Property Type="String" Name="evento" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="artista" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="escenario" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="fecha_hora_inicio" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="fecha_hora_fin" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="orden" Nullable="true" />
+          <Property Type="String" Name="venue" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="recordatorio" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_agregado" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_compras_Result">
+          <Property Type="Int32" Name="id_compra" Nullable="false" />
+          <Property Type="String" Name="codigo_orden" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="usuario" Nullable="false" MaxLength="201" />
+          <Property Type="String" Name="evento" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="tipo_ticket" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="precio_unitario" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="total" Nullable="true" Precision="21" Scale="2" />
+          <Property Type="String" Name="descuento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="estado" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="fecha_compra" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_mostrar_likes_Result">
+          <Property Type="Int32" Name="id_like" Nullable="false" />
+          <Property Type="String" Name="usuario" Nullable="false" MaxLength="201" />
+          <Property Type="String" Name="tipo_like" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="evento" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="artista" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="escenario" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="fecha_hora_inicio" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_hora_fin" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="fecha_like" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="activo" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2756,6 +2911,7 @@
           <EntitySetMapping Name="likes">
             <EntityTypeMapping TypeName="gestion_ticketsModel.likes">
               <MappingFragment StoreEntitySet="likes">
+                <ScalarProperty Name="id_artista" ColumnName="id_artista" />
                 <ScalarProperty Name="id_like" ColumnName="id_like" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="id_evento" ColumnName="id_evento" />
@@ -3240,6 +3396,63 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_activar_agenda" FunctionName="gestion_ticketsModel.Store.sp_activar_agenda" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_agenda" FunctionName="gestion_ticketsModel.Store.sp_actualizar_agenda" />
+          <FunctionImportMapping FunctionImportName="sp_actualizar_estado_compra" FunctionName="gestion_ticketsModel.Store.sp_actualizar_estado_compra" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_compra" FunctionName="gestion_ticketsModel.Store.sp_agregar_compra" />
+          <FunctionImportMapping FunctionImportName="sp_agregar_like" FunctionName="gestion_ticketsModel.Store.sp_agregar_like" />
+          <FunctionImportMapping FunctionImportName="sp_cancelar_compra" FunctionName="gestion_ticketsModel.Store.sp_cancelar_compra" />
+          <FunctionImportMapping FunctionImportName="sp_eliminar_agenda" FunctionName="gestion_ticketsModel.Store.sp_eliminar_agenda" />
+          <FunctionImportMapping FunctionImportName="sp_mostrar_agenda" FunctionName="gestion_ticketsModel.Store.sp_mostrar_agenda">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_agenda_Result">
+                <ScalarProperty Name="id_agenda" ColumnName="id_agenda" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+                <ScalarProperty Name="artista" ColumnName="artista" />
+                <ScalarProperty Name="escenario" ColumnName="escenario" />
+                <ScalarProperty Name="fecha_hora_inicio" ColumnName="fecha_hora_inicio" />
+                <ScalarProperty Name="fecha_hora_fin" ColumnName="fecha_hora_fin" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="venue" ColumnName="venue" />
+                <ScalarProperty Name="recordatorio" ColumnName="recordatorio" />
+                <ScalarProperty Name="fecha_agregado" ColumnName="fecha_agregado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_compras" FunctionName="gestion_ticketsModel.Store.sp_mostrar_compras">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_compras_Result">
+                <ScalarProperty Name="id_compra" ColumnName="id_compra" />
+                <ScalarProperty Name="codigo_orden" ColumnName="codigo_orden" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+                <ScalarProperty Name="tipo_ticket" ColumnName="tipo_ticket" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio_unitario" ColumnName="precio_unitario" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_compra" ColumnName="fecha_compra" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_mostrar_likes" FunctionName="gestion_ticketsModel.Store.sp_mostrar_likes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="gestion_ticketsModel.sp_mostrar_likes_Result">
+                <ScalarProperty Name="id_like" ColumnName="id_like" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="tipo_like" ColumnName="tipo_like" />
+                <ScalarProperty Name="evento" ColumnName="evento" />
+                <ScalarProperty Name="artista" ColumnName="artista" />
+                <ScalarProperty Name="escenario" ColumnName="escenario" />
+                <ScalarProperty Name="fecha_hora_inicio" ColumnName="fecha_hora_inicio" />
+                <ScalarProperty Name="fecha_hora_fin" ColumnName="fecha_hora_fin" />
+                <ScalarProperty Name="fecha_like" ColumnName="fecha_like" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_quitar_like" FunctionName="gestion_ticketsModel.Store.sp_quitar_like" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

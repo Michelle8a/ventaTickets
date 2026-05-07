@@ -61,6 +61,7 @@
         <AssociationConnector Association="gestion_ticketsModel.fk_secciones_venues" ManuallyRouted="false" />
         <AssociationConnector Association="gestion_ticketsModel.fk_tipos_ticket_secciones" ManuallyRouted="false" />
         <AssociationConnector Association="gestion_ticketsModel.fk_usuariosrol_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_ticketsModel.fk_likes_artistas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

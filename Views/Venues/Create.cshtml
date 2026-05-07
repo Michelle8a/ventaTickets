@@ -1,0 +1,104 @@
+﻿@model GestionTickets.venues
+
+@{
+    ViewBag.Title = "Crear Venue";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow bg-white">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Crear Venue</h4>
+                </div>
+
+                <div class="card-body">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.id_ciudad, "Ciudad", new { @class = "form-label" })
+                            @Html.DropDownList("id_ciudad", null, "Seleccione una ciudad", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_ciudad, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.nombre, "Nombre del venue", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.nombre, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.tipo, "Tipo", new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.tipo,
+                                new SelectList(new[]
+                                {
+                                    new { Value = "estadio",   Text = "Estadio"   },
+                                    new { Value = "teatro",    Text = "Teatro"    },
+                                    new { Value = "auditorio", Text = "Auditorio" },
+                                    new { Value = "arena",     Text = "Arena"     },
+                                    new { Value = "salon",     Text = "Salón"     },
+                                    new { Value = "parque",    Text = "Parque"    },
+                                    new { Value = "otro",      Text = "Otro"      }
+                                }, "Value", "Text"),
+                                "Seleccione un tipo",
+                                new { @class = "form-control" }
+                            )
+                            @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.direccion, "Dirección", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.direccion, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.capacidad, "Capacidad", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.capacidad, new { @class = "form-control", type = "number", min = "1" })
+                            @Html.ValidationMessageFor(model => model.capacidad, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.imagen_url, "URL de imagen", new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.imagen_url, new { @class = "form-control", placeholder = "https://..." })
+                            @Html.ValidationMessageFor(model => model.imagen_url, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.latitud, "Latitud", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.latitud, new { @class = "form-control", placeholder = "Ej: 13.692940" })
+                                @Html.ValidationMessageFor(model => model.latitud, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                @Html.LabelFor(model => model.longitud, "Longitud", new { @class = "form-label" })
+                                @Html.TextBoxFor(model => model.longitud, new { @class = "form-control", placeholder = "Ej: -89.218191" })
+                                @Html.ValidationMessageFor(model => model.longitud, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-4">
+                            @Html.CheckBox("activo", true, new { @class = "form-check-input" })
+                            @Html.LabelFor(model => model.activo, "Activo", new { @class = "form-check-label" })
+                            @Html.ValidationMessageFor(model => model.activo, "", new { @class = "text-danger d-block" })
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-secondary" })
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

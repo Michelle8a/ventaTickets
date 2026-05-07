@@ -1,0 +1,51 @@
+﻿@model GestionTickets.venues
+
+@{
+    ViewBag.Title = "Detalles del Venue";
+}
+
+<h2>Detalles del Venue</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Nombre</dt>
+        <dd>@Model.nombre</dd>
+
+        <dt>Tipo</dt>
+        <dd>@Model.tipo</dd>
+
+        <dt>Dirección</dt>
+        <dd>@(string.IsNullOrWhiteSpace(Model.direccion) ? "-" : Model.direccion)</dd>
+
+        <dt>Imagen</dt>
+        <dd>
+            @if (!string.IsNullOrWhiteSpace(Model.imagen_url))
+            {
+                <img src="@Model.imagen_url" alt="@Model.nombre" style="max-width: 250px;" />
+            }
+            else
+            {
+                @:Sin imagen
+            }
+        </dd>
+
+        <dt>Ciudad</dt>
+        <dd>@(Model.ciudades != null ? Model.ciudades.nombre : "Sin ciudad")</dd>
+
+        <dt>Capacidad</dt>
+        <dd>@(Model.capacidad.HasValue ? Model.capacidad.Value.ToString() : "-")</dd>
+
+        <dt>Latitud</dt>
+        <dd>@(Model.latitud.HasValue ? Model.latitud.Value.ToString() : "-")</dd>
+
+        <dt>Longitud</dt>
+        <dd>@(Model.longitud.HasValue ? Model.longitud.Value.ToString() : "-")</dd>
+
+        <dt>Activo</dt>
+        <dd>@(Model.activo == true ? "Sí" : "No")</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id_venue }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default" })
+</p>

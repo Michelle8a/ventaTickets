@@ -145,13 +145,16 @@
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccesoController.cs" />
+    <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\ArtistaController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="Controllers\OrganizadoresController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Controllers\PresentacionesController.cs" />
     <Compile Include="Controllers\TiposTicketController.cs" />
+    <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="conversion_moneda.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
@@ -217,6 +220,9 @@
     <Compile Include="secciones_venue.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_mostrar_agenda_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_mostrar_artistas_Result.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
@@ -224,6 +230,9 @@
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_mostrar_ciudades_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_compras_Result.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_mostrar_conversiones_Result.cs">
@@ -236,6 +245,9 @@
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_mostrar_fotos_venue_Result.cs">
+      <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_mostrar_likes_Result.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_mostrar_metodos_cash_Result.cs">
@@ -382,11 +394,18 @@
     <Content Include="Views\Presentaciones\Editar.cshtml" />
     <Content Include="Views\Presentaciones\Index.cshtml" />
     <Content Include="Views\Organizadores\Crear.cshtml" />
+    <Content Include="Views\Venues\Index.cshtml" />
+    <Content Include="Views\Venues\Create.cshtml" />
+    <Content Include="Views\Venues\Delete.cshtml" />
+    <Content Include="Views\Venues\Edit.cshtml" />
+    <Content Include="Views\Venues\Details.cshtml" />
+    <Content Include="Views\Agenda\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Likes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
