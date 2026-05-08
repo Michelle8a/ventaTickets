@@ -1,0 +1,29 @@
+﻿@model GestionTickets.Models.Compra
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h3 class="text-center">🧾 Factura de Compra</h3>
+
+        <hr />
+
+        <p><strong>Fecha:</strong> @Model.Fecha</p>
+        <p><strong>Cantidad:</strong> @Model.Cantidad</p>
+        <p><strong>Método:</strong> @Model.MetodoPago</p>
+
+        @if (Model.MetodoPago == "Tarjeta")
+        {
+            <p><strong>Tarjeta:</strong> **** **** **** @Model.NumeroTarjeta.Substring(Model.NumeroTarjeta.Length - 4)</p>
+        }
+
+        <hr />
+
+        <p>Subtotal: $@Model.Subtotal</p>
+        <p>Cargos: $@Model.Cargos</p>
+        <h4>Total: $@Model.Total</h4>
+
+        <br />
+
+        <a href="/Compra/GenerarPDF/@Model.Id" class="btn btn-danger">📄 Descargar PDF</a>
+        <a href="/Home/Index" class="btn btn-secondary">🏠 Inicio</a>
+    </div>
+</div>

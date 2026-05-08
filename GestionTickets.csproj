@@ -147,6 +147,7 @@
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\ArtistaController.cs" />
+    <Compile Include="Controllers\CompraController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LikesController.cs" />
@@ -197,6 +198,8 @@
     <Compile Include="metodos_pago_transferencia.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Compra.cs" />
     <Compile Include="notificaciones.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
@@ -400,11 +403,12 @@
     <Content Include="Views\Venues\Edit.cshtml" />
     <Content Include="Views\Venues\Details.cshtml" />
     <Content Include="Views\Agenda\Index.cshtml" />
+    <Content Include="Views\Compra\Create.cshtml" />
+    <Content Include="Views\Compra\Detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Likes\" />
   </ItemGroup>
   <ItemGroup>

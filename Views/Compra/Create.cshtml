@@ -1,0 +1,85 @@
+﻿@model GestionTickets.Models.Compra
+
+@{
+    ViewBag.Title = "Compra de Tickets";
+}
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h3 class="text-center mb-4">🎟 Compra de Tickets</h3>
+
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label>Cantidad</label>
+                @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control", type = "number", min = "1", max = "4", id = "cantidad" })
+            </div>
+
+            <div class="mb-3">
+                <label>Método de Pago</label>
+                @Html.DropDownListFor(m => m.MetodoPago,
+                    new SelectList(new[] { "Efectivo", "Tarjeta" }),
+                    "Seleccione",
+                    new { @class = "form-control", id = "metodoPago" })
+            </div>
+
+            <div class="mb-3">
+                <label>Tarjeta</label>
+                @Html.TextBoxFor(m => m.NumeroTarjeta, new { @class = "form-control", id = "tarjeta" })
+            </div>
+
+            <hr />
+
+            <div class="bg-light p-3 rounded">
+                <h5>Resumen</h5>
+                <p>Subtotal: $<span id="subtotal">0</span></p>
+                <p>Cargos: $<span id="cargos">0</span></p>
+                <h4>Total: $<span id="total">0</span></h4>
+            </div>
+
+            <br />
+
+            <button class="btn btn-success w-100">💳 Confirmar Compra</button>
+            <a href="/Home/Index" class="btn btn-secondary w-100 mt-2">⬅ Volver</a>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+    const precio = 10;
+    const cargo = 2;
+
+    const cantidad = document.getElementById("cantidad");
+    const metodo = document.getElementById("metodoPago");
+    const tarjeta = document.getElementById("tarjeta");
+
+    function calcular() {
+        let cant = parseInt(cantidad.value) || 0;
+
+        if (cant > 4) {
+            cant = 4;
+            cantidad.value = 4;
+        }
+
+        let subtotal = cant * precio;
+        let cargos = cant * cargo;
+        let total = subtotal + cargos;
+
+        document.getElementById("subtotal").innerText = subtotal.toFixed(2);
+        document.getElementById("cargos").innerText = cargos.toFixed(2);
+        document.getElementById("total").innerText = total.toFixed(2);
+    }
+
+    cantidad.addEventListener("input", calcular);
+
+    metodo.addEventListener("change", function () {
+        tarjeta.disabled = this.value === "Efectivo";
+        if (this.value === "Efectivo") tarjeta.value = "";
+    });
+    </script>
+}
