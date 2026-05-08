@@ -1,13 +1,15 @@
-﻿using System;
+﻿using GestionTickets.Models;
+using GestionTickets.Permisos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using GestionTickets.Models;
 using System.Web.Mvc;
 
 namespace GestionTickets.Controllers
 {
-        public class CompraController : Controller
+    [ValidarSesion]
+    public class CompraController : Controller
         {
         private ApplicationDbContext db = new ApplicationDbContext();
 

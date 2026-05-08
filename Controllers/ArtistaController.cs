@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionTickets.Permisos;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -36,6 +37,7 @@ namespace GestionTickets.Controllers
         }
 
         // GET: Artistas/Create
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Create()
         {
             return View();
@@ -65,6 +67,7 @@ namespace GestionTickets.Controllers
         }
 
         // GET: Artistas/Edit/5
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,6 +84,7 @@ namespace GestionTickets.Controllers
         // POST: Artistas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Edit([Bind(Include = "id_artista,nombre,genero,descripcion,imagen_url,activo")] artistas artista)
         {
             ValidarArtista(artista);
@@ -99,6 +103,7 @@ namespace GestionTickets.Controllers
         }
 
         // GET: Artistas/Delete/5
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,6 +118,7 @@ namespace GestionTickets.Controllers
         }
 
         // POST: Artistas/Delete/5
+        [ValidarRol("Admin", "Organizador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

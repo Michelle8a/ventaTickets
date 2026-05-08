@@ -1,10 +1,17 @@
 ﻿@model IEnumerable<GestionTickets.sp_mostrar_presentaciones_Result>
-@{ ViewBag.Title = "Presentaciones"; }
+@{
+    var rol = Session["rol"] as string;
+    bool habilitar = rol == "Admin" || rol == "Organizador";
+    ViewBag.Title = "Presentaciones";
+}
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Presentaciones</h2>
-        <a href="@Url.Action("Crear")" class="btn btn-primary">Nueva Presentacion</a>
-    </div>
+        @if (habilitar)
+        {
+            <a href="@Url.Action("Crear")" class="btn btn-primary">Nueva Presentacion</a>
+        }
+        </div>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
             <tr>

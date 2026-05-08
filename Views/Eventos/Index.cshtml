@@ -1,21 +1,26 @@
 ﻿@model IEnumerable<GestionTickets.sp_mostrar_eventos_Result>
 
 @{
+    var rol = Session["rol"] as string;
+    bool habilitar = rol == "Admin" || rol == "Organizador";
     ViewBag.Title = "Eventos";
 }
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Eventos disponibles</h2>
+        @if (habilitar)
+        {
 
-        @Html.ActionLink(
-            "Crear evento",
-            "Create",
-            "Eventos",
-            null,
-            new { @class = "btn btn-success" }
-        )
-    </div>
+            @Html.ActionLink(
+                     "Crear evento",
+                     "Create",
+                     "Eventos",
+                     null,
+                     new { @class = "btn btn-success" }
+                 )
+        }
+        </div>
 
     @if (!Model.Any())
     {
@@ -43,26 +48,30 @@
                         <div class="card-footer bg-white">
                             <div class="d-grid gap-2">
                                 <a href="@Url.Action("PorEvento", "TiposTicket", new { id = evento.id_evento })"
-                                class="btn btn-sm btn-primary w-100">
-                                Ver tickets
+                                   class="btn btn-sm btn-primary w-100">
+                                    Ver tickets
                                 </a>
 
-                                @Html.ActionLink(
-                                    "Editar",
-                                    "Edit",
-                                    "Eventos",
-                                    new { id = evento.id_evento },
-                                    new { @class = "btn btn-sm btn-warning" }
-                                )
+                                @if (habilitar)
+                                {
 
-                                @Html.ActionLink(
-                                    "Eliminar",
-                                    "Delete",
-                                    "Eventos",
-                                    new { id = evento.id_evento },
-                                    new { @class = "btn btn-sm btn-danger" }
-                                )
-                            </div>
+                                    @Html.ActionLink(
+                                             "Editar",
+                                             "Edit",
+                                             "Eventos",
+                                             new { id = evento.id_evento },
+                                             new { @class = "btn btn-sm btn-warning" }
+                                         )
+
+                                    @Html.ActionLink(
+                                             "Eliminar",
+                                             "Delete",
+                                             "Eventos",
+                                             new { id = evento.id_evento },
+                                             new { @class = "btn btn-sm btn-danger" }
+                                         )
+                                }
+                                </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 ﻿@model GestionTickets.tipos_ticket
 
 @{
+    var rol = Session["rol"] as string;
+    bool habilitar = rol == "Admin";
     ViewBag.Title = "Detalle Tipo de Ticket";
 }
 
@@ -53,8 +55,12 @@
 
                     <div class="d-flex justify-content-between">
                         @Html.ActionLink("Volver", "PorEvento", "TiposTicket", new { id = Model.id_evento }, new { @class = "btn btn-secondary" })
-                        @Html.ActionLink("Editar", "Edit", "TiposTicket", new { id = Model.id_tipo_ticket }, new { @class = "btn btn-warning" })
-                    </div>
+
+                        @if (habilitar)
+                        {
+                            @Html.ActionLink("Editar", "Edit", "TiposTicket", new { id = Model.id_tipo_ticket }, new { @class = "btn btn-warning" })
+                        }
+                        </div>
 
                 </div>
             </div>

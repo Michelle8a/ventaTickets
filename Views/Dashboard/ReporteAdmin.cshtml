@@ -1,0 +1,273 @@
+﻿@{
+    ViewBag.Title = "Admin";
+}
+
+<style>
+    body {
+        background-color: #f4f6f9;
+    }
+
+    .dashboard-title {
+        font-weight: bold;
+        color: #1f2937;
+    }
+
+    .dashboard-subtitle {
+        color: #6b7280;
+    }
+
+    .kpi-card {
+        border: none;
+        border-radius: 20px;
+        transition: 0.3s;
+        background: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .kpi-number {
+        font-size: 32px;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .kpi-label {
+        color: #6b7280;
+        font-size: 15px;
+    }
+
+    .report-card {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        transition: 0.3s;
+        background: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        height: 100%;
+    }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .report-icon {
+        font-size: 45px;
+    }
+
+    .report-title {
+        font-weight: bold;
+        margin-top: 15px;
+        color: #111827;
+    }
+
+    .report-text {
+        color: #6b7280;
+        min-height: 50px;
+    }
+
+    .btn-dashboard {
+        border-radius: 12px;
+        padding: 10px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+        .btn-dashboard:hover {
+            transform: scale(1.03);
+        }
+
+    .section-title {
+        font-weight: bold;
+        color: #1f2937;
+    }
+</style>
+
+<div class="container py-5">
+
+    <!-- TITULO -->
+    <div class="mb-5">
+        <h1 class="dashboard-title">Dashboard Administrador</h1>
+        <p class="dashboard-subtitle">
+            Panel de estadísticas y reportes generales del sistema.
+        </p>
+    </div>
+
+    <!-- KPIs -->
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-3">
+            <div class="card kpi-card">
+                <div class="card-body text-center">
+                    <div style="font-size:40px;">💰</div>
+                    <div class="kpi-number">$25K</div>
+                    <div class="kpi-label">Ventas Totales</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card kpi-card">
+                <div class="card-body text-center">
+                    <div style="font-size:40px;">👥</div>
+                    <div class="kpi-number">1,240</div>
+                    <div class="kpi-label">Usuarios</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card kpi-card">
+                <div class="card-body text-center">
+                    <div style="font-size:40px;">🎤</div>
+                    <div class="kpi-number">38</div>
+                    <div class="kpi-label">Eventos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card kpi-card">
+                <div class="card-body text-center">
+                    <div style="font-size:40px;">🎟</div>
+                    <div class="kpi-number">5,430</div>
+                    <div class="kpi-label">Tickets Vendidos</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TITULO REPORTES -->
+    <div class="mb-4">
+        <h3 class="section-title">Reportes del Sistema</h3>
+    </div>
+
+    <!-- REPORTES -->
+    <div class="row g-4">
+
+        <!-- REPORTE -->
+        <div class="col-md-4">
+            <div class="card report-card">
+                <div class="card-body text-center p-4">
+
+                    <div class="report-icon">💵</div>
+
+                    <h4 class="report-title">
+                        Ventas Totales
+                    </h4>
+
+                    <p class="report-text">
+                        Consulta las ganancias generales del sistema.
+                    </p>
+
+                    <a href="@Url.Action("VentasTotales", "Dashboard")"
+                       class="btn btn-dark btn-dashboard w-100">
+                        Ver Reporte
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORTE -->
+        <div class="col-md-4">
+            <div class="card report-card">
+                <div class="card-body text-center p-4">
+
+                    <div class="report-icon">🎟</div>
+
+                    <h4 class="report-title">
+                        Eventos Más Vendidos
+                    </h4>
+
+                    <p class="report-text">
+                        Visualiza los eventos con mayor demanda.
+                    </p>
+
+                    <a href="@Url.Action("EventosVendidos", "Dashboard")"
+                       class="btn btn-primary btn-dashboard w-100">
+                        Ver Reporte
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORTE -->
+        <div class="col-md-4">
+            <div class="card report-card">
+                <div class="card-body text-center p-4">
+
+                    <div class="report-icon">🌎</div>
+
+                    <h4 class="report-title">
+                        Ventas por País
+                    </h4>
+
+                    <p class="report-text">
+                        Estadísticas de compras según país.
+                    </p>
+
+                    <a href="@Url.Action("VentasPais", "Dashboard")"
+                       class="btn btn-success btn-dashboard w-100">
+                        Ver Reporte
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORTE -->
+        <div class="col-md-4">
+            <div class="card report-card">
+                <div class="card-body text-center p-4">
+
+                    <div class="report-icon">🔄</div>
+
+                    <h4 class="report-title">
+                        Reembolsos
+                    </h4>
+
+                    <p class="report-text">
+                        Visualiza solicitudes y estados de reembolsos.
+                    </p>
+
+                    <a href="@Url.Action("Reembolsos", "Dashboard")"
+                       class="btn btn-danger btn-dashboard w-100">
+                        Ver Reporte
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORTE -->
+        <div class="col-md-4">
+            <div class="card report-card">
+                <div class="card-body text-center p-4">
+
+                    <div class="report-icon">📈</div>
+
+                    <h4 class="report-title">
+                        Ingresos Mensuales
+                    </h4>
+
+                    <p class="report-text">
+                        Analiza el crecimiento de ingresos mensuales.
+                    </p>
+
+                    <a href="@Url.Action("IngresosMensuales", "Dashboard")"
+                       class="btn btn-info btn-dashboard w-100">
+                        Ver Reporte
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

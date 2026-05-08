@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GestionTickets.Permisos;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Data.Entity;
 
 namespace GestionTickets.Controllers
 {
@@ -38,6 +39,7 @@ namespace GestionTickets.Controllers
         }
 
         // GET: Eventos/Create
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Create()
         {
             CargarCombos();
@@ -47,6 +49,7 @@ namespace GestionTickets.Controllers
         //POST: Eventos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Create([Bind(Include = "id_venue,id_categoria,id_usuario,nombre,tipo,descripcion,imagen_url,fecha_inicio,fecha_fin,activo")] eventos evento)
         {
             ValidarEvento(evento);
@@ -67,6 +70,7 @@ namespace GestionTickets.Controllers
         }
 
         // GET: Eventos/Edit/5
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,6 +88,7 @@ namespace GestionTickets.Controllers
         // POST: Eventos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Edit([Bind(Include = "id_evento,id_venue,id_categoria,id_usuario,nombre,tipo,descripcion,imagen_url,fecha_inicio,fecha_fin,fecha_creacion,activo")] eventos evento)
         {
             ValidarEvento(evento);
@@ -101,6 +106,7 @@ namespace GestionTickets.Controllers
         }
 
         //GET: Eventos/Delete/5
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Delete(int? id)
         {
             if(id == null)
@@ -121,6 +127,7 @@ namespace GestionTickets.Controllers
         //POST Evento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult DeleteConfirmed(int id)
         {
             eventos evento = db.eventos.Find(id);

@@ -1,6 +1,8 @@
 ﻿@model GestionTickets.artistas
 
 @{
+    var rol = Session["rol"] as string;
+    bool habilitar = rol == "Admin" || rol == "Organizador";
     ViewBag.Title = "Detalle Artista";
 }
 
@@ -50,8 +52,12 @@
 
                     <div class="d-flex justify-content-between">
                         @Html.ActionLink("Volver", "Index", "Artistas", null, new { @class = "btn btn-secondary" })
-                        @Html.ActionLink("Editar", "Edit", "Artistas", new { id = Model.id_artista }, new { @class = "btn btn-warning" })
-                    </div>
+
+                        @if (habilitar)
+                        {
+                            @Html.ActionLink("Editar", "Edit", "Artistas", new { id = Model.id_artista }, new { @class = "btn btn-warning" })
+                        }
+                        </div>
 
                 </div>
             </div>

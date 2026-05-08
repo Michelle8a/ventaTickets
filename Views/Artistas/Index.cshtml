@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<GestionTickets.artistas>
 
 @{
+    var rol = Session["rol"] as string;
+    bool habilitar = rol == "Admin" || rol == "Organizador";
+
     ViewBag.Title = "Artistas";
 }
 
@@ -9,7 +12,11 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Artistas</h2>
 
-        @Html.ActionLink("Crear artista", "Create", "Artistas", null, new { @class = "btn btn-success" })
+        @if (habilitar)
+        {
+            @Html.ActionLink("Crear artista", "Create", "Artistas", null, new { @class = "btn btn-success" })
+        }
+
     </div>
 
     @if (!Model.Any())
@@ -67,16 +74,19 @@
                             <div class="d-grid gap-2">
                                 @Html.ActionLink("Detalles", "Details", "Artistas", new { id = artista.id_artista }, new { @class = "btn btn-sm btn-info" })
 
-                                <a href="@Url.Action("Edit", "Artistas", new { id = artista.id_artista })"
-                                   class="btn btn-sm btn-warning btn-editar-artista">
-                                    Editar
-                                </a>
+                                @if (habilitar)
+                                {
+                                    <a href="@Url.Action("Edit", "Artistas", new { id = artista.id_artista })"
+                                       class="btn btn-sm btn-warning btn-editar-artista">
+                                        Editar
+                                    </a>
 
-                                <a href="@Url.Action("Delete", "Artistas", new { id = artista.id_artista })"
-                                   class="btn btn-sm btn-danger btn-eliminar-artista">
-                                    Eliminar
-                                </a>
-                            </div>
+                                    <a href="@Url.Action("Delete", "Artistas", new { id = artista.id_artista })"
+                                       class="btn btn-sm btn-danger btn-eliminar-artista">
+                                        Eliminar
+                                    </a>
+                                }
+                                </div>
                         </div>
 
                     </div>

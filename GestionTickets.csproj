@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -148,6 +151,7 @@
     <Compile Include="Controllers\AgendaController.cs" />
     <Compile Include="Controllers\ArtistaController.cs" />
     <Compile Include="Controllers\CompraController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LikesController.cs" />
@@ -209,6 +213,7 @@
     <Compile Include="paises.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Permisos\ValidarRolAttribute.cs" />
     <Compile Include="Permisos\ValidarSesionAttribute.cs" />
     <Compile Include="presentaciones.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
@@ -297,6 +302,12 @@
     </Compile>
     <Compile Include="venues.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Reports\Admin\rptVentasTotales.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptVentasTotales.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -405,11 +416,14 @@
     <Content Include="Views\Agenda\Index.cshtml" />
     <Content Include="Views\Compra\Create.cshtml" />
     <Content Include="Views\Compra\Detalle.cshtml" />
+    <Content Include="Views\Dashboard\ReporteAdmin.cshtml" />
+    <Content Include="Views\Dashboard\ReporteOrganizador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
     <Folder Include="Views\Likes\" />
+    <Folder Include="Views\Reports\Organizador\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -440,6 +454,13 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reports\Admin\rptVentasTotales.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptVentasTotales.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

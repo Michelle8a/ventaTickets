@@ -1,0 +1,265 @@
+﻿@{
+    ViewBag.Title = "Dashboard Organizador";
+}
+
+<style>
+    body {
+        background-color: #f4f6f9;
+    }
+
+    .dashboard-title {
+        font-weight: bold;
+        color: #4c1d95;
+    }
+
+    .dashboard-subtitle {
+        color: #6b7280;
+    }
+
+    .kpi-card {
+        border: none;
+        border-radius: 20px;
+        transition: 0.3s;
+        background: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .kpi-number {
+        font-size: 32px;
+        font-weight: bold;
+        color: #111827;
+    }
+
+    .kpi-label {
+        color: #6b7280;
+        font-size: 15px;
+    }
+
+    .report-card {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        transition: 0.3s;
+        background: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        height: 100%;
+    }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .report-icon {
+        font-size: 45px;
+    }
+
+    .report-title {
+        font-weight: bold;
+        margin-top: 15px;
+        color: #111827;
+    }
+
+    .report-text {
+        color: #6b7280;
+        min-height: 50px;
+    }
+
+    .btn-dashboard {
+        border-radius: 12px;
+        padding: 10px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+        .btn-dashboard:hover {
+            transform: scale(1.03);
+        }
+
+    .section-title {
+        font-weight: bold;
+        color: #4c1d95;
+    }
+</style>
+
+<div class="container py-5">
+
+    <!-- TITULO -->
+    <div class="mb-5">
+        <h1 class="dashboard-title">Dashboard Organizador</h1>
+
+        <p class="dashboard-subtitle">
+            Administra tus eventos, ventas y estadísticas.
+        </p>
+    </div>
+
+    <!-- KPIs -->
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-3">
+            <div class="card kpi-card">
+                <div class="card-body text-center">
+
+                    <div style="font-size:40px;">🎤</div>
+
+                    <div class="kpi-number">8</div>
+
+                    <div class="kpi-label">
+                        Mis Eventos
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card kpi-card">
+                <div class="card-body text-center">
+
+                    <div style="font-size:40px;">🎟</div>
+
+                    <div class="kpi-number">1,240</div>
+
+                    <div class="kpi-label">
+                        Tickets Vendidos
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card kpi-card">
+                <div class="card-body text-center">
+
+                    <div style="font-size:40px;">💰</div>
+
+                    <div class="kpi-number">$18K</div>
+
+                    <div class="kpi-label">
+                        Ingresos
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card kpi-card">
+                <div class="card-body text-center">
+
+                    <div style="font-size:40px;">❤️</div>
+
+                    <div class="kpi-number">930</div>
+
+                    <div class="kpi-label">
+                        Likes Totales
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TITULO -->
+    <div class="mb-4">
+        <h3 class="section-title">
+            Reportes del Organizador
+        </h3>
+    </div>
+
+    <!-- REPORTES -->
+    <div class="row g-4">
+
+        <!-- REPORTE -->
+        <div class="col-md-4">
+            <div class="card report-card">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="report-icon">🎫</div>
+
+                    <h4 class="report-title">
+                        Tickets Vendidos
+                    </h4>
+
+                    <p class="report-text">
+                        Consulta los tickets vendidos por evento.
+                    </p>
+
+                    <a href="@Url.Action("TicketsVendidos", "Dashboard")"
+                       class="btn btn-primary btn-dashboard w-100">
+
+                        Ver Reporte
+
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- REPORTE -->
+        <div class="col-md-4">
+            <div class="card report-card">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="report-icon">💵</div>
+
+                    <h4 class="report-title">
+                        Mis Ingresos
+                    </h4>
+
+                    <p class="report-text">
+                        Visualiza ingresos generados por tus eventos.
+                    </p>
+
+                    <a href="@Url.Action("MisIngresos", "Dashboard")"
+                       class="btn btn-success btn-dashboard w-100">
+
+                        Ver Reporte
+
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- REPORTE -->
+        <div class="col-md-4">
+            <div class="card report-card">
+
+                <div class="card-body text-center p-4">
+
+                    <div class="report-icon">🔥</div>
+
+                    <h4 class="report-title">
+                        Eventos Populares
+                    </h4>
+
+                    <p class="report-text">
+                        Eventos con más likes y ventas.
+                    </p>
+
+                    <a href="@Url.Action("EventosPopulares", "Dashboard")"
+                       class="btn btn-danger btn-dashboard w-100">
+
+                        Ver Reporte
+
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+       
+    </div>
+
+</div>

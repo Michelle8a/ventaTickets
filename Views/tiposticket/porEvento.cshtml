@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<GestionTickets.tipos_ticket>
 
 @{
+    var rol = Session["rol"] as string;
+    bool habilitar = rol == "Admin";
     ViewBag.Title = "Tickets del Evento";
 }
 
@@ -16,15 +18,18 @@
 
         <div>
             @Html.ActionLink("Volver a eventos", "Index", "Eventos", null, new { @class = "btn btn-secondary me-2" })
+            @if (habilitar)
+            {
 
-            @Html.ActionLink(
-                "Crear ticket",
-                "Create",
-                "TiposTicket",
-                new { idEvento = ViewBag.IdEvento },
-                new { @class = "btn btn-success" }
-            )
-        </div>
+                @Html.ActionLink(
+                         "Crear ticket",
+                         "Create",
+                         "TiposTicket",
+                         new { idEvento = ViewBag.IdEvento },
+                         new { @class = "btn btn-success" }
+                     )
+            }
+            </div>
     </div>
 
     @if (!Model.Any())
@@ -81,9 +86,12 @@
                                 </a>
 
                                 @Html.ActionLink("Detalles", "Details", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-info" })
-                                @Html.ActionLink("Editar", "Edit", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-warning" })
-                                @Html.ActionLink("Eliminar", "Delete", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-danger" })
-                            </div>
+                                @if (habilitar)
+                                {
+                                    @Html.ActionLink("Editar", "Edit", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-warning" })
+                                    @Html.ActionLink("Eliminar", "Delete", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-danger" })
+                                }
+                                </div>
                         </div>
 
                     </div>

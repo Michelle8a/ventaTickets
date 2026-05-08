@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestionTickets.Permisos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -39,6 +40,7 @@ namespace GestionTickets.Controllers
         }
 
         // GET: Presentaciones/Crear
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Crear()
         {
             ViewBag.Eventos = db.sp_mostrar_eventos(null).ToList();
@@ -48,6 +50,7 @@ namespace GestionTickets.Controllers
 
         // POST: Presentaciones/Crear
         [HttpPost]
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Crear(int id_evento, int id_artista, DateTime fecha_hora_inicio,
             string escenario, DateTime? fecha_hora_fin, int? orden)
         {
@@ -57,6 +60,7 @@ namespace GestionTickets.Controllers
         }
 
         // GET: Presentaciones/Editar/5
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Editar(int id)
         {
             var presentacion = db.sp_mostrar_presentaciones(null)
@@ -71,6 +75,7 @@ namespace GestionTickets.Controllers
 
         // POST: Presentaciones/Editar/5
         [HttpPost]
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Editar(int id_presentacion, int id_artista, string escenario,
             DateTime? fecha_hora_inicio, DateTime? fecha_hora_fin, int? orden)
         {
@@ -81,6 +86,7 @@ namespace GestionTickets.Controllers
 
         // POST: Presentaciones/Eliminar/5
         [HttpPost]
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Eliminar(int id)
         {
             db.sp_eliminar_presentacion(id);
@@ -89,6 +95,7 @@ namespace GestionTickets.Controllers
 
         // POST: Presentaciones/Activar/5
         [HttpPost]
+        [ValidarRol("Admin", "Organizador")]
         public ActionResult Activar(int id)
         {
             db.sp_activar_presentacion(id);

@@ -1,18 +1,23 @@
 ﻿@model IEnumerable<GestionTickets.sp_mostrar_venues_Result>
 @{
+    var rol = Session["rol"] as string;
+    bool habilitar = rol == "Admin" || rol == "Organizador";
     ViewBag.Title = "Venues";
 }
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Venues disponibles</h2>
-        @Html.ActionLink(
-            "Crear venue",
-            "Create",
-            "Venues",
-            null,
-            new { @class = "btn btn-success" }
-        )
-    </div>
+        @if (habilitar)
+        {
+            @Html.ActionLink(
+                     "Crear venue",
+                     "Create",
+                     "Venues",
+                     null,
+                     new { @class = "btn btn-success" }
+                 )
+        }
+        </div>
     @if (!Model.Any())
     {
         <div class="alert alert-info">No hay venues disponibles.</div>
@@ -44,23 +49,26 @@
                             </li>
                         </ul>
                         <div class="card-footer bg-white">
-                            <div class="d-grid gap-2">
-                                @Html.ActionLink(
-                                    "Editar",
-                                    "Edit",
-                                    "Venues",
-                                    new { id = venue.id_venue },
-                                    new { @class = "btn btn-sm btn-warning" }
-                                )
-                                @Html.ActionLink(
-                                    "Eliminar",
-                                    "Delete",
-                                    "Venues",
-                                    new { id = venue.id_venue },
-                                    new { @class = "btn btn-sm btn-danger" }
-                                )
+                            @if (habilitar)
+                            {
+                                <div class="d-grid gap-2">
+                                    @Html.ActionLink(
+                                         "Editar",
+                                         "Edit",
+                                         "Venues",
+                                         new { id = venue.id_venue },
+                                         new { @class = "btn btn-sm btn-warning" }
+                                     )
+                                    @Html.ActionLink(
+                                         "Eliminar",
+                                         "Delete",
+                                         "Venues",
+                                         new { id = venue.id_venue },
+                                         new { @class = "btn btn-sm btn-danger" }
+                                     )
+                                </div>
+                            }
                             </div>
-                        </div>
                     </div>
                 </div>
             }
