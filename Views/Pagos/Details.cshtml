@@ -1,15 +1,100 @@
-﻿@model dynamic
-
+﻿@model GestionTickets.Models.Pago
 @{
-    ViewBag.Title = "Detalle del Pago";
+    ViewBag.Title = "Confirmación de Pago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container mt-4">
-    <h2>Detalle del Pago</h2>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-sm text-center">
+                <div class="card-body p-5">
 
-    <p><strong>ID:</strong> @Model.IdPago</p>
-    <p><strong>Método:</strong> @Model.MetodoPago</p>
-    <p><strong>Tarjeta:</strong> @Model.NumeroTarjeta</p>
+                    <div class="display-4 text-success mb-3">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h4 class="mb-1">¡Pedido confirmado!</h4>
+                    <p class="text-muted mb-4">
+                        Orden #@Model.IdPago &nbsp;·&nbsp;
+                        @Model.FechaPago.ToString("dd/MM/yyyy HH:mm")
+                    </p>
 
-    <a href="/Pagos" class="btn btn-primary">Volver</a>
+                    <div class="text-start small">
+                        <div class="row mb-2">
+                            <div class="col-5 text-muted">Cliente</div>
+                            <div class="col-7 fw-semibold">@Model.Nombre</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 text-muted">Teléfono</div>
+                            <div class="col-7">@Model.Telefono</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-5 text-muted">Dirección</div>
+                            <div class="col-7">@Model.Direccion</div>
+                        </div>
+                        @if (!string.IsNullOrWhiteSpace(Model.Notas))
+                        {
+                            <div class="row mb-2">
+                                <div class="col-5 text-muted">Notas</div>
+                                <div class="col-7">@Model.Notas</div>
+                            </div>
+                        }
+
+                        <hr />
+
+                        <div class="row mb-2">
+                            <div class="col-5 text-muted">Método de pago</div>
+                            <div class="col-7">
+                                @if (Model.MetodoPago == "card")
+                                {
+                                    <i class="fa-regular fa-credit-card me-1"></i>
+                                    <span>Tarjeta</span>
+                                    if (!string.IsNullOrWhiteSpace(Model.NumeroTarjeta))
+                                    {
+                                        var num = Model.NumeroTarjeta.Replace(" ", "");
+                                        var ult = num.Substring(Math.Max(0, num.Length - 4));
+                                        <span class="text-muted ms-1">**** @ult</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-money-bill-wave me-1"></i>
+                                    <span>Efectivo</span>
+                                }
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row mb-1">
+                            <div class="col-5 text-muted">Subtotal</div>
+                            <div class="col-7">$@Model.Subtotal.ToString("0.00")</div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-5 text-muted">Envío</div>
+                            <div class="col-7">$@Model.Envio.ToString("0.00")</div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-5 text-muted">Propina</div>
+                            <div class="col-7">$@Model.Propina.ToString("0.00")</div>
+                        </div>
+                        <div class="row fw-bold">
+                            <div class="col-5">Total pagado</div>
+                            <div class="col-7 text-success fs-5">
+                                $@Model.Total.ToString("0.00")
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 justify-content-center mt-4">
+                        @Html.ActionLink("Ver todos los pagos", "Index", "Pagos",
+                            null, new { @class = "btn btn-outline-secondary" })
+                        @Html.ActionLink("Volver al inicio", "Index", "Home",
+                            null, new { @class = "btn btn-primary" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

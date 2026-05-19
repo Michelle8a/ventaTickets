@@ -2,84 +2,355 @@
 
 @{
     ViewBag.Title = "Compra de Tickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container mt-5">
-    <div class="card shadow p-4">
-        <h3 class="text-center mb-4">🎟 Compra de Tickets</h3>
+<style>
+    .ticket-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        border-radius: 1.5rem;
+        color: white;
+        padding: 2.5rem 2rem;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+    }
 
-        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+        .ticket-hero::before {
+            content: "🎫";
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.08;
+            right: -2rem;
+            top: -2rem;
+            transform: rotate(-15deg);
+        }
+
+    .ticket-card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        border: none;
+        position: relative;
+    }
+
+        .ticket-card::before,
+        .ticket-card::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #f5f6fa;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .ticket-card::before {
+            left: -15px;
+        }
+
+        .ticket-card::after {
+            right: -15px;
+        }
+
+    .form-control-custom {
+        border: 2px solid #e9ecef;
+        border-radius: 0.75rem;
+        padding: 0.85rem 1rem;
+        font-size: 1rem;
+        transition: all 0.25s ease;
+        background: #fafbfc;
+    }
+
+        .form-control-custom:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
+            outline: none;
+        }
+
+    .form-label-custom {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .qty-control {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        background: #fafbfc;
+        border: 2px solid #e9ecef;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        max-width: 200px;
+    }
+
+    .qty-btn {
+        background: transparent;
+        border: none;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #667eea;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+        .qty-btn:hover:not(:disabled) {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .qty-btn:disabled {
+            color: #cbd5e0;
+            cursor: not-allowed;
+        }
+
+    .qty-input {
+        flex: 1;
+        text-align: center;
+        border: none;
+        background: transparent;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #2d3748;
+        outline: none;
+        width: 60px;
+    }
+
+    .summary-box {
+        background: linear-gradient(135deg, #f6f9fc 0%, #eef2ff 100%);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        border: 2px dashed #c3dafe;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        color: #4a5568;
+    }
+
+    .summary-total {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #667eea;
+        border-top: 2px solid #c3dafe;
+        padding-top: 0.75rem;
+        margin-top: 0.5rem;
+    }
+
+    .btn-comprar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: 0.5px;
+        width: 100%;
+        margin-top: 1.5rem;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.35);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .btn-comprar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(102, 126, 234, 0.5);
+            color: white;
+        }
+
+        .btn-comprar:active {
+            transform: translateY(0);
+        }
+
+    .btn-volver {
+        background: transparent;
+        border: 2px solid #e9ecef;
+        color: #718096;
+        padding: 0.75rem 2rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        width: 100%;
+        margin-top: 0.75rem;
+        transition: all 0.2s;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+        .btn-volver:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+            color: #2d3748;
+        }
+
+    .price-pulse {
+        animation: pricePulse 0.4s ease;
+    }
+
+    @@keyframes pricePulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.15);
+            color: #f093fb;
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .info-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.4rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        backdrop-filter: blur(10px);
+    }
+</style>
+
+<div class="container my-4" style="max-width: 600px;">
+
+    <!-- Hero -->
+    <div class="ticket-hero">
+        <div class="info-badge mb-3">
+            <i class="fa-solid fa-bolt"></i> Compra rápida y segura
+        </div>
+        <h2 class="mb-2 fw-bold">🎟️ ¡Asegura tu lugar!</h2>
+        <p class="mb-0 opacity-90">
+            Ticket @ViewBag.NombreTicket · @ViewBag.Moneda @Model.PrecioUnitario.ToString("0.00")
+            @if (ViewBag.CantidadDisponible != null)
+            {
+                <span> · @ViewBag.CantidadDisponible disponibles</span>
+            }
+        </p>
+    </div>
+
+    <!-- Tarjeta de compra -->
+    <div class="ticket-card">
+
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger rounded-3" })
 
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
-            <div class="mb-3">
-                <label>Cantidad</label>
-                @Html.TextBoxFor(m => m.Cantidad, new { @class = "form-control", type = "number", min = "1", max = "4", id = "cantidad" })
+            <!-- Cantidad con controles +/- -->
+            <div class="mb-4">
+                <label class="form-label-custom">Cantidad de tickets</label>
+                <div class="qty-control">
+                    <button type="button" class="qty-btn" id="btnMinus">−</button>
+                    @Html.TextBoxFor(m => m.Cantidad, new
+ {
+     @class = "qty-input",
+     type = "number",
+     min = "1",
+     max = "4",
+     id = "cantidad",
+     Value = "1",
+     @readonly = "readonly"
+ })
+                    <button type="button" class="qty-btn" id="btnPlus">+</button>
+                </div>
+                <small class="text-muted mt-2 d-block">
+                    <i class="fa-solid fa-circle-info"></i> Máximo 4 tickets por compra
+                </small>
             </div>
 
-            <div class="mb-3">
-                <label>Método de Pago</label>
-                @Html.DropDownListFor(m => m.MetodoPago,
-                    new SelectList(new[] { "Efectivo", "Tarjeta" }),
-                    "Seleccione",
-                    new { @class = "form-control", id = "metodoPago" })
+            <!-- Resumen -->
+            <div class="summary-box">
+                <div class="summary-row">
+                    <span><i class="fa-solid fa-ticket me-2"></i> Subtotal</span>
+                    <span>$<span id="subtotal">10.00</span></span>
+                </div>
+                <div class="summary-row">
+                    <span><i class="fa-solid fa-receipt me-2"></i> Cargo por servicio</span>
+                    <span>$<span id="cargos">2.00</span></span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span>Total a pagar</span>
+                    <span>$<span id="total">12.00</span></span>
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label>Tarjeta</label>
-                @Html.TextBoxFor(m => m.NumeroTarjeta, new { @class = "form-control", id = "tarjeta" })
-            </div>
-
-            <hr />
-
-            <div class="bg-light p-3 rounded">
-                <h5>Resumen</h5>
-                <p>Subtotal: $<span id="subtotal">0</span></p>
-                <p>Cargos: $<span id="cargos">0</span></p>
-                <h4>Total: $<span id="total">0</span></h4>
-            </div>
-
-            <br />
-
-            <button class="btn btn-success w-100">💳 Confirmar Compra</button>
-            <a href="/Home/Index" class="btn btn-secondary w-100 mt-2">⬅ Volver</a>
+            <!-- Botones -->
+            <button type="submit" class="btn-comprar">
+                <i class="fa-solid fa-lock me-2"></i> Continuar al pago
+            </button>
+            <a href="/Home/Index" class="btn-volver">
+                <i class="fa-solid fa-arrow-left me-2"></i> Volver al inicio
+            </a>
         }
     </div>
 </div>
 
 @section Scripts {
     <script>
-    const precio = 10;
-    const cargo = 2;
+        (function () {
+            const PRECIO = @Model.PrecioUnitario;
+            const CARGO  = 2;
+            const MAX    = Math.min(4, @(ViewBag.CantidadDisponible ?? 4));
+            const MIN    = 1;
 
-    const cantidad = document.getElementById("cantidad");
-    const metodo = document.getElementById("metodoPago");
-    const tarjeta = document.getElementById("tarjeta");
+            const cantidad = document.getElementById('cantidad');
+            const btnPlus = document.getElementById('btnPlus');
+            const btnMinus = document.getElementById('btnMinus');
+            const subEl = document.getElementById('subtotal');
+            const carEl = document.getElementById('cargos');
+            const totEl = document.getElementById('total');
 
-    function calcular() {
-        let cant = parseInt(cantidad.value) || 0;
+            function animate(el) {
+                el.classList.remove('price-pulse');
+                void el.offsetWidth;
+                el.classList.add('price-pulse');
+            }
 
-        if (cant > 4) {
-            cant = 4;
-            cantidad.value = 4;
-        }
+            function calcular() {
+                const c = parseInt(cantidad.value) || 1;
+                const subtotal = c * PRECIO;
+                const cargos = c * CARGO;
+                const total = subtotal + cargos;
 
-        let subtotal = cant * precio;
-        let cargos = cant * cargo;
-        let total = subtotal + cargos;
+                subEl.textContent = subtotal.toFixed(2);
+                carEl.textContent = cargos.toFixed(2);
+                totEl.textContent = total.toFixed(2);
 
-        document.getElementById("subtotal").innerText = subtotal.toFixed(2);
-        document.getElementById("cargos").innerText = cargos.toFixed(2);
-        document.getElementById("total").innerText = total.toFixed(2);
-    }
+                animate(totEl);
 
-    cantidad.addEventListener("input", calcular);
+                btnMinus.disabled = c <= MIN;
+                btnPlus.disabled = c >= MAX;
+            }
 
-    metodo.addEventListener("change", function () {
-        tarjeta.disabled = this.value === "Efectivo";
-        if (this.value === "Efectivo") tarjeta.value = "";
-    });
+            btnPlus.addEventListener('click', () => {
+                let c = parseInt(cantidad.value) || 1;
+                if (c < MAX) { cantidad.value = c + 1; calcular(); }
+            });
+
+            btnMinus.addEventListener('click', () => {
+                let c = parseInt(cantidad.value) || 1;
+                if (c > MIN) { cantidad.value = c - 1; calcular(); }
+            });
+
+            calcular();
+        })();
     </script>
 }

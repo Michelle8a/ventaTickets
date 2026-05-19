@@ -1,29 +1,214 @@
 ﻿@model GestionTickets.Models.Compra
 
-<div class="container mt-5">
-    <div class="card shadow p-4">
-        <h3 class="text-center">🧾 Factura de Compra</h3>
+@{
+    ViewBag.Title = "¡Compra exitosa!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-        <hr />
+<style>
+    .success-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        border-radius: 1.5rem;
+        color: white;
+        padding: 3rem 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+        position: relative;
+        overflow: hidden;
+    }
 
-        <p><strong>Fecha:</strong> @Model.Fecha</p>
-        <p><strong>Cantidad:</strong> @Model.Cantidad</p>
-        <p><strong>Método:</strong> @Model.MetodoPago</p>
+    .check-circle {
+        width: 90px;
+        height: 90px;
+        background: white;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: #48bb78;
+        margin-bottom: 1rem;
+        animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
 
-        @if (Model.MetodoPago == "Tarjeta")
-        {
-            <p><strong>Tarjeta:</strong> **** **** **** @Model.NumeroTarjeta.Substring(Model.NumeroTarjeta.Length - 4)</p>
+    @@keyframes pop {
+        0% {
+            transform: scale(0);
         }
 
-        <hr />
+        80% {
+            transform: scale(1.1);
+        }
 
-        <p>Subtotal: $@Model.Subtotal</p>
-        <p>Cargos: $@Model.Cargos</p>
-        <h4>Total: $@Model.Total</h4>
+        100% {
+            transform: scale(1);
+        }
+    }
 
-        <br />
+    .ticket-receipt {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        position: relative;
+    }
 
-        <a href="/Compra/GenerarPDF/@Model.Id" class="btn btn-danger">📄 Descargar PDF</a>
-        <a href="/Home/Index" class="btn btn-secondary">🏠 Inicio</a>
+    .receipt-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.85rem 0;
+        border-bottom: 1px dashed #e9ecef;
+    }
+
+        .receipt-row:last-child {
+            border-bottom: none;
+        }
+
+    .receipt-label {
+        color: #718096;
+        font-weight: 500;
+    }
+
+    .receipt-value {
+        color: #2d3748;
+        font-weight: 600;
+    }
+
+    .total-highlight {
+        background: linear-gradient(135deg, #f6f9fc 0%, #eef2ff 100%);
+        border-radius: 1rem;
+        padding: 1.25rem;
+        margin-top: 1rem;
+        font-size: 1.5rem;
+        font-weight: 800;
+        display: flex;
+        justify-content: space-between;
+        color: #667eea;
+    }
+
+    .btn-action {
+        padding: 0.85rem 2rem;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        transition: all 0.2s;
+    }
+
+    .btn-pdf {
+        background: linear-gradient(135deg, #f56565 0%, #c53030 100%);
+        color: white;
+        border: none;
+        box-shadow: 0 6px 15px rgba(245, 101, 101, 0.35);
+    }
+
+        .btn-pdf:hover {
+            transform: translateY(-2px);
+            color: white;
+            box-shadow: 0 10px 20px rgba(245, 101, 101, 0.45);
+        }
+
+    .btn-home {
+        background: white;
+        border: 2px solid #e9ecef;
+        color: #4a5568;
+    }
+
+        .btn-home:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        top: -10px;
+        z-index: 9999;
+        pointer-events: none;
+        animation: fall linear forwards;
+    }
+
+    @@keyframes fall {
+        to {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+</style>
+
+<div class="container my-4" style="max-width: 700px;">
+
+    <div class="success-hero">
+        <div class="check-circle">✓</div>
+        <h2 class="fw-bold mb-2">¡Compra exitosa!</h2>
+        <p class="mb-0 opacity-90">Tus tickets fueron reservados correctamente</p>
+    </div>
+
+    <div class="ticket-receipt">
+        <h5 class="fw-bold mb-4">
+            <i class="fa-solid fa-receipt me-2 text-primary"></i>Detalles de la compra
+        </h5>
+
+        <div class="receipt-row">
+            <span class="receipt-label">📅 Fecha</span>
+            <span class="receipt-value">@Model.Fecha.ToString("dd/MM/yyyy HH:mm")</span>
+        </div>
+        <div class="receipt-row">
+            <span class="receipt-label">🎟️ Cantidad</span>
+            <span class="receipt-value">@Model.Cantidad tickets</span>
+        </div>
+        <div class="receipt-row">
+            <span class="receipt-label">💳 Método de pago</span>
+            <span class="receipt-value">@Model.MetodoPago</span>
+        </div>
+        @if (Model.MetodoPago == "Tarjeta" && !string.IsNullOrEmpty(Model.NumeroTarjeta))
+        {
+            <div class="receipt-row">
+                <span class="receipt-label">Tarjeta</span>
+                <span class="receipt-value">**** **** **** @Model.NumeroTarjeta.Substring(Model.NumeroTarjeta.Length - 4)</span>
+            </div>
+        }
+        <div class="receipt-row">
+            <span class="receipt-label">Subtotal</span>
+            <span class="receipt-value">$@Model.Subtotal.ToString("0.00")</span>
+        </div>
+        <div class="receipt-row">
+            <span class="receipt-label">Cargos</span>
+            <span class="receipt-value">$@Model.Cargos.ToString("0.00")</span>
+        </div>
+
+        <div class="total-highlight">
+            <span>Total pagado</span>
+            <span>$@Model.Total.ToString("0.00")</span>
+        </div>
+
+        <div class="d-flex gap-2 justify-content-center mt-4 flex-wrap">
+            <a href="/Compra/GenerarPDF/@Model.Id" class="btn btn-action btn-pdf">
+                <i class="fa-solid fa-file-pdf me-2"></i>Descargar PDF
+            </a>
+            <a href="/Home/Index" class="btn btn-action btn-home">
+                <i class="fa-solid fa-house me-2"></i>Volver al inicio
+            </a>
+        </div>
     </div>
 </div>
+
+<script>
+    (function () {
+        const colors = ['#667eea', '#764ba2', '#f093fb', '#fbbf24', '#48bb78', '#f56565'];
+        for (let i = 0; i < 80; i++) {
+            setTimeout(() => {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.background = colors[Math.floor(Math.random() * colors.length)];
+                c.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                c.style.transform = `rotate(${Math.random() * 360}deg)`;
+                if (Math.random() > 0.5) c.style.borderRadius = '50%';
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 4500);
+            }, i * 30);
+        }
+    })();
+</script>

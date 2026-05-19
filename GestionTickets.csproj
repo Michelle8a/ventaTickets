@@ -204,6 +204,11 @@
     </Compile>
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Compra.cs" />
+    <Compile Include="Models\MetodoPagoCash.cs" />
+    <Compile Include="Models\MetodoPagoTarjeta.cs" />
+    <Compile Include="Models\MetodoPagoTransferencia.cs" />
+    <Compile Include="Models\Pago.cs" />
+    <Compile Include="Models\TipoTicket.cs" />
     <Compile Include="notificaciones.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
     </Compile>
