@@ -237,10 +237,13 @@
         </div>
         <h2 class="mb-2 fw-bold">🎟️ ¡Asegura tu lugar!</h2>
         <p class="mb-0 opacity-90">
-            Ticket @ViewBag.NombreTicket · @ViewBag.Moneda @Model.PrecioUnitario.ToString("0.00")
-            @if (ViewBag.CantidadDisponible != null)
+            @if (ViewBag.NombreTicket != null)
             {
-                <span> · @ViewBag.CantidadDisponible disponibles</span>
+                <text>Ticket @ViewBag.NombreTicket · @ViewBag.Moneda @Model.PrecioUnitario.ToString("0.00")</text>
+            }
+            else
+            {
+                <text>Selecciona la cantidad de tickets y procede al pago</text>
             }
         </p>
     </div>
@@ -254,21 +257,25 @@
         {
             @Html.AntiForgeryToken()
 
+            @* 🔑 Hidden fields para que viajen al POST *@
+            @Html.HiddenFor(m => m.IdTipoTicket)
+            @Html.HiddenFor(m => m.PrecioUnitario)
+
             <!-- Cantidad con controles +/- -->
             <div class="mb-4">
                 <label class="form-label-custom">Cantidad de tickets</label>
                 <div class="qty-control">
                     <button type="button" class="qty-btn" id="btnMinus">−</button>
                     @Html.TextBoxFor(m => m.Cantidad, new
- {
-     @class = "qty-input",
-     type = "number",
-     min = "1",
-     max = "4",
-     id = "cantidad",
-     Value = "1",
-     @readonly = "readonly"
- })
+               {
+                   @class = "qty-input",
+                   type = "number",
+                   min = "1",
+                   max = "4",
+                   id = "cantidad",
+                   Value = "1",
+                   @readonly = "readonly"
+               })
                     <button type="button" class="qty-btn" id="btnPlus">+</button>
                 </div>
                 <small class="text-muted mt-2 d-block">
@@ -277,20 +284,20 @@
             </div>
 
             <!-- Resumen -->
-            <div class="summary-box">
-                <div class="summary-row">
-                    <span><i class="fa-solid fa-ticket me-2"></i> Subtotal</span>
-                    <span>$<span id="subtotal">10.00</span></span>
-                </div>
-                <div class="summary-row">
-                    <span><i class="fa-solid fa-receipt me-2"></i> Cargo por servicio</span>
-                    <span>$<span id="cargos">2.00</span></span>
-                </div>
-                <div class="summary-row summary-total">
-                    <span>Total a pagar</span>
-                    <span>$<span id="total">12.00</span></span>
-                </div>
-            </div>
+    <div class="summary-box">
+        <div class="summary-row">
+            <span><i class="fa-solid fa-ticket me-2"></i> Subtotal</span>
+            <span>$<span id="subtotal">@Model.PrecioUnitario.ToString("0.00")</span></span>
+        </div>
+        <div class="summary-row">
+            <span><i class="fa-solid fa-receipt me-2"></i> Cargo por servicio</span>
+            <span>$<span id="cargos">2.00</span></span>
+        </div>
+        <div class="summary-row summary-total">
+            <span>Total a pagar</span>
+            <span>$<span id="total">@((Model.PrecioUnitario + 2).ToString("0.00"))</span></span>
+        </div>
+    </div>
 
             <!-- Botones -->
             <button type="submit" class="btn-comprar">
@@ -306,17 +313,19 @@
 @section Scripts {
     <script>
         (function () {
-            const PRECIO = @Model.PrecioUnitario;
+            const PRECIO = @Model.PrecioUnitario.ToString(System.Globalization.CultureInfo.InvariantCulture);
             const CARGO  = 2;
-            const MAX    = Math.min(4, @(ViewBag.CantidadDisponible ?? 4));
+            const MAX    = 4;
             const MIN    = 1;
 
+            // ... resto del script igual
+
             const cantidad = document.getElementById('cantidad');
-            const btnPlus = document.getElementById('btnPlus');
+            const btnPlus  = document.getElementById('btnPlus');
             const btnMinus = document.getElementById('btnMinus');
-            const subEl = document.getElementById('subtotal');
-            const carEl = document.getElementById('cargos');
-            const totEl = document.getElementById('total');
+            const subEl    = document.getElementById('subtotal');
+            const carEl    = document.getElementById('cargos');
+            const totEl    = document.getElementById('total');
 
             function animate(el) {
                 el.classList.remove('price-pulse');
@@ -327,8 +336,8 @@
             function calcular() {
                 const c = parseInt(cantidad.value) || 1;
                 const subtotal = c * PRECIO;
-                const cargos = c * CARGO;
-                const total = subtotal + cargos;
+                const cargos   = c * CARGO;
+                const total    = subtotal + cargos;
 
                 subEl.textContent = subtotal.toFixed(2);
                 carEl.textContent = cargos.toFixed(2);
@@ -337,7 +346,7 @@
                 animate(totEl);
 
                 btnMinus.disabled = c <= MIN;
-                btnPlus.disabled = c >= MAX;
+                btnPlus.disabled  = c >= MAX;
             }
 
             btnPlus.addEventListener('click', () => {

@@ -3,35 +3,35 @@
   "WorkspaceRootPath": "C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\views\\compra\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\compra\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\carlo\\documents\\github\\ventatickets\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\carlo\\documents\\github\\ventatickets\\views\\compra\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:views\\compra\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\carlo\\documents\\github\\ventatickets\\controllers\\compracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\controllers\\compracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\compracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\carlo\\documents\\github\\ventatickets\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\carlo\\documents\\github\\ventatickets\\models\\tipoticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\models\\tipoticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:models\\tipoticket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\carlo\\documents\\github\\ventatickets\\controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:controllers\\pagoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\carlo\\documents\\github\\ventatickets\\models\\pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\models\\pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:models\\pago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|c:\\users\\carlo\\documents\\github\\ventatickets\\models\\compra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\models\\compra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9FF21BBB-FAC3-4F54-B291-19AF8BD8FD7B}|GestionTickets.csproj|solutionrelative:models\\compra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -42,17 +42,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\Views\\Compra\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Compra\\Create.cshtml",
               "ToolTip": "C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\Views\\Compra\\Create.cshtml",
               "RelativeToolTip": "Views\\Compra\\Create.cshtml",
-              "ViewState": "AgIAACcBAAAAAAAAAAAAADABAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABcBAAAAAAAAAAAAACQBAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-19T09:11:30.28Z",
               "EditorCaption": ""
@@ -67,8 +67,7 @@
               "RelativeToolTip": "Models\\TipoTicket.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAiwCoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T09:06:46.236Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T09:06:46.236Z"
             },
             {
               "$type": "Document",
@@ -76,12 +75,11 @@
               "Title": "CompraController.cs",
               "DocumentMoniker": "C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\Controllers\\CompraController.cs",
               "RelativeDocumentMoniker": "Controllers\\CompraController.cs",
-              "ToolTip": "C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\Controllers\\CompraController.cs*",
-              "RelativeToolTip": "Controllers\\CompraController.cs*",
+              "ToolTip": "C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\Controllers\\CompraController.cs",
+              "RelativeToolTip": "Controllers\\CompraController.cs",
               "ViewState": "AgIAAH0AAAAAAAAAAAAiwJgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T05:14:09.369Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T05:14:09.369Z"
             },
             {
               "$type": "Document",
@@ -93,8 +91,7 @@
               "RelativeToolTip": "Models\\Pago.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAUwCQAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T05:31:22.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T05:31:22.954Z"
             },
             {
               "$type": "Document",
@@ -106,8 +103,7 @@
               "RelativeToolTip": "Models\\Compra.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAACQAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T05:30:59.005Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T05:30:59.005Z"
             },
             {
               "$type": "Document",
@@ -119,8 +115,7 @@
               "RelativeToolTip": "Controllers\\PagosController.cs",
               "ViewState": "AgIAAHEAAAAAAAAAAAAwwH0AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T05:28:33.693Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T05:28:33.693Z"
             },
             {
               "$type": "Document",
@@ -132,12 +127,11 @@
               "RelativeToolTip": "Models\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T05:17:42.11Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T05:17:42.11Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\carlo\\Documents\\GitHub\\ventaTickets\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
