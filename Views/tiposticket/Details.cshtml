@@ -6,63 +6,69 @@
     ViewBag.Title = "Detalle Tipo de Ticket";
 }
 
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-7 col-lg-6">
+<div class="vt-panel-wrap">
+    <div class="vt-panel">
+        <div class="vt-panel__head vt-panel__head--info">
+            <div class="vt-panel__icon"><i class="bi bi-ticket-detailed"></i></div>
+            <div>
+                <h1 class="vt-panel__title">@Model.nombre</h1>
+                <p class="vt-panel__hint">Detalle del tipo de ticket</p>
+            </div>
+        </div>
 
-            <div class="card shadow bg-white">
-                <div class="card-header bg-info text-white">
-                    <h4 class="mb-0">Detalle Tipo de Ticket</h4>
+        <div class="vt-panel__body">
+
+            <div class="vt-price" style="padding-left:0; padding-top:0;">
+                <span class="vt-price__cur">@Model.moneda</span>
+                <span class="vt-price__amount">@Model.precio.ToString("N2")</span>
+            </div>
+
+            <dl class="vt-deflist">
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-calendar-event"></i> Evento</span>
+                    <span class="vt-def__val">@(Model.eventos != null ? Model.eventos.nombre : "Sin evento")</span>
                 </div>
-
-                <div class="card-body">
-
-                    <dl class="row mb-4">
-                        <dt class="col-sm-4">Evento</dt>
-                        <dd class="col-sm-8">
-                            @(Model.eventos != null ? Model.eventos.nombre : "Sin evento")
-                        </dd>
-
-                        <dt class="col-sm-4">Sección</dt>
-                        <dd class="col-sm-8">
-                            @(Model.secciones_venue != null ? Model.secciones_venue.nombre : "Sin sección")
-                        </dd>
-
-                        <dt class="col-sm-4">Ticket</dt>
-                        <dd class="col-sm-8">@Model.nombre</dd>
-
-                        <dt class="col-sm-4">Precio</dt>
-                        <dd class="col-sm-8">@Model.moneda @Model.precio.ToString("N2")</dd>
-
-                        <dt class="col-sm-4">Cantidad</dt>
-                        <dd class="col-sm-8">@Model.cantidad_ticket</dd>
-
-                        <dt class="col-sm-4">Inicio venta</dt>
-                        <dd class="col-sm-8">
-                            @(Model.venta_inicio.HasValue ? Model.venta_inicio.Value.ToString("dd/MM/yyyy HH:mm") : "-")
-                        </dd>
-
-                        <dt class="col-sm-4">Fin venta</dt>
-                        <dd class="col-sm-8">
-                            @(Model.venta_fin.HasValue ? Model.venta_fin.Value.ToString("dd/MM/yyyy HH:mm") : "-")
-                        </dd>
-
-                        <dt class="col-sm-4">Activo</dt>
-                        <dd class="col-sm-8">
-                            @(Model.activo == true ? "Sí" : "No")
-                        </dd>
-                    </dl>
-
-                    <div class="d-flex justify-content-between">
-                        @Html.ActionLink("Volver", "PorEvento", "TiposTicket", new { id = Model.id_evento }, new { @class = "btn btn-secondary" })
-
-                        @if (habilitar)
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-grid-3x3-gap"></i> Sección</span>
+                    <span class="vt-def__val">@(Model.secciones_venue != null ? Model.secciones_venue.nombre : "Sin sección")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-box-seam"></i> Cantidad</span>
+                    <span class="vt-def__val">@Model.cantidad_ticket</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-play-circle"></i> Inicio venta</span>
+                    <span class="vt-def__val">@(Model.venta_inicio.HasValue ? Model.venta_inicio.Value.ToString("dd/MM/yyyy HH:mm") : "-")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-stop-circle"></i> Fin venta</span>
+                    <span class="vt-def__val">@(Model.venta_fin.HasValue ? Model.venta_fin.Value.ToString("dd/MM/yyyy HH:mm") : "-")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-toggle-on"></i> Estado</span>
+                    <span class="vt-def__val">
+                        @if (Model.activo == true)
                         {
-                            @Html.ActionLink("Editar", "Edit", "TiposTicket", new { id = Model.id_tipo_ticket }, new { @class = "btn btn-warning" })
+                            <span class="vt-status vt-status--on"><i class="bi bi-check-circle-fill"></i> Activo</span>
                         }
-                        </div>
-
+                        else
+                        {
+                            <span class="vt-status vt-status--off"><i class="bi bi-x-circle-fill"></i> Inactivo</span>
+                        }
+                    </span>
                 </div>
+            </dl>
+
+            <div class="vt-form-actions">
+                <a href="@Url.Action("PorEvento", "TiposTicket", new { id = Model.id_evento })" class="vt-btn vt-btn--ghost">
+                    <i class="bi bi-arrow-left"></i> Volver
+                </a>
+                @if (habilitar)
+                {
+                    <a href="@Url.Action("Edit", "TiposTicket", new { id = Model.id_tipo_ticket })" class="vt-btn vt-btn--gold">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                }
             </div>
 
         </div>

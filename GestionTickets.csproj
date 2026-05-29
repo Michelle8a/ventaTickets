@@ -371,6 +371,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\Auth.css" />
+    <Content Include="Content\css\modules.css" />
     <Content Include="Content\images\logotickets.png" />
     <Content Include="favicon.ico" />
     <Content Include="GestionTicketsModel.Context.tt">

@@ -4,65 +4,74 @@
     ViewBag.Title = "Eliminar Tipo de Ticket";
 }
 
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-7 col-lg-6">
+<div class="vt-panel-wrap">
+    <div class="vt-panel">
+        <div class="vt-panel__head vt-panel__head--danger">
+            <div class="vt-panel__icon"><i class="bi bi-exclamation-triangle"></i></div>
+            <div>
+                <h1 class="vt-panel__title">Eliminar tipo de ticket</h1>
+                <p class="vt-panel__hint">Esta acción desactivará la entrada.</p>
+            </div>
+        </div>
 
-            <div class="card shadow bg-white">
-                <div class="card-header bg-danger text-white">
-                    <h4 class="mb-0">Eliminar Tipo de Ticket</h4>
-                </div>
+        <div class="vt-panel__body">
 
-                <div class="card-body">
-
-                    <div class="alert alert-warning">
-                        ¿Seguro que deseas eliminar este tipo de ticket?
-                        <br />
-                        <strong>Nota:</strong> el ticket será desactivado, no eliminado definitivamente.
-                    </div>
-
-                    <dl class="row mb-4">
-                        <dt class="col-sm-4">Evento</dt>
-                        <dd class="col-sm-8">
-                            @(Model.eventos != null ? Model.eventos.nombre : "Sin evento")
-                        </dd>
-
-                        <dt class="col-sm-4">Sección</dt>
-                        <dd class="col-sm-8">
-                            @(Model.secciones_venue != null ? Model.secciones_venue.nombre : "Sin sección")
-                        </dd>
-
-                        <dt class="col-sm-4">Ticket</dt>
-                        <dd class="col-sm-8">@Model.nombre</dd>
-
-                        <dt class="col-sm-4">Precio</dt>
-                        <dd class="col-sm-8">@Model.moneda @Model.precio.ToString("N2")</dd>
-
-                        <dt class="col-sm-4">Cantidad</dt>
-                        <dd class="col-sm-8">@Model.cantidad_ticket</dd>
-
-                        <dt class="col-sm-4">Activo</dt>
-                        <dd class="col-sm-8">
-                            @(Model.activo == true ? "Sí" : "No")
-                        </dd>
-                    </dl>
-
-                    @using (Html.BeginForm("Delete", "TiposTicket", FormMethod.Post, new { id = "formEliminarTipoTicket" }))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <div class="d-flex justify-content-between">
-                            @Html.ActionLink("Cancelar", "PorEvento", "TiposTicket", new { id = Model.id_evento }, new { @class = "btn btn-secondary" })
-
-                            <button type="button" id="btnEliminarTipoTicket" class="btn btn-danger">
-                                Desactivar
-                            </button>
-                        </div>
-                    }
-
+            <div class="vt-alert vt-alert--warn">
+                <i class="bi bi-info-circle-fill"></i>
+                <div>
+                    ¿Seguro que deseas eliminar este tipo de ticket?
+                    <br /><strong>Nota:</strong> el ticket será desactivado, no eliminado definitivamente.
                 </div>
             </div>
 
+            <dl class="vt-deflist">
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-calendar-event"></i> Evento</span>
+                    <span class="vt-def__val">@(Model.eventos != null ? Model.eventos.nombre : "Sin evento")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-grid-3x3-gap"></i> Sección</span>
+                    <span class="vt-def__val">@(Model.secciones_venue != null ? Model.secciones_venue.nombre : "Sin sección")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-ticket"></i> Ticket</span>
+                    <span class="vt-def__val">@Model.nombre</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-cash-coin"></i> Precio</span>
+                    <span class="vt-def__val">@Model.moneda @Model.precio.ToString("N2")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-box-seam"></i> Cantidad</span>
+                    <span class="vt-def__val">@Model.cantidad_ticket</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-toggle-on"></i> Estado</span>
+                    <span class="vt-def__val">
+                        @if (Model.activo == true)
+                        {
+                            <span class="vt-status vt-status--on"><i class="bi bi-check-circle-fill"></i> Activo</span>
+                        }
+                        else
+                        {
+                            <span class="vt-status vt-status--off"><i class="bi bi-x-circle-fill"></i> Inactivo</span>
+                        }
+                    </span>
+                </div>
+            </dl>
+
+            @using (Html.BeginForm("Delete", "TiposTicket", FormMethod.Post, new { id = "formEliminarTipoTicket" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="vt-form-actions">
+                    <a href="@Url.Action("PorEvento", "TiposTicket", new { id = Model.id_evento })" class="vt-btn vt-btn--ghost">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </a>
+                    <button type="button" id="btnEliminarTipoTicket" class="vt-btn vt-btn--danger">
+                        <i class="bi bi-slash-circle"></i> Desactivar
+                    </button>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -78,7 +87,7 @@
                     showCancelButton: true,
                     confirmButtonText: "Sí, desactivar",
                     cancelButtonText: "Cancelar",
-                    confirmButtonColor: "#dc3545",
+                    confirmButtonColor: "#d9534f",
                     cancelButtonColor: "#6c757d"
                 }).then((result) => {
                     if (result.isConfirmed) {

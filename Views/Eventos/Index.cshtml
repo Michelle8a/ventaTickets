@@ -6,75 +6,75 @@
     ViewBag.Title = "Eventos";
 }
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Eventos disponibles</h2>
+<div class="vt-page">
+
+    <div class="vt-head">
+        <div class="vt-head__titles">
+            <span class="vt-eyebrow"><i class="bi bi-calendar-event"></i> Cartelera</span>
+            <h1 class="vt-title">Eventos disponibles</h1>
+            <p class="vt-subtitle">Explora la programación y compra tus entradas.</p>
+        </div>
         @if (habilitar)
         {
-
-            @Html.ActionLink(
-                     "Crear evento",
-                     "Create",
-                     "Eventos",
-                     null,
-                     new { @class = "btn btn-success" }
-                 )
+            <div class="vt-head__actions">
+                <a href="@Url.Action("Create", "Eventos")" class="vt-btn vt-btn--primary">
+                    <i class="bi bi-plus-lg"></i> Crear evento
+                </a>
+            </div>
         }
-        </div>
+    </div>
 
     @if (!Model.Any())
     {
-        <div class="alert alert-info">No hay eventos disponibles.</div>
+        <div class="vt-empty">
+            <i class="bi bi-calendar-x"></i>
+            <h3>No hay eventos disponibles</h3>
+            <p>Cuando se publiquen nuevos eventos aparecerán aquí.</p>
+        </div>
     }
     else
     {
-        <div class="row g-3">
+        <div class="vt-grid">
             @foreach (var evento in Model)
             {
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <span class="badge bg-secondary mb-2">@evento.categoria</span>
-                            <h5 class="card-title">@evento.evento</h5>
-                            <p class="card-text text-muted">@evento.tipo</p>
-                        </div>
-
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">@evento.venue</li>
-                            <li class="list-group-item">@evento.fecha_inicio.ToString("dd/MM/yyyy")</li>
-                            <li class="list-group-item">@evento.organizador</li>
-                        </ul>
-
-                        <div class="card-footer bg-white">
-                            <div class="d-grid gap-2">
-                                <a href="@Url.Action("PorEvento", "TiposTicket", new { id = evento.id_evento })"
-                                   class="btn btn-sm btn-primary w-100">
-                                    Ver tickets
-                                </a>
-
-                                @if (habilitar)
-                                {
-
-                                    @Html.ActionLink(
-                                             "Editar",
-                                             "Edit",
-                                             "Eventos",
-                                             new { id = evento.id_evento },
-                                             new { @class = "btn btn-sm btn-warning" }
-                                         )
-
-                                    @Html.ActionLink(
-                                             "Eliminar",
-                                             "Delete",
-                                             "Eventos",
-                                             new { id = evento.id_evento },
-                                             new { @class = "btn btn-sm btn-danger" }
-                                         )
-                                }
-                                </div>
-                        </div>
+                <article class="vt-card">
+                    <div class="vt-card__media">
+                        <span class="vt-chip"><i class="bi bi-tag-fill"></i> @evento.categoria</span>
+                        @if (evento.activo == true)
+                        {
+                            <span class="vt-status vt-status--light"><i class="bi bi-circle-fill" style="font-size:.55em;"></i> Activo</span>
+                        }
+                        <i class="bi bi-music-note-beamed vt-card__media-icon"></i>
                     </div>
-                </div>
+
+                    <div class="vt-card__body">
+                        <h2 class="vt-card__title">@evento.evento</h2>
+                        <p class="vt-card__type">@evento.tipo</p>
+
+                        <ul class="vt-meta">
+                            <li><i class="bi bi-geo-alt-fill"></i> <span>@evento.venue</span></li>
+                            <li><i class="bi bi-calendar3"></i> <span>@evento.fecha_inicio.ToString("dd MMM yyyy")</span></li>
+                            <li><i class="bi bi-person-badge"></i> <span class="vt-meta__label">Organiza:</span> <span>@evento.organizador</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="vt-card__footer">
+                        <a href="@Url.Action("PorEvento", "TiposTicket", new { id = evento.id_evento })"
+                           class="vt-btn vt-btn--accent vt-btn--sm">
+                            <i class="bi bi-ticket-perforated"></i> Ver tickets
+                        </a>
+
+                        @if (habilitar)
+                        {
+                            <a href="@Url.Action("Edit", "Eventos", new { id = evento.id_evento })" class="vt-btn vt-btn--outline-gold vt-btn--sm">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <a href="@Url.Action("Delete", "Eventos", new { id = evento.id_evento })" class="vt-btn vt-btn--outline-danger vt-btn--sm">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        }
+                    </div>
+                </article>
             }
         </div>
     }

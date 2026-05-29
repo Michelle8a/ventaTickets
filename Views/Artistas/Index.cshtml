@@ -3,94 +3,83 @@
 @{
     var rol = Session["rol"] as string;
     bool habilitar = rol == "Admin" || rol == "Organizador";
-
     ViewBag.Title = "Artistas";
 }
 
-<div class="container mt-4">
+<div class="vt-page">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Artistas</h2>
-
+    <div class="vt-head">
+        <div class="vt-head__titles">
+            <span class="vt-eyebrow"><i class="bi bi-stars"></i> Talento</span>
+            <h1 class="vt-title">Artistas</h1>
+            <p class="vt-subtitle">Conoce a los artistas y grupos que dan vida a los eventos.</p>
+        </div>
         @if (habilitar)
         {
-            @Html.ActionLink("Crear artista", "Create", "Artistas", null, new { @class = "btn btn-success" })
+            <div class="vt-head__actions">
+                <a href="@Url.Action("Create", "Artistas")" class="vt-btn vt-btn--primary">
+                    <i class="bi bi-plus-lg"></i> Crear artista
+                </a>
+            </div>
         }
-
     </div>
 
     @if (!Model.Any())
     {
-        <div class="alert alert-info">
-            No hay artistas registrados.
+        <div class="vt-empty">
+            <i class="bi bi-person-bounding-box"></i>
+            <h3>No hay artistas registrados</h3>
+            <p>Cuando agregues artistas aparecerán aquí.</p>
         </div>
     }
     else
     {
-        <div class="row g-3">
+        <div class="vt-grid">
             @foreach (var artista in Model)
             {
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm bg-white">
+                var descripcion = artista.descripcion;
+                if (!string.IsNullOrWhiteSpace(descripcion) && descripcion.Length > 110)
+                {
+                    descripcion = descripcion.Substring(0, 110) + "...";
+                }
 
-                        @if (!string.IsNullOrWhiteSpace(artista.imagen_url))
+                <article class="vt-card">
+                    <div class="vt-card__media vt-card__media--photo"
+                         style="@(string.IsNullOrWhiteSpace(artista.imagen_url) ? "" : $"background-image:url('{artista.imagen_url}')")">
+                        @if (!string.IsNullOrWhiteSpace(artista.genero))
                         {
-                            <img src="@artista.imagen_url"
-                                 class="card-img-top"
-                                 alt="@artista.nombre"
-                                 style="height: 220px; object-fit: cover;" />
+                            <span class="vt-chip"><i class="bi bi-music-note"></i> @artista.genero</span>
                         }
-                        else
+                        @if (artista.activo == true)
                         {
-                            <div class="bg-light d-flex align-items-center justify-content-center"
-                                 style="height: 220px;">
-                                <span class="text-muted">Sin imagen</span>
-                            </div>
+                            <span class="vt-status vt-status--light"><i class="bi bi-circle-fill" style="font-size:.55em;"></i> Activo</span>
                         }
-
-                        <div class="card-body">
-                            <h5 class="card-title">@artista.nombre</h5>
-
-                            <p class="card-text mb-2">
-                                <strong>Género:</strong>
-                                @(string.IsNullOrWhiteSpace(artista.genero) ? "No especificado" : artista.genero)
-                            </p>
-
-                            <p class="card-text text-muted">
-                                @{
-                                    var descripcion = artista.descripcion;
-
-                                    if (!string.IsNullOrWhiteSpace(descripcion) && descripcion.Length > 100)
-                                    {
-                                        descripcion = descripcion.Substring(0, 100) + "...";
-                                    }
-                                }
-
-                                @(string.IsNullOrWhiteSpace(descripcion) ? "Sin descripción." : descripcion)
-                            </p>
-                        </div>
-
-                        <div class="card-footer bg-white">
-                            <div class="d-grid gap-2">
-                                @Html.ActionLink("Detalles", "Details", "Artistas", new { id = artista.id_artista }, new { @class = "btn btn-sm btn-info" })
-
-                                @if (habilitar)
-                                {
-                                    <a href="@Url.Action("Edit", "Artistas", new { id = artista.id_artista })"
-                                       class="btn btn-sm btn-warning btn-editar-artista">
-                                        Editar
-                                    </a>
-
-                                    <a href="@Url.Action("Delete", "Artistas", new { id = artista.id_artista })"
-                                       class="btn btn-sm btn-danger btn-eliminar-artista">
-                                        Eliminar
-                                    </a>
-                                }
-                                </div>
-                        </div>
-
+                        @if (string.IsNullOrWhiteSpace(artista.imagen_url))
+                        {
+                            <span class="vt-media-empty"><i class="bi bi-person-fill"></i></span>
+                        }
                     </div>
-                </div>
+
+                    <div class="vt-card__body">
+                        <h2 class="vt-card__title">@artista.nombre</h2>
+                        <p class="vt-card__type">@(string.IsNullOrWhiteSpace(descripcion) ? "Sin descripción." : descripcion)</p>
+                    </div>
+
+                    <div class="vt-card__footer">
+                        <a href="@Url.Action("Details", "Artistas", new { id = artista.id_artista })" class="vt-btn vt-btn--accent vt-btn--sm">
+                            <i class="bi bi-eye"></i> Detalles
+                        </a>
+                        @if (habilitar)
+                        {
+                            <a href="@Url.Action("Edit", "Artistas", new { id = artista.id_artista })" class="vt-btn vt-btn--outline-gold vt-btn--sm btn-editar-artista">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <a href="@Url.Action("Delete", "Artistas", new { id = artista.id_artista })" class="vt-btn vt-btn--outline-danger vt-btn--sm btn-eliminar-artista">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        }
+                    </div>
+                </article>
             }
         </div>
     }
@@ -103,21 +92,19 @@
             @if (TempData["SuccessMessage"] != null)
             {
                 <text>
-                    Swal.fire({
-                        title: "Operación realizada",
-                        text: "@TempData["SuccessMessage"]",
-                        icon: "success",
-                        confirmButtonText: "Aceptar",
-                        confirmButtonColor: "#0d6efd"
-                    });
+                Swal.fire({
+                    title: "Operación realizada",
+                    text: "@TempData["SuccessMessage"]",
+                    icon: "success",
+                    confirmButtonText: "Aceptar",
+                    confirmButtonColor: "#1B3C53"
+                });
                 </text>
             }
 
             $(".btn-editar-artista").on("click", function (e) {
                 e.preventDefault();
-
                 var url = $(this).attr("href");
-
                 Swal.fire({
                     title: "¿Editar artista?",
                     text: "Serás redirigido al formulario de edición.",
@@ -125,7 +112,7 @@
                     showCancelButton: true,
                     confirmButtonText: "Sí, editar",
                     cancelButtonText: "Cancelar",
-                    confirmButtonColor: "#ffc107",
+                    confirmButtonColor: "#e6a23c",
                     cancelButtonColor: "#6c757d"
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -136,9 +123,7 @@
 
             $(".btn-eliminar-artista").on("click", function (e) {
                 e.preventDefault();
-
                 var url = $(this).attr("href");
-
                 Swal.fire({
                     title: "¿Eliminar artista?",
                     text: "Primero revisarás los datos del artista antes de confirmar.",
@@ -146,7 +131,7 @@
                     showCancelButton: true,
                     confirmButtonText: "Continuar",
                     cancelButtonText: "Cancelar",
-                    confirmButtonColor: "#dc3545",
+                    confirmButtonColor: "#d9534f",
                     cancelButtonColor: "#6c757d"
                 }).then((result) => {
                     if (result.isConfirmed) {

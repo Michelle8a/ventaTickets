@@ -25,7 +25,8 @@ namespace GestionTickets
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap.css",
                         "~/Content/Site.css",
-                        "~/Content/Layout.css"));
+                        "~/Content/Layout.css",
+                        "~/Content/css/modules.css"));
         }
     }
 }

@@ -3,80 +3,83 @@
 @{
     var rol = Session["rol"] as string;
     bool habilitar = rol == "Admin" || rol == "Organizador";
-
     ViewBag.Title = "Detalles del Evento";
 }
 
-<h2>Detalles del Evento</h2>
+<div class="vt-panel-wrap">
+    <div class="vt-panel">
+        <div class="vt-panel__head">
+            <div class="vt-panel__icon"><i class="bi bi-calendar-event"></i></div>
+            <div>
+                <h1 class="vt-panel__title">@Model.nombre</h1>
+                <p class="vt-panel__hint">@Model.tipo</p>
+            </div>
+        </div>
 
-<div>
-    <hr />
+        <div class="vt-panel__body">
 
-    <dl class="dl-horizontal">
-
-        <dt>Nombre</dt>
-        <dd>@Model.nombre</dd>
-
-        <dt>Tipo</dt>
-        <dd>@Model.tipo</dd>
-
-        <dt>Descripción</dt>
-        <dd>@Model.descripcion</dd>
-
-        <dt>Imagen</dt>
-        <dd>
             @if (!string.IsNullOrWhiteSpace(Model.imagen_url))
             {
-                <img src="@Model.imagen_url" alt="@Model.nombre" style="max-width: 250px;" />
+                <img src="@Model.imagen_url" alt="@Model.nombre" class="vt-detail-img" />
             }
-            else
+
+            @if (!string.IsNullOrWhiteSpace(Model.descripcion))
             {
-                @:Sin imagen
+                <p style="color:var(--vt-text); line-height:1.55; margin-bottom:1.3rem;">@Model.descripcion</p>
             }
-        </dd>
 
-        <dt>Venue</dt>
-        <dd>@(Model.venues != null ? Model.venues.nombre : "Sin venue")</dd>
+            <dl class="vt-deflist">
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-geo-alt"></i> Venue</span>
+                    <span class="vt-def__val">@(Model.venues != null ? Model.venues.nombre : "Sin venue")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-tag"></i> Categoría</span>
+                    <span class="vt-def__val">@(Model.categorias != null ? Model.categorias.nombre : "Sin categoría")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-person-badge"></i> Usuario creador</span>
+                    <span class="vt-def__val">@(Model.usuarios != null ? $"{Model.usuarios.nombre} {Model.usuarios.apellido}" : "Sin usuario")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-calendar3"></i> Fecha inicio</span>
+                    <span class="vt-def__val">@Model.fecha_inicio.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-calendar-check"></i> Fecha fin</span>
+                    <span class="vt-def__val">@(Model.fecha_fin.HasValue ? Model.fecha_fin.Value.ToString("dd/MM/yyyy") : "-")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-clock-history"></i> Fecha creación</span>
+                    <span class="vt-def__val">@(Model.fecha_creacion.HasValue ? Model.fecha_creacion.Value.ToString("dd/MM/yyyy HH:mm") : "-")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-toggle-on"></i> Estado</span>
+                    <span class="vt-def__val">
+                        @if (Model.activo == true)
+                        {
+                            <span class="vt-status vt-status--on"><i class="bi bi-check-circle-fill"></i> Activo</span>
+                        }
+                        else
+                        {
+                            <span class="vt-status vt-status--off"><i class="bi bi-x-circle-fill"></i> Inactivo</span>
+                        }
+                    </span>
+                </div>
+            </dl>
 
-        <dt>Categoría</dt>
-        <dd>@(Model.categorias != null ? Model.categorias.nombre : "Sin categoría")</dd>
+            <div class="vt-form-actions">
+                <a href="@Url.Action("Index", "Eventos")" class="vt-btn vt-btn--ghost">
+                    <i class="bi bi-arrow-left"></i> Volver
+                </a>
+                @if (habilitar)
+                {
+                    <a href="@Url.Action("Edit", "Eventos", new { id = Model.id_evento })" class="vt-btn vt-btn--gold">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                }
+            </div>
 
-        <dt>Usuario creador</dt>
-        <dd>
-            @if (Model.usuarios != null)
-            {
-                @($"{Model.usuarios.nombre} {Model.usuarios.apellido}")
-            }
-            else
-            {
-                @:Sin usuario
-            }
-        </dd>
-
-        <dt>Fecha inicio</dt>
-        <dd>@Model.fecha_inicio.ToString("dd/MM/yyyy")</dd>
-
-        <dt>Fecha fin</dt>
-        <dd>
-            @(Model.fecha_fin.HasValue ? Model.fecha_fin.Value.ToString("dd/MM/yyyy") : "-")
-        </dd>
-
-        <dt>Fecha creación</dt>
-        <dd>
-            @(Model.fecha_creacion.HasValue ? Model.fecha_creacion.Value.ToString("dd/MM/yyyy HH:mm") : "-")
-        </dd>
-
-        <dt>Activo</dt>
-        <dd>@(Model.activo == true ? "Sí" : "No")</dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-
-<p>
-    @if (habilitar)
-    {
-        @Html.ActionLink("Editar", "Edit", new { id = Model.id_evento }, new { @class = "btn btn-warning" })
-    }
-        @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-default" })
-    </p>
-

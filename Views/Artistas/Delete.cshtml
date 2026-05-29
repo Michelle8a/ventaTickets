@@ -4,69 +4,71 @@
     ViewBag.Title = "Eliminar Artista";
 }
 
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-7 col-lg-6">
+<div class="vt-panel-wrap">
+    <div class="vt-panel">
+        <div class="vt-panel__head vt-panel__head--danger">
+            <div class="vt-panel__icon"><i class="bi bi-exclamation-triangle"></i></div>
+            <div>
+                <h1 class="vt-panel__title">Eliminar artista</h1>
+                <p class="vt-panel__hint">Esta acción desactivará el artista.</p>
+            </div>
+        </div>
 
-            <div class="card shadow bg-white">
-                <div class="card-header bg-danger text-white">
-                    <h4 class="mb-0">Eliminar Artista</h4>
-                </div>
+        <div class="vt-panel__body">
 
-                <div class="card-body">
-
-                    <div class="alert alert-warning">
-                        ¿Seguro que deseas eliminar este artista?
-                        <br />
-                        <strong>Nota:</strong> el artista será desactivado, no eliminado definitivamente.
-                    </div>
-
-                    @if (!string.IsNullOrWhiteSpace(Model.imagen_url))
-                    {
-                        <div class="mb-3 text-center">
-                            <img src="@Model.imagen_url"
-                                 alt="@Model.nombre"
-                                 class="img-thumbnail"
-                                 style="max-width: 220px; max-height: 220px; object-fit: cover;" />
-                        </div>
-                    }
-
-                    <dl class="row mb-4">
-                        <dt class="col-sm-4">Nombre</dt>
-                        <dd class="col-sm-8">@Model.nombre</dd>
-
-                        <dt class="col-sm-4">Género</dt>
-                        <dd class="col-sm-8">
-                            @(string.IsNullOrWhiteSpace(Model.genero) ? "No especificado" : Model.genero)
-                        </dd>
-
-                        <dt class="col-sm-4">Descripción</dt>
-                        <dd class="col-sm-8">
-                            @(string.IsNullOrWhiteSpace(Model.descripcion) ? "Sin descripción" : Model.descripcion)
-                        </dd>
-
-                        <dt class="col-sm-4">Activo</dt>
-                        <dd class="col-sm-8">
-                            @(Model.activo == true ? "Sí" : "No")
-                        </dd>
-                    </dl>
-
-                    @using (Html.BeginForm("Delete", "Artistas", FormMethod.Post, new { id = "formEliminarArtista" }))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <div class="d-flex justify-content-between">
-                            @Html.ActionLink("Cancelar", "Index", "Artistas", null, new { @class = "btn btn-secondary" })
-
-                            <button type="button" id="btnEliminarArtista" class="btn btn-danger">
-                                Desactivar
-                            </button>
-                        </div>
-                    }
-
+            <div class="vt-alert vt-alert--warn">
+                <i class="bi bi-info-circle-fill"></i>
+                <div>
+                    ¿Seguro que deseas eliminar este artista?
+                    <br /><strong>Nota:</strong> el artista será desactivado, no eliminado definitivamente.
                 </div>
             </div>
 
+            @if (!string.IsNullOrWhiteSpace(Model.imagen_url))
+            {
+                <img src="@Model.imagen_url" alt="@Model.nombre" class="vt-detail-img" />
+            }
+
+            <dl class="vt-deflist">
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-person"></i> Nombre</span>
+                    <span class="vt-def__val">@Model.nombre</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-music-note"></i> Género</span>
+                    <span class="vt-def__val">@(string.IsNullOrWhiteSpace(Model.genero) ? "No especificado" : Model.genero)</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-card-text"></i> Descripción</span>
+                    <span class="vt-def__val">@(string.IsNullOrWhiteSpace(Model.descripcion) ? "Sin descripción" : Model.descripcion)</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-toggle-on"></i> Estado</span>
+                    <span class="vt-def__val">
+                        @if (Model.activo == true)
+                        {
+                            <span class="vt-status vt-status--on"><i class="bi bi-check-circle-fill"></i> Activo</span>
+                        }
+                        else
+                        {
+                            <span class="vt-status vt-status--off"><i class="bi bi-x-circle-fill"></i> Inactivo</span>
+                        }
+                    </span>
+                </div>
+            </dl>
+
+            @using (Html.BeginForm("Delete", "Artistas", FormMethod.Post, new { id = "formEliminarArtista" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="vt-form-actions">
+                    <a href="@Url.Action("Index", "Artistas")" class="vt-btn vt-btn--ghost">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </a>
+                    <button type="button" id="btnEliminarArtista" class="vt-btn vt-btn--danger">
+                        <i class="bi bi-slash-circle"></i> Desactivar
+                    </button>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -82,7 +84,7 @@
                     showCancelButton: true,
                     confirmButtonText: "Sí, desactivar",
                     cancelButtonText: "Cancelar",
-                    confirmButtonColor: "#dc3545",
+                    confirmButtonColor: "#d9534f",
                     cancelButtonColor: "#6c757d"
                 }).then((result) => {
                     if (result.isConfirmed) {

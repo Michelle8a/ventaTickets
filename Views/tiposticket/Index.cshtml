@@ -3,94 +3,88 @@
 @{
     var rol = Session["rol"] as string;
     bool habilitar = rol == "Admin";
-
     ViewBag.Title = "Tipos de Ticket";
 }
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">Tipos de Ticket</h2>
+<div class="vt-page">
+
+    <div class="vt-head">
+        <div class="vt-head__titles">
+            <span class="vt-eyebrow"><i class="bi bi-ticket-perforated"></i> Inventario</span>
+            <h1 class="vt-title">Tipos de Ticket</h1>
+            <p class="vt-subtitle">Gestiona las entradas disponibles para los eventos.</p>
+        </div>
         @if (habilitar)
         {
-
-            @Html.ActionLink("Crear tipo de ticket", "Create", "TiposTicket", null, new { @class = "btn btn-success" })
+            <div class="vt-head__actions">
+                <a href="@Url.Action("Create", "TiposTicket")" class="vt-btn vt-btn--primary">
+                    <i class="bi bi-plus-lg"></i> Crear tipo de ticket
+                </a>
+            </div>
         }
-        </div>
+    </div>
 
     @if (!Model.Any())
     {
-        <div class="alert alert-info">
-            No hay tipos de ticket registrados.
+        <div class="vt-empty">
+            <i class="bi bi-ticket"></i>
+            <h3>No hay tipos de ticket registrados</h3>
+            <p>Crea un tipo de ticket para empezar a vender.</p>
         </div>
     }
     else
     {
-        <div class="row g-3">
+        <div class="vt-grid">
             @foreach (var ticket in Model)
             {
-                <div class="col-md-4">
-                    <div class="card h-100 shadow-sm bg-white">
-
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">@ticket.nombre</h5>
-                        </div>
-
-                        <div class="card-body">
-                            <p class="mb-2">
-                                <strong>Evento:</strong>
-                                @(ticket.eventos != null ? ticket.eventos.nombre : "Sin evento")
-                            </p>
-
-                            <p class="mb-2">
-                                <strong>Sección:</strong>
-                                @(ticket.secciones_venue != null ? ticket.secciones_venue.nombre : "Sin sección")
-                            </p>
-
-                            <p class="mb-2">
-                                <strong>Precio:</strong>
-                                @ticket.moneda @ticket.precio.ToString("N2")
-                            </p>
-
-                            <p class="mb-2">
-                                <strong>Cantidad:</strong>
-                                @ticket.cantidad_ticket
-                            </p>
-
-                            <p class="mb-2">
-                                <strong>Venta inicio:</strong>
-                                @(ticket.venta_inicio.HasValue ? ticket.venta_inicio.Value.ToString("dd/MM/yyyy HH:mm") : "-")
-                            </p>
-
-                            <p class="mb-2">
-                                <strong>Venta fin:</strong>
-                                @(ticket.venta_fin.HasValue ? ticket.venta_fin.Value.ToString("dd/MM/yyyy HH:mm") : "-")
-                            </p>
-
-                            <p class="mb-0">
-                                <strong>Activo:</strong>
-                                @(ticket.activo == true ? "Sí" : "No")
-                            </p>
-                        </div>
-
-                        <div class="card-footer bg-white">
-                            <div class="d-grid gap-2">
-                                <a href="@Url.Action("Create", "Compras", new { idTipoTicket = ticket.id_tipo_ticket })"
-                                   class="btn btn-sm btn-success">
-                                    Comprar
-                                </a>
-
-                                @Html.ActionLink("Detalles", "Details", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-info" })
-                                @if (habilitar)
-                                {
-                                    @Html.ActionLink("Editar", "Edit", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-warning" })
-                                    @Html.ActionLink("Eliminar", "Delete", "TiposTicket", new { id = ticket.id_tipo_ticket }, new { @class = "btn btn-sm btn-danger" })
-                                    
-                                }
-                                </div>
-                        </div>
-
+                <article class="vt-card vt-ticket">
+                    <div class="vt-ticket__head">
+                        <h2 class="vt-ticket__name">@ticket.nombre</h2>
+                        @if (ticket.activo == true)
+                        {
+                            <span class="vt-status vt-status--light"><i class="bi bi-check-circle-fill"></i> Activo</span>
+                        }
+                        else
+                        {
+                            <span class="vt-status vt-status--light" style="opacity:.75;"><i class="bi bi-pause-circle"></i> Inactivo</span>
+                        }
                     </div>
-                </div>
+
+                    <div class="vt-price">
+                        <span class="vt-price__cur">@ticket.moneda</span>
+                        <span class="vt-price__amount">@ticket.precio.ToString("N2")</span>
+                    </div>
+
+                    <hr class="vt-divider" />
+
+                    <div class="vt-card__body" style="padding-top:0;">
+                        <ul class="vt-meta">
+                            <li><i class="bi bi-calendar-event"></i> <span>@(ticket.eventos != null ? ticket.eventos.nombre : "Sin evento")</span></li>
+                            <li><i class="bi bi-grid-3x3-gap"></i> <span>@(ticket.secciones_venue != null ? ticket.secciones_venue.nombre : "Sin sección")</span></li>
+                            <li><i class="bi bi-box-seam"></i> <span class="vt-meta__label">Disponibles:</span> <span>@ticket.cantidad_ticket</span></li>
+                            <li><i class="bi bi-clock"></i> <span class="vt-meta__label">Venta:</span> <span>@(ticket.venta_inicio.HasValue ? ticket.venta_inicio.Value.ToString("dd/MM/yy HH:mm") : "-") → @(ticket.venta_fin.HasValue ? ticket.venta_fin.Value.ToString("dd/MM/yy HH:mm") : "-")</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="vt-card__footer">
+                        <a href="@Url.Action("Create", "Compras", new { idTipoTicket = ticket.id_tipo_ticket })"
+                           class="vt-btn vt-btn--accent vt-btn--sm">
+                            <i class="bi bi-cart-plus"></i> Comprar
+                        </a>
+                        <a href="@Url.Action("Details", "TiposTicket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--ghost vt-btn--sm">
+                            <i class="bi bi-eye"></i> Detalles
+                        </a>
+                        @if (habilitar)
+                        {
+                            <a href="@Url.Action("Edit", "TiposTicket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--outline-gold vt-btn--sm">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="@Url.Action("Delete", "TiposTicket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--outline-danger vt-btn--sm">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        }
+                    </div>
+                </article>
             }
         </div>
     }
