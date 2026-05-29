@@ -1,0 +1,131 @@
+@model GestionTickets.Models.Reembolso
+@{
+    ViewBag.Title = "Solicitar Reembolso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var pago   = (GestionTickets.Models.Pago)ViewBag.Pago;
+    var compra = (GestionTickets.Models.Compra)ViewBag.Compra;
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+            <h2 class="mb-4">
+                <i class="fa-solid fa-rotate-left me-2"></i>Solicitar Reembolso
+            </h2>
+
+            @if (pago != null)
+            {
+                <!-- Resumen del pago original -->
+                <div class="card mb-4 border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                        Esta acción cancelará el pedido y no puede deshacerse
+                    </div>
+                    <div class="card-body small">
+                        <div class="row mb-1">
+                            <div class="col-5 text-muted">Código de orden</div>
+                            <div class="col-7 fw-semibold">@(compra?.CodigoOrden ?? "—")</div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-5 text-muted">Fecha de pago</div>
+                            <div class="col-7">@pago.FechaPago.ToString("dd/MM/yyyy HH:mm")</div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-5 text-muted">Método de pago</div>
+                            <div class="col-7">
+                                @(pago.Metodo == "card" ? "Tarjeta (Stripe)" : "Efectivo")
+                            </div>
+                        </div>
+                        <div class="row mb-1">
+                            <div class="col-5 text-muted">Total pagado</div>
+                            <div class="col-7 fw-bold text-danger">$@pago.Monto.ToString("0.00")</div>
+                        </div>
+                        @if (!string.IsNullOrWhiteSpace(pago.StripePaymentIntentId))
+                        {
+                            <div class="row mb-1">
+                                <div class="col-5 text-muted">ID Stripe</div>
+                                <div class="col-7 text-break"><code>@pago.StripePaymentIntentId</code></div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            @using (Html.BeginForm("Create", "Reembolsos", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.IdPago)
+                @Html.HiddenFor(m => m.IdCompra)
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Monto, new { @class = "form-label fw-semibold" })
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                @Html.TextBoxFor(m => m.Monto, new
+                                {
+                                    @class    = "form-control",
+                                    type      = "number",
+                                    min       = "0.01",
+                                    step      = "0.01",
+                                    max       = pago?.Monto.ToString("0.00") ?? "0"
+                                })
+                            </div>
+                            <div class="form-text">
+                                Máximo reembolsable: <strong>$@(pago?.Monto.ToString("0.00") ?? "0.00")</strong>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.Monto, "", new { @class = "text-danger small" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Motivo, new { @class = "form-label fw-semibold" })
+                            @Html.TextAreaFor(m => m.Motivo, 3, 0, new
+                            {
+                                @class      = "form-control",
+                                placeholder = "Explica el motivo del reembolso…"
+                            })
+                            @Html.ValidationMessageFor(m => m.Motivo, "", new { @class = "text-danger small" })
+                        </div>
+
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <div class="alert alert-danger">
+                                @Html.ValidationSummary(true, "", new { @class = "mb-0" })
+                            </div>
+                        }
+
+                        @if (pago?.Metodo == "card" && !string.IsNullOrWhiteSpace(pago?.StripePaymentIntentId))
+                        {
+                            <div class="alert alert-info small">
+                                <i class="fa-brands fa-stripe me-1"></i>
+                                El reembolso se procesará automáticamente a través de Stripe.
+                                Aparecerá en el estado de cuenta en 5–10 días hábiles (modo test: inmediato).
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning small">
+                                <i class="fa-solid fa-circle-info me-1"></i>
+                                El pago fue en efectivo. El reembolso quedará en estado <strong>pendiente</strong>
+                                y deberá procesarse manualmente.
+                            </div>
+                        }
+
+                        <div class="d-flex gap-2 justify-content-end mt-3">
+                            @Html.ActionLink("Cancelar", "Details", "Pagos",
+                                new { id = Model.IdPago },
+                                new { @class = "btn btn-outline-secondary" })
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa-solid fa-rotate-left me-1"></i>Confirmar reembolso
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

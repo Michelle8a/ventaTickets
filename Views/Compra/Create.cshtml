@@ -256,6 +256,8 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.IdTipoTicket)
+            @Html.HiddenFor(m => m.PrecioUnitario)
 
             @* 🔑 Hidden fields para que viajen al POST *@
             @Html.HiddenFor(m => m.IdTipoTicket)

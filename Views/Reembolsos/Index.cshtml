@@ -1,0 +1,93 @@
+@model IEnumerable<GestionTickets.Models.Reembolso>
+@{
+    ViewBag.Title = "Reembolsos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="mb-0">
+            <i class="fa-solid fa-rotate-left me-2"></i>Reembolsos
+        </h2>
+    </div>
+
+    @if (TempData["Exito"] != null)
+    {
+        <div class="alert alert-success">@TempData["Exito"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">No hay reembolsos registrados.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha solicitud</th>
+                        <th>Orden</th>
+                        <th>Método pago orig.</th>
+                        <th class="text-end">Monto reembolsado</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in Model)
+                    {
+                        <tr>
+                            <td>@r.IdReembolso</td>
+                            <td>@r.FechaSolicitud.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                @if (r.Compra != null)
+                                {
+                                    <span>@r.Compra.CodigoOrden</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Compra #@r.IdCompra</span>
+                                }
+                            </td>
+                            <td>
+                                @if (r.Pago?.Metodo == "card")
+                                {
+                                    <i class="fa-regular fa-credit-card me-1"></i><span>Tarjeta</span>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-money-bill-wave me-1"></i><span>Efectivo</span>
+                                }
+                            </td>
+                            <td class="text-end fw-bold">$@r.Monto.ToString("0.00")</td>
+                            <td>
+                                <span title="@r.Motivo">
+                                    @(r.Motivo?.Length > 40 ? r.Motivo.Substring(0, 40) + "…" : r.Motivo)
+                                </span>
+                            </td>
+                            <td>
+                                @{
+                                    var badge = r.Estado == "completado" ? "bg-success"
+                                              : r.Estado == "pendiente"  ? "bg-warning text-dark"
+                                              : "bg-secondary";
+                                }
+                                <span class="badge @badge">@r.Estado</span>
+                            </td>
+                            <td class="text-center">
+                                @Html.ActionLink("Ver", "Details", new { id = r.IdReembolso },
+                                    new { @class = "btn btn-info btn-sm" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

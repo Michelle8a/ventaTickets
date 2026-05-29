@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -33,7 +33,6 @@ namespace GestionTickets.Models
         public int? IdMetodoCash { get; set; }
 
         [Column("monto")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public decimal Monto { get; set; }
 
         [Column("moneda")]
@@ -50,28 +49,50 @@ namespace GestionTickets.Models
         [Column("activo")]
         public bool Activo { get; set; } = true;
 
-        // ─── Campos de FORMULARIO (no se guardan) ────────────
-        [NotMapped] public string TitularTarjeta { get; set; }
-        [NotMapped] public string NumeroTarjeta { get; set; }
-        [NotMapped] public string Vencimiento { get; set; }
-        [NotMapped] public string Cvv { get; set; }
-        [NotMapped] public decimal? PagaCon { get; set; }
-        [NotMapped] public string Nombre { get; set; }
-        [NotMapped] public string Telefono { get; set; }
-        [NotMapped] public string Direccion { get; set; }
-        [NotMapped] public string Notas { get; set; }
+        // ID del PaymentIntent de Stripe (para tarjeta)
+        [Column("stripe_payment_intent_id")]
+        [StringLength(100)]
+        public string StripePaymentIntentId { get; set; }
 
-        // ─── Resumen del pedido ──────────────────────────────
-        [NotMapped] public int Cantidad { get; set; }
+        // ─── Datos de contacto (se guardan en BD) ────────────────────
+        [Column("nombre_contacto")]
+        [StringLength(150)]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Column("telefono_contacto")]
+        [StringLength(20)]
+        [Display(Name = "Teléfono")]
+        public string Telefono { get; set; }
+
+        [Column("direccion_contacto")]
+        [StringLength(250)]
+        [Display(Name = "Dirección")]
+        public string Direccion { get; set; }
+
+        [Column("notas_contacto")]
+        [StringLength(500)]
+        [Display(Name = "Notas")]
+        public string Notas { get; set; }
+
+        // ─── Campos de formulario de tarjeta (NO se guardan) ────────
+        [NotMapped] public string TitularTarjeta { get; set; }
+        [NotMapped] public string NumeroTarjeta  { get; set; }
+        [NotMapped] public string Vencimiento    { get; set; }
+        [NotMapped] public string Cvv            { get; set; }
+        [NotMapped] public decimal? PagaCon      { get; set; }
+
+        // ─── Resumen del pedido (calculados, NO se guardan) ─────────
+        [NotMapped] public int Cantidad     { get; set; }
         [NotMapped] public decimal Subtotal { get; set; }
-        [NotMapped] public decimal Cargos { get; set; }
-        [NotMapped] public decimal Envio { get; set; } = 1.00m;
-        [NotMapped] public decimal Propina { get; set; }
+        [NotMapped] public decimal Cargos   { get; set; }
+        [NotMapped] public decimal Envio    { get; set; } = 1.00m;
+        [NotMapped] public decimal Propina  { get; set; }
 
         [NotMapped]
         public decimal Total => Subtotal + Cargos + Envio + Propina;
 
-        // ─── Alias para compatibilidad ───────────────────────
+        // ─── Alias de compatibilidad ─────────────────────────────────
         [NotMapped]
         public string MetodoPago
         {
@@ -79,7 +100,6 @@ namespace GestionTickets.Models
             set => Metodo = value;
         }
 
-        // Alias para CompraId (usado en algunas vistas)
         [NotMapped]
         public int CompraId
         {

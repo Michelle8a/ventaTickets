@@ -1,5 +1,7 @@
 ﻿# Visual Studio
 .vs/
+*.suo
+*.json.backup
 bin/
 obj/
 

@@ -1,4 +1,4 @@
-﻿@model GestionTickets.Models.Pago
+@model GestionTickets.Models.Pago
 @{
     ViewBag.Title = "Confirmación de Pago";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,6 +7,12 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-7">
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            }
+
             <div class="card shadow-sm text-center">
                 <div class="card-body p-5">
 
@@ -15,23 +21,34 @@
                     </div>
                     <h4 class="mb-1">¡Pedido confirmado!</h4>
                     <p class="text-muted mb-4">
-                        Orden #@Model.IdPago &nbsp;·&nbsp;
-                        @Model.FechaPago.ToString("dd/MM/yyyy HH:mm")
+                        Orden&nbsp;<strong>@(ViewBag.CodigoOrden ?? "#" + Model.IdPago.ToString())</strong>
+                        &nbsp;·&nbsp;@Model.FechaPago.ToString("dd/MM/yyyy HH:mm")
                     </p>
 
                     <div class="text-start small">
-                        <div class="row mb-2">
-                            <div class="col-5 text-muted">Cliente</div>
-                            <div class="col-7 fw-semibold">@Model.Nombre</div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-5 text-muted">Teléfono</div>
-                            <div class="col-7">@Model.Telefono</div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-5 text-muted">Dirección</div>
-                            <div class="col-7">@Model.Direccion</div>
-                        </div>
+
+                        <!-- Datos de contacto -->
+                        @if (!string.IsNullOrWhiteSpace(Model.Nombre))
+                        {
+                            <div class="row mb-2">
+                                <div class="col-5 text-muted">Cliente</div>
+                                <div class="col-7 fw-semibold">@Model.Nombre</div>
+                            </div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.Telefono))
+                        {
+                            <div class="row mb-2">
+                                <div class="col-5 text-muted">Teléfono</div>
+                                <div class="col-7">@Model.Telefono</div>
+                            </div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.Direccion))
+                        {
+                            <div class="row mb-2">
+                                <div class="col-5 text-muted">Dirección</div>
+                                <div class="col-7">@Model.Direccion</div>
+                            </div>
+                        }
                         @if (!string.IsNullOrWhiteSpace(Model.Notas))
                         {
                             <div class="row mb-2">
@@ -42,18 +59,21 @@
 
                         <hr />
 
+                        <!-- Método de pago -->
                         <div class="row mb-2">
                             <div class="col-5 text-muted">Método de pago</div>
                             <div class="col-7">
-                                @if (Model.MetodoPago == "card")
+                                @if (Model.Metodo == "card")
                                 {
                                     <i class="fa-regular fa-credit-card me-1"></i>
-                                    <span>Tarjeta</span>
-                                    if (!string.IsNullOrWhiteSpace(Model.NumeroTarjeta))
+                                    <span>@(ViewBag.TipoTarjeta ?? "Tarjeta")</span>
+                                    if (ViewBag.NumeroEnmascarado != null)
                                     {
-                                        var num = Model.NumeroTarjeta.Replace(" ", "");
-                                        var ult = num.Substring(Math.Max(0, num.Length - 4));
-                                        <span class="text-muted ms-1">**** @ult</span>
+                                        <span class="text-muted ms-1">@ViewBag.NumeroEnmascarado</span>
+                                    }
+                                    if (ViewBag.TitularTarjeta != null)
+                                    {
+                                        <div class="text-muted small">@ViewBag.TitularTarjeta</div>
                                     }
                                 }
                                 else
@@ -64,37 +84,66 @@
                             </div>
                         </div>
 
+                        @if (!string.IsNullOrWhiteSpace(Model.StripePaymentIntentId))
+                        {
+                            <div class="row mb-2">
+                                <div class="col-5 text-muted">ID Stripe</div>
+                                <div class="col-7 text-break">
+                                    <code class="small">@Model.StripePaymentIntentId</code>
+                                </div>
+                            </div>
+                        }
+
                         <hr />
 
+                        <!-- Totales -->
                         <div class="row mb-1">
                             <div class="col-5 text-muted">Subtotal</div>
                             <div class="col-7">$@Model.Subtotal.ToString("0.00")</div>
                         </div>
                         <div class="row mb-1">
+                            <div class="col-5 text-muted">Cargo servicio</div>
+                            <div class="col-7">$@Model.Cargos.ToString("0.00")</div>
+                        </div>
+                        <div class="row mb-1">
                             <div class="col-5 text-muted">Envío</div>
                             <div class="col-7">$@Model.Envio.ToString("0.00")</div>
                         </div>
-                        <div class="row mb-1">
-                            <div class="col-5 text-muted">Propina</div>
-                            <div class="col-7">$@Model.Propina.ToString("0.00")</div>
-                        </div>
-                        <div class="row fw-bold">
+                        <div class="row fw-bold mt-2">
                             <div class="col-5">Total pagado</div>
-                            <div class="col-7 text-success fs-5">
-                                $@Model.Total.ToString("0.00")
-                            </div>
+                            <div class="col-7 text-success fs-5">$@Model.Monto.ToString("0.00")</div>
+                        </div>
+
+                        <!-- Badge de estado -->
+                        <div class="text-center mt-3">
+                            @{
+                                var badge = Model.Estado == "aprobado"    ? "bg-success"
+                                          : Model.Estado == "reembolsado" ? "bg-secondary"
+                                          : "bg-warning text-dark";
+                            }
+                            <span class="badge @badge fs-6">@Model.Estado.ToUpper()</span>
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2 justify-content-center mt-4">
-                        @Html.ActionLink("Ver todos los pagos", "Index", "Pagos",
+                    <!-- Acciones -->
+                    <div class="d-flex flex-wrap gap-2 justify-content-center mt-4">
+                        @Html.ActionLink("Ver historial de pagos", "Index", "Pagos",
                             null, new { @class = "btn btn-outline-secondary" })
+
                         @Html.ActionLink("Volver al inicio", "Index", "Home",
                             null, new { @class = "btn btn-primary" })
+
+                        @if (Model.Estado == "aprobado" && !(bool)(ViewBag.TieneReembolso ?? false))
+                        {
+                            @Html.ActionLink("Solicitar reembolso", "Create", "Reembolsos",
+                                new { pagoId = Model.IdPago },
+                                new { @class = "btn btn-outline-danger" })
+                        }
                     </div>
 
                 </div>
             </div>
+
         </div>
     </div>
 </div>

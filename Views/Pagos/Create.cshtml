@@ -1,4 +1,4 @@
-﻿@model GestionTickets.Models.Pago
+@model GestionTickets.Models.Pago
 @{
     ViewBag.Title = "Formas de Pago";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,43 +15,40 @@
         cursor: pointer;
         transition: border-color .2s, background .2s;
     }
-
     .method-radio:checked + .method-tile {
         border-color: #0d6efd;
         background: #f0f6ff;
     }
-
-    .method-icon {
-        font-size: 1.4rem;
-        color: #0d6efd;
-    }
-
-    .text-xs {
-        font-size: .78rem;
-        color: #6c757d;
-    }
-
-    .divider {
-        border-top: 1px solid #e9ecef;
-    }
-
-    .required::after {
-        content: " *";
-        color: #dc3545;
-    }
-
+    .method-icon { font-size: 1.4rem; color: #0d6efd; }
+    .text-xs     { font-size: .78rem; color: #6c757d; }
+    .divider     { border-top: 1px solid #e9ecef; }
+    .required::after { content: " *"; color: #dc3545; }
     .btn-pagar {
         background: linear-gradient(135deg, #0d6efd, #0a58ca);
-        color: #fff;
-        border: none;
-        padding: .55rem 1.4rem;
+        color: #fff; border: none; padding: .55rem 1.4rem;
     }
-
-        .btn-pagar:hover {
-            background: #0a58ca;
-            color: #fff;
-        }
+    .btn-pagar:hover { background: #0a58ca; color: #fff; }
+    /* Stripe Element estilizado como un input de Bootstrap */
+    #stripe-card-element {
+        padding: .5rem .75rem;
+        border: 1px solid #ced4da;
+        border-radius: .375rem;
+        background: #fff;
+        height: 42px;
+        line-height: 1.5;
+        box-sizing: border-box;
+        width: 100%;
+    }
+    #stripe-card-element.StripeElement--focus   { border-color: #86b7fe; box-shadow: 0 0 0 .25rem rgba(13,110,253,.25); outline: none; }
+    #stripe-card-element.StripeElement--invalid { border-color: #dc3545; }
+    #stripe-card-errors { color: #dc3545; font-size: .875em; margin-top: .25rem; }
+    #pay-spinner { display: none; }
+    /* Ocultar el resumen de validación cuando no hay errores */
+    .validation-summary-valid { display: none !important; }
 </style>
+
+<!-- Stripe.js — debe cargarse desde stripe.com para la seguridad de los datos -->
+<script src="https://js.stripe.com/v3/"></script>
 
 <div class="container my-4 my-lg-5">
     <div class="row g-4">
@@ -63,7 +60,9 @@
                     <h5 class="mb-0">
                         <i class="fa-solid fa-shield-check me-2"></i>Formas de pago
                     </h5>
-                    <span class="text-xs">Simulación sin cobro real</span>
+                    <span class="text-xs">
+                        <i class="fa-brands fa-stripe me-1"></i>Procesado por Stripe (modo test)
+                    </span>
                 </div>
                 <div class="card-body">
 
@@ -72,123 +71,72 @@
                     {
                         @Html.AntiForgeryToken()
 
+                        <!-- Campos ocultos de totales y Stripe -->
+                        @Html.HiddenFor(m => m.CompraId)
+                        @Html.HiddenFor(m => m.Subtotal)
+                        @Html.HiddenFor(m => m.Cargos)
+                        @Html.HiddenFor(m => m.Envio)
+                        @Html.HiddenFor(m => m.Propina, new { id = "hiddenPropina" })
+                        <input type="hidden" id="stripePaymentIntentId" name="stripePaymentIntentId" />
+
                         <!-- Selector de método -->
                         <div class="mb-3">
                             <input class="form-check-input d-none method-radio"
-                                   type="radio" name="MetodoPago"
-                                   id="methodCard" value="card" checked="checked" />
+                                   type="radio" name="Metodo" id="methodCard" value="card" checked="checked" />
                             <label class="method-tile w-100 mb-2" for="methodCard">
-                                <span class="method-icon">
-                                    <i class="fa-regular fa-credit-card"></i>
-                                </span>
+                                <span class="method-icon"><i class="fa-regular fa-credit-card"></i></span>
                                 <span class="flex-grow-1">
                                     <strong>Tarjeta de crédito / débito</strong>
-                                    <span class="text-xs d-block">Visa, MasterCard</span>
+                                    <span class="text-xs d-block">Visa · Mastercard · Amex — procesado por Stripe</span>
                                 </span>
                             </label>
 
                             <input class="form-check-input d-none method-radio"
-                                   type="radio" name="MetodoPago"
-                                   id="methodCash" value="cash" />
-                            <label class="method-tile w-100 mb-2" for="methodCash">
-                                <span class="method-icon">
-                                    <i class="fa-solid fa-money-bill-wave"></i>
-                                </span>
+                                   type="radio" name="Metodo" id="methodCash" value="cash" />
+                            <label class="method-tile w-100" for="methodCash">
+                                <span class="method-icon"><i class="fa-solid fa-money-bill-wave"></i></span>
                                 <span class="flex-grow-1">
                                     <strong>Efectivo (contra entrega)</strong>
                                     <span class="text-xs d-block">Paga al recibir tu pedido</span>
                                 </span>
                             </label>
                         </div>
-                        @Html.ValidationMessageFor(m => m.MetodoPago, "",
-                            new { @class = "text-danger small" })
+                        @Html.ValidationMessageFor(m => m.Metodo, "", new { @class = "text-danger small" })
 
                         <div class="divider my-3"></div>
 
-                        <!-- Campos de TARJETA -->
-                        <div id="cardFields" class="row g-3">
-                            <div class="col-12">
-                                @Html.LabelFor(m => m.TitularTarjeta,
-                                    new { @class = "form-label required" })
-                                @Html.TextBoxFor(m => m.TitularTarjeta, new
-                                {
-                                    @class = "form-control",
-                                    placeholder = "Como aparece en la tarjeta"
-                                })
-                                @Html.ValidationMessageFor(m => m.TitularTarjeta, "",
-                                    new { @class = "text-danger small" })
+                        <!-- ── Sección TARJETA (Stripe Elements) ──────────── -->
+                        <div id="cardFields">
+                            <!-- Nombre del titular (se envía a Stripe como billing_details.name) -->
+                            <div class="mb-3">
+                                <label for="TitularTarjeta" class="form-label required">Nombre del titular</label>
+                                <input type="text" id="TitularTarjeta" name="TitularTarjeta"
+                                       class="form-control" placeholder="Como aparece en la tarjeta" />
                             </div>
 
-                            <div class="col-12">
-                                @Html.LabelFor(m => m.NumeroTarjeta,
-                                    new { @class = "form-label required" })
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <i class="fa-regular fa-credit-card"></i>
-                                    </span>
-                                    @Html.TextBoxFor(m => m.NumeroTarjeta, new
-                                    {
-                                        @class = "form-control",
-                                        placeholder = "0000 0000 0000 0000",
-                                        maxlength = "19",
-                                        id = "cardNumber",
-                                        inputmode = "numeric"
-                                    })
-                                    <span class="input-group-text">
-                                        <i class="fa-regular fa-credit-card"
-                                           id="cardBrandIcon"></i>
-                                    </span>
+                            <!-- Stripe Card Element (número + vencimiento + CVC en un solo campo seguro) -->
+                            <div class="mb-3">
+                                <label class="form-label required">Datos de la tarjeta</label>
+                                <div id="stripe-card-element"></div>
+                                <div id="stripe-card-errors" role="alert"></div>
+                                <div class="text-xs mt-1">
+                                    <i class="fa-solid fa-lock me-1"></i>
+                                    Tus datos viajan cifrados directamente a Stripe. Nunca pasan por nuestros servidores.
                                 </div>
-                                @Html.ValidationMessageFor(m => m.NumeroTarjeta, "",
-                                    new { @class = "text-danger small" })
                             </div>
 
-                            <div class="col-6">
-                                @Html.LabelFor(m => m.Vencimiento,
-                                    new { @class = "form-label required" })
-                                @Html.TextBoxFor(m => m.Vencimiento, new
-                                {
-                                    @class = "form-control",
-                                    placeholder = "MM/AA",
-                                    maxlength = "5",
-                                    id = "cardExpiry",
-                                    inputmode = "numeric"
-                                })
-                                @Html.ValidationMessageFor(m => m.Vencimiento, "",
-                                    new { @class = "text-danger small" })
-                            </div>
-
-                            <div class="col-6">
-                                @Html.LabelFor(m => m.Cvv,
-                                    new { @class = "form-label required" })
-                                @Html.PasswordFor(m => m.Cvv, new
-                                {
-                                    @class = "form-control",
-                                    placeholder = "123",
-                                    maxlength = "4",
-                                    inputmode = "numeric"
-                                })
-                                @Html.ValidationMessageFor(m => m.Cvv, "",
-                                    new { @class = "text-danger small" })
+                            <!-- Tarjetas de prueba Stripe -->
+                            <div class="alert alert-info py-2 px-3 small">
+                                <strong>Modo test:</strong> usa la tarjeta
+                                <code>4242 4242 4242 4242</code> · cualquier fecha futura · cualquier CVC.
                             </div>
                         </div>
 
-                        <!-- Campos de EFECTIVO -->
-                        <div id="cashFields" class="row g-3 d-none">
-                            <div class="col-12">
-                                @Html.LabelFor(m => m.PagaCon,
-                                    new { @class = "form-label" })
-                                <div class="input-group">
-                                    <span class="input-group-text">$</span>
-                                    @Html.TextBoxFor(m => m.PagaCon, new
-                                    {
-                                        @class = "form-control",
-                                        placeholder = "Ej. 20.00",
-                                        type = "number",
-                                        min = "0",
-                                        step = "0.01"
-                                    })
-                                </div>
+                        <!-- ── Sección EFECTIVO ──────────────────────────── -->
+                        <div id="cashFields" class="d-none">
+                            <div class="alert alert-secondary">
+                                <i class="fa-solid fa-circle-info me-2"></i>
+                                Recibirás un código de referencia para pagar en efectivo al momento de la entrega.
                             </div>
                         </div>
 
@@ -197,61 +145,40 @@
                         <!-- Datos de contacto -->
                         <div class="row g-3">
                             <div class="col-md-6">
-                                @Html.LabelFor(m => m.Nombre,
-                                    new { @class = "form-label required" })
-                                @Html.TextBoxFor(m => m.Nombre,
-                                    new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Nombre, "",
-                                    new { @class = "text-danger small" })
+                                @Html.LabelFor(m => m.Nombre, new { @class = "form-label required" })
+                                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger small" })
                             </div>
                             <div class="col-md-6">
-                                @Html.LabelFor(m => m.Telefono,
-                                    new { @class = "form-label required" })
-                                @Html.TextBoxFor(m => m.Telefono, new
-                                {
-                                    @class = "form-control",
-                                    placeholder = "+503 xxxx xxxx",
-                                    type = "tel"
-                                })
-                                @Html.ValidationMessageFor(m => m.Telefono, "",
-                                    new { @class = "text-danger small" })
+                                @Html.LabelFor(m => m.Telefono, new { @class = "form-label required" })
+                                @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", placeholder = "+503 xxxx xxxx", type = "tel" })
+                                @Html.ValidationMessageFor(m => m.Telefono, "", new { @class = "text-danger small" })
                             </div>
                             <div class="col-12">
-                                @Html.LabelFor(m => m.Direccion,
-                                    new { @class = "form-label required" })
-                                @Html.TextBoxFor(m => m.Direccion, new
-                                {
-                                    @class = "form-control",
-                                    placeholder = "Colonia, calle, # casa, referencia"
-                                })
-                                @Html.ValidationMessageFor(m => m.Direccion, "",
-                                    new { @class = "text-danger small" })
+                                @Html.LabelFor(m => m.Direccion, new { @class = "form-label required" })
+                                @Html.TextBoxFor(m => m.Direccion, new { @class = "form-control", placeholder = "Colonia, calle, # casa, referencia" })
+                                @Html.ValidationMessageFor(m => m.Direccion, "", new { @class = "text-danger small" })
                             </div>
                             <div class="col-12">
-                                @Html.LabelFor(m => m.Notas,
-                                    new { @class = "form-label" })
-                                @Html.TextAreaFor(m => m.Notas, 2, 0, new
-                                {
-                                    @class = "form-control",
-                                    placeholder = "Ej.: Tocar timbre, portón negro"
-                                })
+                                @Html.LabelFor(m => m.Notas, new { @class = "form-label" })
+                                @Html.TextAreaFor(m => m.Notas, 2, 0, new { @class = "form-control", placeholder = "Ej.: Tocar timbre, portón negro" })
                             </div>
                         </div>
 
-                        <!-- Campos ocultos de totales -->
-                        <!-- Campos ocultos de totales -->
-                        @Html.HiddenFor(m => m.CompraId)
-                        @Html.HiddenFor(m => m.Subtotal)
-                        @Html.HiddenFor(m => m.Cargos)
-                        @Html.HiddenFor(m => m.Envio)
-                        @Html.HiddenFor(m => m.Propina, new { id = "hiddenPropina" })
+                        <!-- Mensaje de error general -->
+                        @Html.ValidationSummary(true, "", new { @class = "alert alert-danger mt-3" })
 
                         <!-- Botones -->
                         <div class="d-grid d-sm-flex gap-2 justify-content-end mt-4">
                             @Html.ActionLink("Seguir comprando", "Index", "Home",
                                 null, new { @class = "btn btn-outline-secondary" })
-                            <button class="btn btn-pagar" type="submit">
-                                <i class="fa-solid fa-shield-check me-1"></i>Pagar ahora
+                            <button id="btnPagar" class="btn btn-pagar" type="button">
+                                <span id="pay-text">
+                                    <i class="fa-solid fa-shield-check me-1"></i>Pagar ahora
+                                </span>
+                                <span id="pay-spinner">
+                                    <span class="spinner-border spinner-border-sm me-1"></span>Procesando…
+                                </span>
                             </button>
                         </div>
                     }
@@ -260,138 +187,203 @@
             </div>
         </div>
 
-        <!-- ══ COL DERECHA: resumen ══ -->
+        <!-- ══ COL DERECHA: resumen de pedido ══ -->
         <div class="col-lg-5">
-            <div class="card shadow-sm mb-3">
-                <div class="d-flex justify-content-between mb-1">
-                    <span>Tickets x@Model.Cantidad</span>
-                    <span>$@Model.Subtotal.ToString("0.00")</span>
-                </div>
-                <div class="d-flex justify-content-between mb-1 text-muted small">
-                    <span>Cargo por servicio</span>
-                    <span>$@Model.Cargos.ToString("0.00")</span>
-                </div>
-                <span>Producto de ejemplo x2</span>
-                <span>$@Model.Subtotal.ToString("0.00")</span>
-            </div>
+            <div class="card shadow-sm">
+                <div class="card-header"><h6 class="mb-0">Resumen del pedido</h6></div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Tickets x@Model.Cantidad</span>
+                        <span>$@Model.Subtotal.ToString("0.00")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1 text-muted small">
+                        <span>Cargo por servicio</span>
+                        <span>$@Model.Cargos.ToString("0.00")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1 text-muted small">
+                        <span>Envío</span>
+                        <span>$@Model.Envio.ToString("0.00")</span>
+                    </div>
 
-            <div class="divider my-3"></div>
+                    <div class="divider my-3"></div>
 
-            <!-- Propina -->
-            <label class="form-label">Propina</label>
-            <div class="d-flex flex-wrap gap-2 mb-2">
-                <input type="radio" class="btn-check tip-option"
-                       name="tipPct" id="tip0" value="0" checked="checked" />
-                <label class="btn btn-outline-secondary btn-sm" for="tip0">0%</label>
+                    <!-- Propina -->
+                    <label class="form-label fw-semibold">Propina (opcional)</label>
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <input type="radio" class="btn-check tip-option" name="tipPct" id="tip0" value="0" checked />
+                        <label class="btn btn-outline-secondary btn-sm" for="tip0">0%</label>
 
-                <input type="radio" class="btn-check tip-option"
-                       name="tipPct" id="tip10" value="0.10" />
-                <label class="btn btn-outline-secondary btn-sm" for="tip10">10%</label>
+                        <input type="radio" class="btn-check tip-option" name="tipPct" id="tip10" value="0.10" />
+                        <label class="btn btn-outline-secondary btn-sm" for="tip10">10%</label>
 
-                <input type="radio" class="btn-check tip-option"
-                       name="tipPct" id="tip15" value="0.15" />
-                <label class="btn btn-outline-secondary btn-sm" for="tip15">15%</label>
+                        <input type="radio" class="btn-check tip-option" name="tipPct" id="tip15" value="0.15" />
+                        <label class="btn btn-outline-secondary btn-sm" for="tip15">15%</label>
 
-                <input type="radio" class="btn-check tip-option"
-                       name="tipPct" id="tipCustom" value="custom" />
-                <label class="btn btn-outline-secondary btn-sm" for="tipCustom">Otro</label>
-            </div>
-            <!-- Totales -->
-            <div class="d-flex justify-content-between mb-1">
-                <span>Subtotal</span>
-                <span>$@Model.Subtotal.ToString("0.00")</span>
-            </div>
-            <div class="d-flex justify-content-between mb-1">
-                <span>Cargos</span>
-                <span>$@Model.Cargos.ToString("0.00")</span>
-            </div>
-            <div class="d-flex justify-content-between mb-1">
-                <span>Envío</span>
-                <span>$@Model.Envio.ToString("0.00")</span>
-            </div>
-            <div class="d-flex justify-content-between mb-1">
-                <span>Propina</span>
-                <span id="displayPropina">$0.00</span>
-            </div>
-            <div class="d-flex justify-content-between align-items-center">
-                <strong>Total</strong>
-                <strong id="displayTotal">$@Model.Total.ToString("0.00")</strong>
-            </div>
-            <span id="displayPropina">$0.00</span>
-        </div>
+                        <input type="radio" class="btn-check tip-option" name="tipPct" id="tipCustom" value="custom" />
+                        <label class="btn btn-outline-secondary btn-sm" for="tipCustom">Otro</label>
+                    </div>
+                    <input type="number" id="customTip" class="form-control form-control-sm d-none mb-2"
+                           placeholder="Monto personalizado ($)" min="0" step="0.01" />
+
+                    <div class="divider my-3"></div>
+
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Subtotal</span>
+                        <span id="dispSubtotal">$@Model.Subtotal.ToString("0.00")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1 text-muted small">
+                        <span>Cargos</span>
+                        <span>$@Model.Cargos.ToString("0.00")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1 text-muted small">
+                        <span>Envío</span>
+                        <span>$@Model.Envio.ToString("0.00")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1 text-muted small">
+                        <span>Propina</span>
+                        <span id="dispPropina">$0.00</span>
+                    </div>
+                    <div class="divider my-2"></div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <strong>Total</strong>
-                        <strong id="displayTotal">$@Model.Total.ToString("0.00")</strong>
+                        <strong>Total a pagar</strong>
+                        <strong id="dispTotal" class="fs-5 text-success">$@Model.Total.ToString("0.00")</strong>
                     </div>
                 </div>
-    <div class="card-footer text-muted d-flex align-items-center gap-2">
-        var subtotal = @Model.Subtotal;
-        var cargos   = @Model.Cargos;
-        var envio    = @Model.Envio;
-    </div>
             </div>
-     
+        </div>
+
+    </div>
+</div>
 
 <script>
-    function recalc(propina) {
-        hiddenPropina.value = propina.toFixed(2);
-        displayPropina.textContent = '$' + propina.toFixed(2);
-        displayTotal.textContent = '$' + (subtotal + cargos + envio + propina).toFixed(2);
-    }
+    // ── Variables de los montos base (del servidor, no modificables desde cliente) ──
+    var subtotal = @Model.Subtotal.ToString("0.00");
+    var cargos   = @Model.Cargos.ToString("0.00");
+    var envio    = @Model.Envio.ToString("0.00");
+    var compraId = @Model.CompraId;
+    var antiForgeryToken = document.querySelector('[name="__RequestVerificationToken"]').value;
 
-    // Formateo y detección de marca de tarjeta
-    var cardNum   = document.getElementById('cardNumber');
-    var brandIcon = document.getElementById('cardBrandIcon');
-    if (cardNum) {
-        cardNum.addEventListener('input', function () {
-            var v = this.value.replace(/\D/g, '').substring(0, 16);
-            this.value = v.replace(/(.{4})/g, '$1 ').trim();
-            if      (/^4/.test(v))
-                brandIcon.className = 'fa-brands fa-cc-visa text-primary';
-            else if (/^5[1-5]|^2[2-7]/.test(v))
-                brandIcon.className = 'fa-brands fa-cc-mastercard text-danger';
-            else
-                brandIcon.className = 'fa-regular fa-credit-card';
+    // ── Inicializar Stripe ──────────────────────────────────────────────────────
+    var stripe      = Stripe('@ViewBag.StripePublishableKey');
+    var elements    = stripe.elements();
+    var cardElement = elements.create('card', {
+        style: {
+            base: {
+                fontSize: '16px',
+                color: '#212529',
+                fontFamily: 'system-ui, -apple-system, sans-serif',
+                '::placeholder': { color: '#6c757d' }
+            },
+            invalid: { color: '#dc3545' }
+        }
+    });
+    cardElement.mount('#stripe-card-element');
+    cardElement.on('change', function (e) {
+        document.getElementById('stripe-card-errors').textContent = e.error ? e.error.message : '';
+    });
+
+    // ── Control de visibilidad de secciones según método ───────────────────────
+    var selectedMethod = 'card';
+    document.querySelectorAll('.method-radio').forEach(function (r) {
+        r.addEventListener('change', function () {
+            selectedMethod = this.value;
+            document.getElementById('cardFields').classList.toggle('d-none', selectedMethod !== 'card');
+            document.getElementById('cashFields').classList.toggle('d-none', selectedMethod !== 'cash');
         });
-    }
+    });
 
-    // Formateo MM/AA
-    var expiry = document.getElementById('cardExpiry');
-    if (expiry) {
-        expiry.addEventListener('input', function () {
-            var v = this.value.replace(/\D/g, '').substring(0, 4);
-            if (v.length >= 3) v = v.slice(0, 2) + '/' + v.slice(2);
-            this.value = v;
-        });
-    }
-
-    // Cálculo de propina
-    var hiddenPropina  = document.getElementById('hiddenPropina');
-    var displayPropina = document.getElementById('displayPropina');
-    var displayTotal   = document.getElementById('displayTotal');
-    var customTip      = document.getElementById('customTip');
-
+    // ── Recalculo de propina y total ────────────────────────────────────────────
     function recalc(propina) {
-        hiddenPropina.value        = propina.toFixed(2);
-        displayPropina.textContent = '$' + propina.toFixed(2);
-        displayTotal.textContent   = '$' + (subtotal + envio + propina).toFixed(2);
+        propina = Math.max(0, propina);
+        document.getElementById('hiddenPropina').value = propina.toFixed(2);
+        document.getElementById('dispPropina').textContent = '$' + propina.toFixed(2);
+        var total = parseFloat(subtotal) + parseFloat(cargos) + parseFloat(envio) + propina;
+        document.getElementById('dispTotal').textContent = '$' + total.toFixed(2);
     }
 
     document.querySelectorAll('.tip-option').forEach(function (r) {
         r.addEventListener('change', function () {
+            var ct = document.getElementById('customTip');
             if (this.value === 'custom') {
-                customTip.classList.remove('d-none');
-                recalc(parseFloat(customTip.value) || 0);
+                ct.classList.remove('d-none');
+                recalc(parseFloat(ct.value) || 0);
             } else {
-                customTip.classList.add('d-none');
-                recalc(subtotal * parseFloat(this.value));
+                ct.classList.add('d-none');
+                recalc(parseFloat(subtotal) * parseFloat(this.value));
             }
         });
     });
+    document.getElementById('customTip').addEventListener('input', function () {
+        recalc(parseFloat(this.value) || 0);
+    });
 
-    if (customTip) {
-        customTip.addEventListener('input', function () {
-            recalc(parseFloat(this.value) || 0);
+    // ── Función auxiliar para mostrar/ocultar spinner ───────────────────────────
+    function setLoading(loading) {
+        document.getElementById('btnPagar').disabled = loading;
+        document.getElementById('pay-text').style.display    = loading ? 'none'  : '';
+        document.getElementById('pay-spinner').style.display = loading ? 'inline' : 'none';
+    }
+
+    function showStripeError(msg) {
+        document.getElementById('stripe-card-errors').textContent = msg;
+        setLoading(false);
+    }
+
+    // ── Click en "Pagar ahora" ───────────────────────────────────────────────────
+    document.getElementById('btnPagar').addEventListener('click', async function () {
+        setLoading(true);
+
+        if (selectedMethod === 'cash') {
+            // Pago en efectivo: enviar el formulario directamente
+            document.getElementById('checkoutForm').submit();
+            return;
+        }
+
+        // ── Paso 1: Crear PaymentIntent en el servidor con el monto final ────
+        var propina = parseFloat(document.getElementById('hiddenPropina').value) || 0;
+        var intentResponse;
+        try {
+            intentResponse = await fetch('/Pagos/CreateIntent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    compraId: compraId,
+                    propina:  propina.toFixed(2),
+                    __RequestVerificationToken: antiForgeryToken
+                })
+            });
+        } catch (e) {
+            showStripeError('Error de red al conectar con el servidor. Intenta de nuevo.');
+            return;
+        }
+
+        var intentData = await intentResponse.json();
+        if (intentData.error) {
+            showStripeError(intentData.error);
+            return;
+        }
+
+        // ── Paso 2: Confirmar el pago con Stripe.js ──────────────────────────
+        var titular = document.getElementById('TitularTarjeta').value;
+        var result  = await stripe.confirmCardPayment(intentData.clientSecret, {
+            payment_method: {
+                card: cardElement,
+                billing_details: { name: titular }
+            }
         });
-    };
+
+        if (result.error) {
+            showStripeError(result.error.message);
+            return;
+        }
+
+        if (result.paymentIntent.status === 'succeeded') {
+            // ── Paso 3: Pasar el ID del PaymentIntent al formulario y enviarlo ──
+            document.getElementById('stripePaymentIntentId').value = result.paymentIntent.id;
+            document.getElementById('checkoutForm').submit();
+        } else {
+            showStripeError('El pago no pudo completarse. Estado: ' + result.paymentIntent.status);
+            setLoading(false);
+        }
+    });
 </script>
