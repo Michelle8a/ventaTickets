@@ -1,0 +1,74 @@
+@model List<GestionTickets.Models.EventoVendidoResumen>
+@{
+    ViewBag.Title = "Eventos Más Vendidos";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .table-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .rank-badge { width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:bold; font-size:13px; }
+    .rank-1 { background:#fbbf24; color:#fff; }
+    .rank-2 { background:#9ca3af; color:#fff; }
+    .rank-3 { background:#b45309; color:#fff; }
+    .rank-other { background:#e5e7eb; color:#374151; }
+    .bar-wrap { background:#e5e7eb; border-radius:8px; height:10px; }
+    .bar-fill { height:10px; border-radius:8px; background: linear-gradient(90deg,#3b82f6,#6366f1); }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteAdmin","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">🎟 Eventos Más Vendidos</h2>
+            <p class="text-muted mb-0">Tipos de ticket ordenados por cantidad vendida</p>
+        </div>
+    </div>
+
+    <div class="table-card p-4">
+        @if (Model != null && Model.Any())
+        {
+            var maxCant = Model.Max(e => e.Cantidad);
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Tipo de Ticket</th>
+                            <th>Tickets Vendidos</th>
+                            <th>Demanda</th>
+                            <th>Ingresos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            var item = Model[i];
+                            var pct  = maxCant > 0 ? (int)((item.Cantidad / (decimal)maxCant) * 100) : 0;
+                            var rankClass = i == 0 ? "rank-1" : i == 1 ? "rank-2" : i == 2 ? "rank-3" : "rank-other";
+                            <tr>
+                                <td><span class="rank-badge @rankClass">@(i + 1)</span></td>
+                                <td class="fw-semibold">@item.NombreTicket</td>
+                                <td>@item.Cantidad.ToString("N0")</td>
+                                <td style="min-width:140px;">
+                                    <div class="bar-wrap">
+                                        <div class="bar-fill" style="width:@pct%;"></div>
+                                    </div>
+                                </td>
+                                <td class="text-success fw-semibold">$@item.Ingresos.ToString("N2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <div style="font-size:60px;">🎟</div>
+                <h5 class="text-muted mt-3">No hay compras registradas aún.</h5>
+            </div>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,100 @@
+@model List<GestionTickets.Models.MetodoResumen>
+@{
+    ViewBag.Title = "Métodos de Pago";
+    var total = Model != null ? Model.Sum(m => m.Total) : 0;
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .metodo-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .big-pct { font-size:36px; font-weight:bold; }
+    .card-tarjeta  { border-top:5px solid #3b82f6; }
+    .card-cash     { border-top:5px solid #10b981; }
+    .card-transfer { border-top:5px solid #f59e0b; }
+    .card-otro     { border-top:5px solid #6b7280; }
+    .donut-wrap { display:flex; justify-content:center; }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteAdmin","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">💳 Métodos de Pago</h2>
+            <p class="text-muted mb-0">Distribución de transacciones por método</p>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-4 mb-4">
+            @foreach (var m in Model)
+            {
+                var pct = total > 0 ? (decimal)m.Total / total * 100 : 0;
+                var cardClass = m.Metodo == "card" ? "card-tarjeta" :
+                                m.Metodo == "cash" ? "card-cash" :
+                                m.Metodo == "transfer" ? "card-transfer" : "card-otro";
+                var icon = m.Metodo == "card" ? "💳" :
+                           m.Metodo == "cash" ? "💵" :
+                           m.Metodo == "transfer" ? "🏦" : "💰";
+                <div class="col-md-4">
+                    <div class="metodo-card p-4 @cardClass">
+                        <div class="d-flex align-items-center mb-2">
+                            <span style="font-size:30px;" class="me-2">@icon</span>
+                            <h5 class="mb-0 fw-bold text-capitalize">@m.Metodo</h5>
+                        </div>
+                        <div class="big-pct">@pct.ToString("N1")%</div>
+                        <div class="text-muted">@m.Cantidad transacciones</div>
+                        <div class="fw-semibold mt-1">$@m.Total.ToString("N2") USD</div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Tabla resumen -->
+        <div class="metodo-card p-4">
+            <h5 class="fw-bold mb-3">Detalle de métodos</h5>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Método</th>
+                            <th>Transacciones</th>
+                            <th>Monto Total</th>
+                            <th>Promedio</th>
+                            <th>Participación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model)
+                        {
+                            var pct2 = total > 0 ? (decimal)m.Total / total * 100 : 0;
+                            <tr>
+                                <td class="fw-semibold text-capitalize">@m.Metodo</td>
+                                <td>@m.Cantidad</td>
+                                <td>$@m.Total.ToString("N2")</td>
+                                <td>$@(m.Cantidad > 0 ? (m.Total / m.Cantidad).ToString("N2") : "0.00")</td>
+                                <td>@pct2.ToString("N1")%</td>
+                            </tr>
+                        }
+                        <tr class="table-dark fw-bold">
+                            <td>TOTAL</td>
+                            <td>@Model.Sum(m => m.Cantidad)</td>
+                            <td>$@total.ToString("N2")</td>
+                            <td>—</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <div style="font-size:60px;">💳</div>
+            <h5 class="text-muted mt-3">No hay pagos registrados aún.</h5>
+        </div>
+    }
+
+</div>

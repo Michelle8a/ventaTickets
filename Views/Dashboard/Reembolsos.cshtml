@@ -1,0 +1,112 @@
+@model GestionTickets.Models.ReembolsosReporteViewModel
+@{
+    ViewBag.Title = "Reporte de Reembolsos";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .kpi-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .table-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .badge-aprobado  { background:#d1fae5; color:#065f46; border-radius:8px; padding:3px 12px; font-size:12px; font-weight:600; }
+    .badge-pendiente { background:#fef3c7; color:#92400e; border-radius:8px; padding:3px 12px; font-size:12px; font-weight:600; }
+    .badge-rechazado { background:#fee2e2; color:#991b1b; border-radius:8px; padding:3px 12px; font-size:12px; font-weight:600; }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteAdmin","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">🔄 Reporte de Reembolsos</h2>
+            <p class="text-muted mb-0">Estado y montos de solicitudes de reembolso</p>
+        </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="kpi-card p-4 text-center">
+                <div style="font-size:28px; font-weight:bold; color:#ef4444;">$@Model.TotalSolicitado.ToString("N2")</div>
+                <div class="text-muted" style="font-size:13px;">Monto Total Solicitado</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card p-4 text-center" style="border-top:4px solid #10b981;">
+                <div style="font-size:28px; font-weight:bold; color:#10b981;">@Model.Aprobados</div>
+                <div class="text-muted" style="font-size:13px;">Aprobados</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card p-4 text-center" style="border-top:4px solid #f59e0b;">
+                <div style="font-size:28px; font-weight:bold; color:#f59e0b;">@Model.Pendientes</div>
+                <div class="text-muted" style="font-size:13px;">Pendientes</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card p-4 text-center" style="border-top:4px solid #ef4444;">
+                <div style="font-size:28px; font-weight:bold; color:#ef4444;">@Model.Rechazados</div>
+                <div class="text-muted" style="font-size:13px;">Rechazados</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="table-card p-4">
+        <h5 class="fw-bold mb-3">Listado de Reembolsos</h5>
+        @if (Model.Lista != null && Model.Lista.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Pago ID</th>
+                            <th>Monto</th>
+                            <th>Motivo</th>
+                            <th>Estado</th>
+                            <th>Fecha Solicitud</th>
+                            <th>Fecha Proceso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var r in Model.Lista)
+                        {
+                            <tr>
+                                <td><small class="text-muted">@r.IdReembolso</small></td>
+                                <td>@r.IdPago</td>
+                                <td class="fw-semibold">$@r.Monto.ToString("N2")</td>
+                                <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="@r.Motivo">
+                                    @r.Motivo
+                                </td>
+                                <td>
+                                    @if (r.Estado == "aprobado")
+                                    {
+                                        <span class="badge-aprobado">Aprobado</span>
+                                    }
+                                    else if (r.Estado == "pendiente")
+                                    {
+                                        <span class="badge-pendiente">Pendiente</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-rechazado">@r.Estado</span>
+                                    }
+                                </td>
+                                <td><small>@r.FechaSolicitud.ToString("dd/MM/yyyy")</small></td>
+                                <td><small>@(r.FechaProceso.HasValue ? r.FechaProceso.Value.ToString("dd/MM/yyyy") : "—")</small></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-4">
+                <div style="font-size:50px;">🔄</div>
+                <p class="text-muted mt-2">No hay reembolsos registrados aún.</p>
+            </div>
+        }
+    </div>
+
+</div>

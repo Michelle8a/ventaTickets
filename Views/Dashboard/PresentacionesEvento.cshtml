@@ -1,0 +1,68 @@
+@model List<GestionTickets.Models.Compra>
+@{
+    ViewBag.Title = "Presentaciones por Evento";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .table-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .badge-pagada    { background:#d1fae5; color:#065f46; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+    .badge-pendiente { background:#fef3c7; color:#92400e; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+    .badge-otro      { background:#e5e7eb; color:#374151; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteOrganizador","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">📅 Presentaciones por Evento</h2>
+            <p class="text-muted mb-0">Compras recientes ordenadas por fecha</p>
+        </div>
+    </div>
+
+    <div class="table-card p-4">
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Código Orden</th>
+                            <th>Tipo Ticket ID</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unit.</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var c in Model)
+                        {
+                            var cls = c.Estado == "pagada" ? "badge-pagada" :
+                                      c.Estado == "pendiente" ? "badge-pendiente" : "badge-otro";
+                            <tr>
+                                <td><code style="font-size:12px;">@c.CodigoOrden</code></td>
+                                <td>@c.IdTipoTicket</td>
+                                <td>@c.Cantidad</td>
+                                <td>$@c.PrecioUnitario.ToString("N2")</td>
+                                <td class="fw-semibold">$@c.Total.ToString("N2")</td>
+                                <td><span class="@cls">@c.Estado</span></td>
+                                <td><small>@c.FechaCompra.ToString("dd/MM/yyyy")</small></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-4">
+                <div style="font-size:50px;">📅</div>
+                <p class="text-muted mt-2">No hay compras registradas.</p>
+            </div>
+        }
+    </div>
+
+</div>

@@ -1,0 +1,78 @@
+@model List<GestionTickets.Models.TipoTicket>
+@{
+    ViewBag.Title = "Ocupación del Venue";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .venue-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .ocu-bar { height:18px; border-radius:8px; background:linear-gradient(90deg,#10b981,#3b82f6); transition:width 0.6s; }
+    .ocu-bg  { background:#e5e7eb; border-radius:8px; height:18px; }
+    .stock-ok   { color:#10b981; font-weight:600; }
+    .stock-low  { color:#f59e0b; font-weight:600; }
+    .stock-zero { color:#ef4444; font-weight:600; }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteOrganizador","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">🏟 Ocupación del Venue</h2>
+            <p class="text-muted mb-0">Disponibilidad de tickets por tipo</p>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-4">
+            @foreach (var t in Model)
+            {
+                // Estimamos capacidad original como cantidad actual (no tenemos histórico aquí)
+                // Se muestra el stock disponible actual
+                var stockClass = t.CantidadTicket == 0 ? "stock-zero" :
+                                 t.CantidadTicket < 20 ? "stock-low" : "stock-ok";
+                var stockLabel = t.CantidadTicket == 0 ? "Agotado" :
+                                 t.CantidadTicket < 20 ? "Últimos disponibles" : "Disponible";
+                <div class="col-md-6">
+                    <div class="venue-card p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <h5 class="fw-bold mb-1">@t.Nombre</h5>
+                                <small class="text-muted">@t.Moneda · $@t.Precio.ToString("N2")</small>
+                            </div>
+                            <span class="@stockClass">@stockLabel</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-1" style="font-size:13px;">
+                            <span class="text-muted">Tickets disponibles</span>
+                            <span class="fw-semibold">@t.CantidadTicket</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="ocu-bg">
+                                @{
+                                    var pct = t.CantidadTicket > 0 ? Math.Min(100, (int)((decimal)t.CantidadTicket / 500 * 100)) : 0;
+                                }
+                                <div class="ocu-bar" style="width:@pct%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3" style="font-size:13px;">
+                            <span>📅 Venta inicia: <strong>@t.VentaInicio.ToString("dd/MM/yyyy")</strong></span>
+                            <span>🔚 Hasta: <strong>@t.VentaFin.ToString("dd/MM/yyyy")</strong></span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="venue-card p-5 text-center">
+            <div style="font-size:60px;">🏟</div>
+            <h5 class="text-muted mt-3">No hay tipos de ticket activos.</h5>
+        </div>
+    }
+
+</div>

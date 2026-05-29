@@ -1,0 +1,129 @@
+@model GestionTickets.Models.VentasTotalesViewModel
+@{
+    ViewBag.Title = "Ventas Totales";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .kpi-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .kpi-number { font-size:28px; font-weight:bold; color:#111827; }
+    .kpi-label { color:#6b7280; font-size:14px; }
+    .table-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .badge-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); padding:20px; }
+    .metodo-bar { height:12px; border-radius:8px; background:#3b82f6; transition:width 0.5s; }
+    .estado-aprobado { background:#d1fae5; color:#065f46; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+    .estado-pendiente { background:#fef3c7; color:#92400e; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteAdmin","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">💵 Ventas Totales</h2>
+            <p class="text-muted mb-0">Resumen general de ingresos del sistema</p>
+        </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="kpi-card p-4 text-center">
+                <div class="kpi-number text-success">$@Model.TotalIngresos.ToString("N2")</div>
+                <div class="kpi-label">Ingresos Totales (USD)</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="kpi-card p-4 text-center">
+                <div class="kpi-number">@Model.TotalPagos</div>
+                <div class="kpi-label">Pagos Aprobados</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="kpi-card p-4 text-center">
+                <div class="kpi-number text-primary">
+                    $@(Model.TotalPagos > 0 ? (Model.TotalIngresos / Model.TotalPagos).ToString("N2") : "0.00")
+                </div>
+                <div class="kpi-label">Ticket Promedio</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Distribución por método -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-5">
+            <div class="badge-card">
+                <h5 class="fw-bold mb-3">Distribución por Método</h5>
+                @if (Model.PorMetodo != null && Model.PorMetodo.Any())
+                {
+                    var maxTotal = Model.PorMetodo.Max(m => m.Total);
+                    foreach (var m in Model.PorMetodo)
+                    {
+                        var pct = maxTotal > 0 ? (int)((m.Total / maxTotal) * 100) : 0;
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="fw-semibold text-capitalize">@m.Metodo</span>
+                                <span class="text-muted">$@m.Total.ToString("N2") · @m.Cantidad pagos</span>
+                            </div>
+                            <div style="background:#e5e7eb; border-radius:8px; height:12px;">
+                                <div class="metodo-bar" style="width:@pct%;"></div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-muted">Sin datos de pagos aprobados aún.</p>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="table-card p-4">
+                <h5 class="fw-bold mb-3">Últimos Pagos</h5>
+                @if (Model.UltimosPagos != null && Model.UltimosPagos.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Método</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.UltimosPagos)
+                                {
+                                    <tr>
+                                        <td><small class="text-muted">@p.IdPago</small></td>
+                                        <td><span class="text-capitalize">@p.Metodo</span></td>
+                                        <td class="fw-semibold">$@p.Monto.ToString("N2")</td>
+                                        <td>
+                                            @if (p.Estado == "aprobado")
+                                            {
+                                                <span class="estado-aprobado">Aprobado</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="estado-pendiente">@p.Estado</span>
+                                            }
+                                        </td>
+                                        <td><small>@p.FechaPago.ToString("dd/MM/yyyy")</small></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">No hay pagos registrados aún.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

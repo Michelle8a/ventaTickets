@@ -46,9 +46,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>packages\CrystalDecisions.CrystalReports.Engine.1.0.0\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>packages\CrystalDecisions.ReportSource.1.0.0\lib\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>packages\CrystalDecisions.Shared.1.0.0\lib\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -246,6 +252,7 @@
     <Compile Include="Models\MetodoPagoTransferencia.cs" />
     <Compile Include="Models\Pago.cs" />
     <Compile Include="Models\Reembolso.cs" />
+    <Compile Include="Models\ReportesViewModels.cs" />
     <Compile Include="Models\TipoTicket.cs" />
     <Compile Include="notificaciones.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
@@ -465,6 +472,18 @@
     <Content Include="Views\Compra\Detalle.cshtml" />
     <Content Include="Views\Dashboard\ReporteAdmin.cshtml" />
     <Content Include="Views\Dashboard\ReporteOrganizador.cshtml" />
+    <Content Include="Views\Dashboard\EventosPopulares.cshtml" />
+    <Content Include="Views\Dashboard\EventosVendidos.cshtml" />
+    <Content Include="Views\Dashboard\IngresosMensuales.cshtml" />
+    <Content Include="Views\Dashboard\MetodosPago.cshtml" />
+    <Content Include="Views\Dashboard\MisIngresos.cshtml" />
+    <Content Include="Views\Dashboard\OcupacionVenue.cshtml" />
+    <Content Include="Views\Dashboard\PresentacionesEvento.cshtml" />
+    <Content Include="Views\Dashboard\Reembolsos.cshtml" />
+    <Content Include="Views\Dashboard\TicketsVendidos.cshtml" />
+    <Content Include="Views\Dashboard\UsoDescuentos.cshtml" />
+    <Content Include="Views\Dashboard\VentasPais.cshtml" />
+    <Content Include="Views\Dashboard\VentasTotales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

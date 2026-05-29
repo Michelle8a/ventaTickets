@@ -1,0 +1,129 @@
+@model List<GestionTickets.Models.IngresoMensual>
+@{
+    ViewBag.Title = "Ingresos Mensuales";
+    var labels  = Model != null ? string.Join(",", Model.Select(m => $"\"{m.NombreMes} {m.Anio}\"")) : "";
+    var valores = Model != null ? string.Join(",", Model.Select(m => m.Total.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))) : "";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .chart-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); padding:24px; }
+    .table-card  { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); padding:24px; }
+    .mejor-mes   { background: linear-gradient(135deg,#3b82f6,#6366f1); color:white; border-radius:16px; padding:20px; }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteAdmin","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">📈 Ingresos Mensuales</h2>
+            <p class="text-muted mb-0">Evolución de ingresos aprobados mes a mes</p>
+        </div>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        var mejorMes = Model.OrderByDescending(m => m.Total).First();
+        var totalAnual = Model.Sum(m => m.Total);
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="mejor-mes">
+                    <div style="font-size:13px; opacity:0.8;">Mejor mes</div>
+                    <div style="font-size:22px; font-weight:bold;">@mejorMes.NombreMes @mejorMes.Anio</div>
+                    <div style="font-size:18px;">$@mejorMes.Total.ToString("N2")</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chart-card text-center" style="padding:20px;">
+                    <div style="font-size:28px; font-weight:bold; color:#111;">$@totalAnual.ToString("N2")</div>
+                    <div class="text-muted">Total acumulado</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="chart-card text-center" style="padding:20px;">
+                    <div style="font-size:28px; font-weight:bold; color:#111;">@Model.Sum(m => m.Cantidad)</div>
+                    <div class="text-muted">Pagos en el período</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráfica -->
+        <div class="chart-card mb-4">
+            <h5 class="fw-bold mb-3">Ingresos por Mes</h5>
+            <canvas id="chartIngresos" height="80"></canvas>
+        </div>
+
+        <!-- Tabla -->
+        <div class="table-card">
+            <h5 class="fw-bold mb-3">Detalle mensual</h5>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Mes</th>
+                            <th>Año</th>
+                            <th>Pagos</th>
+                            <th>Ingresos</th>
+                            <th>Promedio por Pago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model.OrderByDescending(x => x.Anio).ThenByDescending(x => x.Mes))
+                        {
+                            <tr>
+                                <td class="fw-semibold text-capitalize">@m.NombreMes</td>
+                                <td>@m.Anio</td>
+                                <td>@m.Cantidad</td>
+                                <td class="text-success fw-semibold">$@m.Total.ToString("N2")</td>
+                                <td>$@(m.Cantidad > 0 ? (m.Total / m.Cantidad).ToString("N2") : "0.00")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="chart-card text-center py-5">
+            <div style="font-size:60px;">📈</div>
+            <h5 class="text-muted mt-3">No hay datos de ingresos aún.</h5>
+        </div>
+    }
+
+</div>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        const ctx = document.getElementById('chartIngresos');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [@Html.Raw(labels)],
+                    datasets: [{
+                        label: 'Ingresos (USD)',
+                        data: [@Html.Raw(valores)],
+                        backgroundColor: 'rgba(99,102,241,0.7)',
+                        borderColor: 'rgba(99,102,241,1)',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: v => '$' + v.toLocaleString() }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,91 @@
+@model GestionTickets.Models.TicketsVendidosViewModel
+@{
+    ViewBag.Title = "Tickets Vendidos";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .kpi-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .table-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .badge-pagada          { background:#d1fae5; color:#065f46; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+    .badge-pendiente       { background:#fef3c7; color:#92400e; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+    .badge-pendiente_entrega{ background:#dbeafe; color:#1e40af; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+    .badge-otro            { background:#e5e7eb; color:#374151; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteOrganizador","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">🎫 Tickets Vendidos</h2>
+            <p class="text-muted mb-0">Detalle de órdenes de compra y tickets</p>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="kpi-card p-4 text-center">
+                <div style="font-size:28px; font-weight:bold; color:#111;">@Model.TotalTickets.ToString("N0")</div>
+                <div class="text-muted">Total de Tickets</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="kpi-card p-4 text-center">
+                <div style="font-size:28px; font-weight:bold; color:#6366f1;">@Model.TotalOrdenes</div>
+                <div class="text-muted">Órdenes de Compra</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-card p-4">
+        <h5 class="fw-bold mb-3">Listado de Órdenes</h5>
+        @if (Model.Detalle != null && Model.Detalle.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Código Orden</th>
+                            <th>Tipo Ticket</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unit.</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Detalle)
+                        {
+                            <tr>
+                                <td><code style="font-size:12px;">@item.CodigoOrden</code></td>
+                                <td class="fw-semibold">@item.NombreTicket</td>
+                                <td>@item.Cantidad</td>
+                                <td>$@item.PrecioUnit.ToString("N2")</td>
+                                <td class="fw-semibold text-success">$@item.Total.ToString("N2")</td>
+                                <td>
+                                    @{
+                                        var cls = item.Estado == "pagada" ? "badge-pagada" :
+                                                  item.Estado == "pendiente" ? "badge-pendiente" :
+                                                  item.Estado == "pendiente_entrega" ? "badge-pendiente_entrega" : "badge-otro";
+                                    }
+                                    <span class="@cls">@item.Estado</span>
+                                </td>
+                                <td><small>@item.Fecha.ToString("dd/MM/yyyy")</small></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-4">
+                <div style="font-size:50px;">🎫</div>
+                <p class="text-muted mt-2">No hay órdenes registradas aún.</p>
+            </div>
+        }
+    </div>
+
+</div>

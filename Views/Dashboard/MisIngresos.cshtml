@@ -1,0 +1,130 @@
+@model GestionTickets.Models.MisIngresosViewModel
+@{
+    ViewBag.Title = "Mis Ingresos";
+    var labels  = Model.PorMes != null ? string.Join(",", Model.PorMes.Select(m => $"\"{m.NombreMes} {m.Anio}\"")) : "";
+    var valores = Model.PorMes != null ? string.Join(",", Model.PorMes.Select(m => m.Total.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))) : "";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .kpi-card  { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .chart-card{ border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); padding:24px; }
+    .table-card{ border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); padding:24px; }
+    .badge-aprobado { background:#d1fae5; color:#065f46; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+    .badge-otro { background:#e5e7eb; color:#374151; border-radius:8px; padding:3px 10px; font-size:12px; font-weight:600; }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteOrganizador","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">💵 Mis Ingresos</h2>
+            <p class="text-muted mb-0">Ingresos aprobados con desglose mensual</p>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="kpi-card p-4 text-center">
+                <div style="font-size:28px; font-weight:bold; color:#10b981;">$@Model.TotalIngresos.ToString("N2")</div>
+                <div class="text-muted">Total Ingresos</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="kpi-card p-4 text-center">
+                <div style="font-size:28px; font-weight:bold; color:#111;">@Model.TotalPagos</div>
+                <div class="text-muted">Pagos Aprobados</div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.PorMes != null && Model.PorMes.Any())
+    {
+        <div class="chart-card mb-4">
+            <h5 class="fw-bold mb-3">Ingresos por Mes</h5>
+            <canvas id="chartMis" height="80"></canvas>
+        </div>
+    }
+
+    <div class="table-card">
+        <h5 class="fw-bold mb-3">Últimos Pagos</h5>
+        @if (Model.UltimosPagos != null && Model.UltimosPagos.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Método</th>
+                            <th>Monto</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model.UltimosPagos)
+                        {
+                            <tr>
+                                <td>@(p.Nombre ?? "—")</td>
+                                <td class="text-capitalize">@p.Metodo</td>
+                                <td class="fw-semibold text-success">$@p.Monto.ToString("N2")</td>
+                                <td>
+                                    @if (p.Estado == "aprobado")
+                                    {
+                                        <span class="badge-aprobado">Aprobado</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-otro">@p.Estado</span>
+                                    }
+                                </td>
+                                <td><small>@p.FechaPago.ToString("dd/MM/yyyy")</small></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="text-muted text-center py-3">Sin pagos registrados.</p>
+        }
+    </div>
+
+</div>
+
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        const ctx = document.getElementById('chartMis');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [@Html.Raw(labels)],
+                    datasets: [{
+                        label: 'Ingresos (USD)',
+                        data: [@Html.Raw(valores)],
+                        borderColor: '#7c3aed',
+                        backgroundColor: 'rgba(124,58,237,0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#7c3aed',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: v => '$' + v.toLocaleString() }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,76 @@
+@model GestionTickets.Models.VentasPaisViewModel
+@{
+    ViewBag.Title = "Ventas por Dirección";
+}
+
+<style>
+    body { background-color: #f4f6f9; }
+    .kpi-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+    .table-card { border:none; border-radius:16px; background:white; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+</style>
+
+<div class="container py-5">
+
+    <div class="d-flex align-items-center mb-4">
+        <a href="@Url.Action("ReporteAdmin","Dashboard")" class="btn btn-outline-secondary me-3">← Volver</a>
+        <div>
+            <h2 class="fw-bold mb-0">🌎 Ventas por Dirección</h2>
+            <p class="text-muted mb-0">Listado de pagos con información de ubicación del comprador</p>
+        </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="kpi-card p-4 text-center">
+                <div style="font-size:28px; font-weight:bold; color:#111;">@Model.TotalPagos</div>
+                <div class="text-muted">Pagos Registrados</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="kpi-card p-4 text-center">
+                <div style="font-size:28px; font-weight:bold; color:#10b981;">$@Model.TotalMonto.ToString("N2")</div>
+                <div class="text-muted">Monto Total</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-card p-4">
+        <h5 class="fw-bold mb-3">Detalle de Compradores</h5>
+        @if (Model.Lista != null && Model.Lista.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Dirección</th>
+                            <th>Monto</th>
+                            <th>Método</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model.Lista)
+                        {
+                            <tr>
+                                <td>@(p.Nombre ?? "—")</td>
+                                <td>@(p.Telefono ?? "—")</td>
+                                <td><small class="text-muted">@(p.Direccion ?? "—")</small></td>
+                                <td class="fw-semibold">$@p.Monto.ToString("N2")</td>
+                                <td class="text-capitalize">@p.Metodo</td>
+                                <td><small>@p.FechaPago.ToString("dd/MM/yyyy")</small></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="text-muted text-center py-4">No hay pagos registrados.</p>
+        }
+    </div>
+
+</div>
