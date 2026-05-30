@@ -45,7 +45,7 @@
                     @Html.ValidationMessageFor(model => model.imagen_url, "", new { @class = "text-danger" })
                 </div>
 
-                @if (!string.IsNullOrWhiteSpace(Model.imagen_url))
+                if (!string.IsNullOrWhiteSpace(Model.imagen_url))
                 {
                     <div class="vt-field">
                         <label class="vt-label">Vista previa</label>

@@ -1,0 +1,78 @@
+﻿@model GestionTickets.sp_mostrar_presentaciones_Result
+@{ ViewBag.Title = "Eliminar Presentación"; }
+
+<div class="vt-panel-wrap">
+    <div class="vt-panel">
+        <div class="vt-panel__head vt-panel__head--danger">
+            <div class="vt-panel__icon"><i class="bi bi-exclamation-triangle"></i></div>
+            <div>
+                <h1 class="vt-panel__title">Eliminar presentación</h1>
+                <p class="vt-panel__hint">Esta acción desactivará la presentación.</p>
+            </div>
+        </div>
+
+        <div class="vt-panel__body">
+            <div class="vt-alert vt-alert--warn">
+                <i class="bi bi-info-circle-fill"></i>
+                <div>
+                    ¿Seguro que deseas eliminar esta presentación?
+                    <br /><strong>Nota:</strong> la presentación será desactivada, no eliminada definitivamente.
+                </div>
+            </div>
+
+            <dl class="vt-deflist">
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-mic"></i> Artista</span>
+                    <span class="vt-def__val">@Model.artista</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-calendar-event"></i> Evento</span>
+                    <span class="vt-def__val">@Model.evento</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-geo-alt"></i> Escenario</span>
+                    <span class="vt-def__val">@Model.escenario</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-clock"></i> Fecha inicio</span>
+                    <span class="vt-def__val">@Model.fecha_hora_inicio.ToString("dd/MM/yyyy HH:mm")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-clock-history"></i> Fecha fin</span>
+                    <span class="vt-def__val">@(Model.fecha_hora_fin.HasValue ? Model.fecha_hora_fin.Value.ToString("dd/MM/yyyy HH:mm") : "-")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-sort-numeric-up"></i> Orden</span>
+                    <span class="vt-def__val">@Model.orden</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-toggle-on"></i> Estado</span>
+                    <span class="vt-def__val">
+                        @if (Model.activo == true)
+                        {
+                            <span class="vt-status vt-status--on"><i class="bi bi-check-circle-fill"></i> Activo</span>
+                        }
+                        else
+                        {
+                            <span class="vt-status vt-status--off"><i class="bi bi-x-circle-fill"></i> Inactivo</span>
+                        }
+                    </span>
+                </div>
+            </dl>
+
+            @using (Html.BeginForm("Eliminar", "Presentaciones", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.id_presentacion" />
+                <div class="vt-form-actions">
+                    <a href="@Url.Action("Index")" class="vt-btn vt-btn--ghost">
+                        <i class="bi bi-x-lg"></i> Cancelar
+                    </a>
+                    <button type="submit" class="vt-btn vt-btn--danger">
+                        <i class="bi bi-trash3"></i> Eliminar
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

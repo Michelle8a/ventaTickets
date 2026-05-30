@@ -4,79 +4,102 @@
     bool habilitar = rol == "Admin" || rol == "Organizador";
     ViewBag.Title = "Presentaciones";
 }
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Presentaciones</h2>
+
+<div class="vt-page">
+    <div class="vt-head">
+        <div class="vt-head__titles">
+            <span class="vt-eyebrow"><i class="bi bi-camera-video"></i> Cartelera</span>
+            <h1 class="vt-title">Presentaciones</h1>
+            <p class="vt-subtitle">Consulta los artistas y horarios de cada evento.</p>
+        </div>
         @if (habilitar)
         {
-            <a href="@Url.Action("Crear")" class="btn btn-primary">Nueva Presentacion</a>
+            <div class="vt-head__actions">
+                <a href="@Url.Action("Crear")" class="vt-btn vt-btn--primary">
+                    <i class="bi bi-plus-lg"></i> Nueva presentación
+                </a>
+            </div>
         }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="vt-empty">
+            <i class="bi bi-camera-video-off"></i>
+            <h3>No hay presentaciones disponibles</h3>
+            <p>Cuando se registren presentaciones aparecerán aquí.</p>
         </div>
-    <table class="table table-bordered table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>Evento</th>
-                <th>Artista</th>
-                <th>Escenario</th>
-                <th>Inicio</th>
-                <th>Fin</th>
-                <th>Orden</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
+    }
+    else
+    {
+        <div class="vt-grid">
             @foreach (var p in Model)
             {
-                <tr>
-                    <td>@p.evento</td>
-                    <td>@p.artista</td>
-                    <td>@p.escenario</td>
-                    <td>@p.fecha_hora_inicio.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@(p.fecha_hora_fin.HasValue ? p.fecha_hora_fin.Value.ToString("dd/MM/yyyy HH:mm") : "-")</td>
-                    <td>@p.orden</td>
-                    <td>
+                var likes = ViewBag.Likes as List<int?>;
+                bool tieneLike = likes != null && likes.Contains(p.id_presentacion);
+
+                <article class="vt-card">
+                    <div class="vt-card__media">
                         @if (p.activo == true)
                         {
-                            <span class="badge bg-success">Activo</span>
+                            <span class="vt-status vt-status--light"><i class="bi bi-circle-fill" style="font-size:.55em;"></i> Activo</span>
                         }
                         else
                         {
-                            <span class="badge bg-danger">Inactivo</span>
+                            <span class="vt-status vt-status--off"><i class="bi bi-circle-fill" style="font-size:.55em;"></i> Inactivo</span>
                         }
-                    </td>
-                    <td>
-                        @* Boton de like *@
-                        @{
-                            var likes = ViewBag.Likes as List<int?>;
-                            bool tieneLike = likes != null && likes.Contains(p.id_presentacion);
-                        }
+                        <span class="vt-chip"><i class="bi bi-sort-numeric-up"></i> Orden @p.orden</span>
+                        <i class="bi bi-mic vt-card__media-icon"></i>
+                    </div>
+                    <div class="vt-card__body">
+                        <h2 class="vt-card__title">@p.artista</h2>
+                        <p class="vt-card__type">@p.evento</p>
+                        <ul class="vt-meta">
+                            <li><i class="bi bi-geo-alt-fill"></i> <span>@p.escenario</span></li>
+                            <li><i class="bi bi-clock"></i> <span>@p.fecha_hora_inicio.ToString("dd/MM/yyyy HH:mm")</span></li>
+                            <li>
+                                <i class="bi bi-clock-history"></i>
+                                <span>@(p.fecha_hora_fin.HasValue ? p.fecha_hora_fin.Value.ToString("dd/MM/yyyy HH:mm") : "Sin hora fin")</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="vt-card__footer">
                         @using (Html.BeginForm("Toggle", "Likes", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="id_usuario" value="@ViewBag.id_usuario" />
                             <input type="hidden" name="id_presentacion" value="@p.id_presentacion" />
                             <input type="hidden" name="returnUrl" value="@Request.Url.PathAndQuery" />
-                            <button type="submit" class="btn btn-sm btn-light" title="@(tieneLike ? "Quitar de agenda" : "Agregar a agenda")">
+                            <button type="submit" class="vt-btn vt-btn--sm @(tieneLike ? "vt-btn--danger" : "vt-btn--ghost")"
+                                    title="@(tieneLike ? "Quitar de agenda" : "Agregar a agenda")">
                                 @if (tieneLike)
                                 {
-                                    // Corazon lleno
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path fill="#e14a4a" d="M12 20.25c-.37 0-.74-.14-1.02-.42l-7.96-7.96A5.2 5.2 0 0 1 1.5 8.25a5.75 5.75 0 0 1 9.9-3.96A5.75 5.75 0 0 1 22.5 8.25c0 1.45-.59 2.75-1.54 3.71l-7.94 7.87c-.28.28-.65.42-1.02.42z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M12 20.25c-.37 0-.74-.14-1.02-.42l-7.96-7.96A5.2 5.2 0 0 1 1.5 8.25a5.75 5.75 0 0 1 9.9-3.96A5.75 5.75 0 0 1 22.5 8.25c0 1.45-.59 2.75-1.54 3.71l-7.94 7.87c-.28.28-.65.42-1.02.42z" />
                                     </svg>
+                                    <span>En agenda</span>
                                 }
                                 else
                                 {
-                                    // Corazon vacio
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path fill="#e14a4a" d="M4.24 12.25a4.2 4.2 0 0 1-1.24-3A4.25 4.25 0 0 1 7.25 5c1.58 0 2.96.86 3.69 2.14h1.12A4.24 4.24 0 0 1 15.75 5A4.25 4.25 0 0 1 20 9.25c0 1.17-.5 2.25-1.24 3L11.5 19.5zm15.22.71C20.41 12 21 10.7 21 9.25A5.25 5.25 0 0 0 15.75 4c-1.75 0-3.3.85-4.25 2.17A5.22 5.22 0 0 0 7.25 4A5.25 5.25 0 0 0 2 9.25c0 1.45.59 2.75 1.54 3.71l7.96 7.96z" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M4.24 12.25a4.2 4.2 0 0 1-1.24-3A4.25 4.25 0 0 1 7.25 5c1.58 0 2.96.86 3.69 2.14h1.12A4.24 4.24 0 0 1 15.75 5A4.25 4.25 0 0 1 20 9.25c0 1.17-.5 2.25-1.24 3L11.5 19.5zm15.22.71C20.41 12 21 10.7 21 9.25A5.25 5.25 0 0 0 15.75 4c-1.75 0-3.3.85-4.25 2.17A5.22 5.22 0 0 0 7.25 4A5.25 5.25 0 0 0 2 9.25c0 1.45.59 2.75 1.54 3.71l7.96 7.96z" />
                                     </svg>
+                                    <span>Agregar a agenda</span>
                                 }
                             </button>
                         }
-                    </td>
-                </tr>
+                        @if (habilitar)
+                        {
+                            <a href="@Url.Action("Editar", "Presentaciones", new { id = p.id_presentacion })" class="vt-btn vt-btn--gold vt-btn--sm">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <a href="@Url.Action("Eliminar", "Presentaciones", new { id = p.id_presentacion })" class="vt-btn vt-btn--danger vt-btn--sm">
+                                <i class="bi bi-trash3"></i> Eliminar
+                            </a>
+                        }
+                    </div>
+                </article>
             }
-        </tbody>
-    </table>
+        </div>
+    }
 </div>

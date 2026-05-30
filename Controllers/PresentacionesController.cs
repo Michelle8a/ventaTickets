@@ -84,10 +84,21 @@ namespace GestionTickets.Controllers
             return RedirectToAction("Index");
         }
 
-        // POST: Presentaciones/Eliminar/5
-        [HttpPost]
+        // GET: Presentaciones/Eliminar/5
         [ValidarRol("Admin", "Organizador")]
         public ActionResult Eliminar(int id)
+        {
+            var presentacion = db.sp_mostrar_presentaciones(null)
+                .FirstOrDefault(p => p.id_presentacion == id);
+            if (presentacion == null)
+                return HttpNotFound();
+            return View(presentacion);
+        }
+
+        // POST: Presentaciones/Eliminar/5
+        [HttpPost, ActionName("Eliminar")]
+        [ValidarRol("Admin", "Organizador")]
+        public ActionResult EliminarConfirmado(int id)
         {
             db.sp_eliminar_presentacion(id);
             return RedirectToAction("Index");

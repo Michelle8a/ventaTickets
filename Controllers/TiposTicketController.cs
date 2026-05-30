@@ -16,7 +16,11 @@ namespace GestionTickets.Controllers
         // GET: TiposTicket
         public ActionResult Index()
         {
-            var tiposTicket = db.sp_mostrar_tipos_ticket(null).ToList();
+            var tiposTicket = db.tipos_ticket
+                .Include(t => t.eventos)
+                .Include(t => t.secciones_venue)
+                .OrderBy(t => t.id_evento)
+                .ToList();
             return View(tiposTicket);
         }
 

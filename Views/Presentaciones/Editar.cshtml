@@ -1,39 +1,63 @@
 ﻿@model GestionTickets.sp_mostrar_presentaciones_Result
 @{ ViewBag.Title = "Editar Presentación"; }
 
-<div class="container mt-4">
-    <h2>Editar Presentación</h2>
-    @using (Html.BeginForm("Editar", "Presentaciones", FormMethod.Post))
-    {
-        <input type="hidden" name="id_presentacion" value="@Model.id_presentacion" />
-        <div class="mb-3">
-            <label>Artista</label>
-            <select name="id_artista" class="form-select" required>
-                @foreach (var a in ViewBag.Artistas)
-                {
-                    <option value="@a.id_artista">@a.nombre</option>
-                }
-            </select>
+<div class="vt-panel-wrap">
+    <div class="vt-panel">
+        <div class="vt-panel__head">
+            <div class="vt-panel__icon"><i class="bi bi-pencil-square"></i></div>
+            <div>
+                <h1 class="vt-panel__title">Editar presentación</h1>
+                <p class="vt-panel__hint">Actualiza la información de la presentación.</p>
+            </div>
         </div>
-        <div class="mb-3">
-            <label>Escenario</label>
-            <input type="text" name="escenario" class="form-control" value="@Model.escenario" />
+
+        <div class="vt-panel__body">
+            @using (Html.BeginForm("Editar", "Presentaciones", FormMethod.Post))
+            {
+                <input type="hidden" name="id_presentacion" value="@Model.id_presentacion" />
+
+                <div class="vt-field">
+                    <label class="vt-label">Artista</label>
+                    <select name="id_artista" class="form-control" required>
+                        @foreach (var a in ViewBag.Artistas)
+                        {
+                            <option value="@a.id_artista" @(a.nombre == Model.artista ? "selected" : "")>@a.nombre</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="vt-field">
+                    <label class="vt-label">Escenario</label>
+                    <input type="text" name="escenario" class="form-control" value="@Model.escenario" />
+                </div>
+
+                <div class="vt-row">
+                    <div class="vt-field">
+                        <label class="vt-label">Fecha y hora inicio</label>
+                        <input type="datetime-local" name="fecha_hora_inicio" class="form-control"
+                               value="@Model.fecha_hora_inicio.ToString("yyyy-MM-ddTHH:mm")" required />
+                    </div>
+                    <div class="vt-field">
+                        <label class="vt-label">Fecha y hora fin</label>
+                        <input type="datetime-local" name="fecha_hora_fin" class="form-control"
+                               value="@(Model.fecha_hora_fin.HasValue ? Model.fecha_hora_fin.Value.ToString("yyyy-MM-ddTHH:mm") : "")" />
+                    </div>
+                </div>
+
+                <div class="vt-field">
+                    <label class="vt-label">Orden</label>
+                    <input type="number" name="orden" class="form-control" value="@Model.orden" />
+                </div>
+
+                <div class="vt-form-actions">
+                    <a href="@Url.Action("Index")" class="vt-btn vt-btn--ghost">
+                        <i class="bi bi-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="vt-btn vt-btn--primary">
+                        <i class="bi bi-check-lg"></i> Guardar cambios
+                    </button>
+                </div>
+            }
         </div>
-        <div class="mb-3">
-            <label>Fecha y hora inicio</label>
-            <input type="datetime-local" name="fecha_hora_inicio" class="form-control"
-                   value="@Model.fecha_hora_inicio.ToString("yyyy-MM-ddTHH:mm")" required />
-        </div>
-        <div class="mb-3">
-            <label>Fecha y hora fin</label>
-            <input type="datetime-local" name="fecha_hora_fin" class="form-control"
-                   value="@(Model.fecha_hora_fin.HasValue ? Model.fecha_hora_fin.Value.ToString("yyyy-MM-ddTHH:mm") : "")" />
-        </div>
-        <div class="mb-3">
-            <label>Orden</label>
-            <input type="number" name="orden" class="form-control" value="@Model.orden" />
-        </div>
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
-    }
+    </div>
 </div>

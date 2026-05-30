@@ -62,24 +62,32 @@
                             <li><i class="bi bi-calendar-event"></i> <span>@(ticket.eventos != null ? ticket.eventos.nombre : "Sin evento")</span></li>
                             <li><i class="bi bi-grid-3x3-gap"></i> <span>@(ticket.secciones_venue != null ? ticket.secciones_venue.nombre : "Sin sección")</span></li>
                             <li><i class="bi bi-box-seam"></i> <span class="vt-meta__label">Disponibles:</span> <span>@ticket.cantidad_ticket</span></li>
-                            <li><i class="bi bi-clock"></i> <span class="vt-meta__label">Venta:</span> <span>@(ticket.venta_inicio.HasValue ? ticket.venta_inicio.Value.ToString("dd/MM/yy HH:mm") : "-") → @(ticket.venta_fin.HasValue ? ticket.venta_fin.Value.ToString("dd/MM/yy HH:mm") : "-")</span></li>
+                            <li>
+                                <i class="bi bi-clock"></i>
+                                <span class="vt-meta__label">Venta:</span>
+                                <span>
+                                    @(ticket.venta_inicio.HasValue ? ticket.venta_inicio.Value.ToString("dd/MM/yy HH:mm") : "-")
+                                    →
+                                    @(ticket.venta_fin.HasValue ? ticket.venta_fin.Value.ToString("dd/MM/yy HH:mm") : "-")
+                                </span>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="vt-card__footer">
-                        <a href="@Url.Action("Create", "Compras", new { idTipoTicket = ticket.id_tipo_ticket })"
+                        <a href="@Url.Action("Create", "Compra", new { idTipoTicket = ticket.id_tipo_ticket })"
                            class="vt-btn vt-btn--accent vt-btn--sm">
                             <i class="bi bi-cart-plus"></i> Comprar
                         </a>
-                        <a href="@Url.Action("Details", "TiposTicket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--ghost vt-btn--sm">
+                        <a href="@Url.Action("Details", "tiposticket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--ghost vt-btn--sm">
                             <i class="bi bi-eye"></i> Detalles
                         </a>
                         @if (habilitar)
                         {
-                            <a href="@Url.Action("Edit", "TiposTicket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--gold vt-btn--sm">
+                            <a href="@Url.Action("Edit", "tiposticket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--gold vt-btn--sm">
                                 <i class="bi bi-pencil"></i> Editar
                             </a>
-                            <a href="@Url.Action("Delete", "TiposTicket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--danger vt-btn--sm">
+                            <a href="@Url.Action("Delete", "tiposticket", new { id = ticket.id_tipo_ticket })" class="vt-btn vt-btn--danger vt-btn--sm">
                                 <i class="bi bi-trash3"></i> Eliminar
                             </a>
                         }

@@ -484,6 +484,7 @@
     <Content Include="Views\Dashboard\UsoDescuentos.cshtml" />
     <Content Include="Views\Dashboard\VentasPais.cshtml" />
     <Content Include="Views\Dashboard\VentasTotales.cshtml" />
+    <Content Include="Views\Presentaciones\Eliminar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
