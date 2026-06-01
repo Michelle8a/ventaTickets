@@ -66,7 +66,7 @@ namespace GestionTickets.Controllers
         }
 
         //GET: TiposTicket/Create
-        [ValidarRol("Admin")]
+        [ValidarRol("Admin, Organizador")]
         public ActionResult Create(int? idEvento)
         {
             CargarCombos(idEvento);
@@ -76,7 +76,7 @@ namespace GestionTickets.Controllers
         //POST: tiposTicket/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidarRol("Admin")]
+        [ValidarRol("Admin, Organizador")]
         public ActionResult Create([Bind(Include = "id_evento,id_seccion,nombre,precio,moneda,cantidad_ticket,venta_inicio,venta_fin,activo")] tipos_ticket tipoTicket)
         {
             ValidarTipoTicket(tipoTicket);
@@ -102,7 +102,7 @@ namespace GestionTickets.Controllers
         }
 
         //GET: TiposTicket/Edit/5
-        [ValidarRol("Admin")]
+        [ValidarRol("Admin, Organizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -120,7 +120,7 @@ namespace GestionTickets.Controllers
         //POST tiposTicket/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidarRol("Admin")]
+        [ValidarRol("Admin, Organizador")]
         public ActionResult Edit([Bind(Include = "id_tipo_ticket,id_evento,id_seccion,nombre,precio,moneda,cantidad_ticket,venta_inicio,venta_fin,activo")] tipos_ticket tipoTicket)
         {
             ValidarTipoTicket(tipoTicket);
@@ -143,7 +143,7 @@ namespace GestionTickets.Controllers
         }
 
         // GET: TiposTicket/Delete/5
-        [ValidarRol("Admin")]
+        [ValidarRol("Admin, Organizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -163,7 +163,7 @@ namespace GestionTickets.Controllers
         // POST: TiposTicket/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [ValidarRol("Admin")]
+        [ValidarRol("Admin, Organizador")]
         public ActionResult DeleteConfirmed(int id)
         {
             tipos_ticket ticket = db.tipos_ticket.Find(id);
