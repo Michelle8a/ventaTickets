@@ -1,0 +1,67 @@
+﻿@model GestionTickets.usuarios
+@{
+    ViewBag.Title = "Detalles del Usuario";
+    var rolUsuario = Model.usuarios_rol.FirstOrDefault();
+    var nombreRol = rolUsuario?.roles?.nombre ?? "Sin rol";
+}
+
+<div class="vt-panel-wrap">
+    <div class="vt-panel">
+        <div class="vt-panel__head">
+            <div class="vt-panel__icon"><i class="bi bi-person-circle"></i></div>
+            <div>
+                <h1 class="vt-panel__title">@Model.nombre @Model.apellido</h1>
+                <p class="vt-panel__hint">@Model.email</p>
+            </div>
+        </div>
+        <div class="vt-panel__body">
+            <dl class="vt-deflist">
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-person"></i> Nombre</span>
+                    <span class="vt-def__val">@Model.nombre @Model.apellido</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-envelope"></i> Email</span>
+                    <span class="vt-def__val">@Model.email</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-telephone"></i> Teléfono</span>
+                    <span class="vt-def__val">@(string.IsNullOrWhiteSpace(Model.telefono) ? "Sin teléfono" : Model.telefono)</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-globe"></i> País</span>
+                    <span class="vt-def__val">@(Model.paises != null ? Model.paises.nombre : "Sin país")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-shield"></i> Rol</span>
+                    <span class="vt-def__val">@nombreRol</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-calendar3"></i> Fecha registro</span>
+                    <span class="vt-def__val">@(Model.fecha_registro.HasValue ? Model.fecha_registro.Value.ToString("dd/MM/yyyy HH:mm") : "-")</span>
+                </div>
+                <div class="vt-def">
+                    <span class="vt-def__key"><i class="bi bi-toggle-on"></i> Estado</span>
+                    <span class="vt-def__val">
+                        @if (Model.activo == true)
+                        {
+                            <span class="vt-status vt-status--on"><i class="bi bi-check-circle-fill"></i> Activo</span>
+                        }
+                        else
+                        {
+                            <span class="vt-status vt-status--off"><i class="bi bi-x-circle-fill"></i> Inactivo</span>
+                        }
+                    </span>
+                </div>
+            </dl>
+            <div class="vt-form-actions">
+                <a href="@Url.Action("Index")" class="vt-btn vt-btn--ghost">
+                    <i class="bi bi-arrow-left"></i> Volver
+                </a>
+                <a href="@Url.Action("Edit", new { id = Model.id_usuario })" class="vt-btn vt-btn--gold">
+                    <i class="bi bi-pencil"></i> Editar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

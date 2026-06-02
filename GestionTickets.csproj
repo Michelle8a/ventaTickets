@@ -202,6 +202,7 @@
     <Compile Include="Controllers\ReembolsosController.cs" />
     <Compile Include="Controllers\PresentacionesController.cs" />
     <Compile Include="Controllers\TiposTicketController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="conversion_moneda.cs">
       <DependentUpon>GestionTicketsModel.tt</DependentUpon>
@@ -484,6 +485,11 @@
     <Content Include="Views\Dashboard\UsoDescuentos.cshtml" />
     <Content Include="Views\Dashboard\VentasPais.cshtml" />
     <Content Include="Views\Dashboard\VentasTotales.cshtml" />
+    <Content Include="Views\Presentaciones\Eliminar.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

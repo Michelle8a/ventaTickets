@@ -1,0 +1,72 @@
+﻿@model GestionTickets.usuarios
+@{
+    ViewBag.Title = "Editar Usuario";
+    var roles = ViewBag.Roles as List<GestionTickets.roles>;
+    var rolActual = ViewBag.RolActual as int?;
+}
+
+<div class="vt-panel-wrap">
+    <div class="vt-panel">
+        <div class="vt-panel__head">
+            <div class="vt-panel__icon"><i class="bi bi-pencil-square"></i></div>
+            <div>
+                <h1 class="vt-panel__title">Editar usuario</h1>
+                <p class="vt-panel__hint">Actualiza la información y rol del usuario.</p>
+            </div>
+        </div>
+        <div class="vt-panel__body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id_usuario" value="@Model.id_usuario" />
+
+                <div class="vt-row">
+                    <div class="vt-field">
+                        <label class="vt-label">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" value="@Model.nombre" required />
+                    </div>
+                    <div class="vt-field">
+                        <label class="vt-label">Apellido</label>
+                        <input type="text" name="apellido" class="form-control" value="@Model.apellido" required />
+                    </div>
+                </div>
+
+                <div class="vt-field">
+                    <label class="vt-label">Email</label>
+                    <input type="email" name="email" class="form-control" value="@Model.email" required />
+                </div>
+
+                <div class="vt-field">
+                    <label class="vt-label">Teléfono</label>
+                    <input type="text" name="telefono" class="form-control" value="@Model.telefono" placeholder="Ej. +503 7000-0000" />
+                </div>
+
+                <div class="vt-field">
+                    <label class="vt-label">Rol</label>
+                    <select name="id_rol" class="form-control">
+                        <option value="">-- Sin rol --</option>
+                        @foreach (var r in roles)
+                        {
+                            <option value="@r.id_rol" @(rolActual == r.id_rol ? "selected" : "")>@r.nombre</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="vt-check">
+                    <input type="checkbox" name="activo" id="activo" value="true" @(Model.activo == true ? "checked" : "") />
+                    <input type="hidden" name="activo" value="false" />
+                    <label for="activo">Usuario activo</label>
+                </div>
+
+                <div class="vt-form-actions">
+                    <a href="@Url.Action("Index")" class="vt-btn vt-btn--ghost">
+                        <i class="bi bi-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="vt-btn vt-btn--primary">
+                        <i class="bi bi-check-lg"></i> Guardar cambios
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

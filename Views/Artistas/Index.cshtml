@@ -71,11 +71,11 @@
                         </a>
                         @if (habilitar)
                         {
-                            <a href="@Url.Action("Edit", "Artistas", new { id = artista.id_artista })" class="vt-btn vt-btn--outline-gold vt-btn--sm btn-editar-artista">
+                            <a href="@Url.Action("Edit", "Artistas", new { id = artista.id_artista })" class="vt-btn vt-btn--gold vt-btn--sm btn-editar-artista">
                                 <i class="bi bi-pencil"></i> Editar
                             </a>
-                            <a href="@Url.Action("Delete", "Artistas", new { id = artista.id_artista })" class="vt-btn vt-btn--outline-danger vt-btn--sm btn-eliminar-artista">
-                                <i class="bi bi-trash3"></i>
+                            <a href="@Url.Action("Delete", "Artistas", new { id = artista.id_artista })" class="vt-btn vt-btn--danger vt-btn--sm btn-eliminar-artista">
+                                <i class="bi bi-trash3"></i> Eliminar
                             </a>
                         }
                     </div>
