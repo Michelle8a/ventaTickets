@@ -2,7 +2,7 @@
 
 @{
     var rol = Session["rol"] as string;
-    bool habilitar = rol == "Admin";
+    bool habilitar = rol == "Admin" || rol == "Organizador";
     ViewBag.Title = "Tipos de Ticket";
 }
 

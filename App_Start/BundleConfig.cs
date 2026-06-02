@@ -23,10 +23,13 @@ namespace GestionTickets
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                        "~/Content/bootstrap.css",
-                        "~/Content/Site.css",
-                        "~/Content/Layout.css",
-                        "~/Content/css/modules.css"));
+                "~/Content/bootstrap.css",
+                "~/Content/Site.css",
+                "~/Content/Layout.css",
+                "~/Content/css/modules.css",
+                "~/Content/css/Auth.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
